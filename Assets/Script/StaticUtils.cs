@@ -17,14 +17,18 @@ public class StaticUtils : MonoBehaviour {
 	// create stage objects from json
 	public static Stage[] CreateStages(TextAsset StageJson){
 		if (StageJson){
-			string[] data = StageJson.text.Split ('$');
+			string[] data = StageJson.text.Split ('$'); // split each stage into using $ sign
 
 			int count = data.Length;
 			Stage[] stages = new Stage[count];
 
 			for (int i = 0; i < data.Length; i++) {
+
+				// get each stage info
 				string json = data [i];
-				Stage stage = JsonUtility.FromJson<Stage> (json);	
+
+				// create stage instance from json finally
+				Stage stage = JsonUtility.FromJson<Stage> (json);
 				stages [i] = stage;
 			}
 			return stages;
