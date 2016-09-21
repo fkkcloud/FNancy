@@ -3,8 +3,6 @@ using System.Collections;
 
 public class MusicManager : MonoBehaviour {
 
-	public bool isSFXON; // used for sfx toggle in runtime
-
 	public AudioClip[] level_musics;
 
 	private AudioSource music_player;

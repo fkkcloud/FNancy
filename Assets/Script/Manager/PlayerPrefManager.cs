@@ -6,40 +6,17 @@ public class PlayerPrefsManager : MonoBehaviour {
 	// const is also static in class in c#!!
 	const string MASTER_VOLUME_KEY = "master_volume";
 	const string FPS = "fps";
-	const string SOULS = "souls";
-	const string SFX_VOLUME_KEY = "sfx_volume";
 	const string LEVEL_KEY = "level_unlocked_";
 
 	/// <summary>
 	/// Master Volume
 	/// </summary>
-	public static void SetMasterVolume(int isVolumeOn){
-		if (isVolumeOn == 1) {
-			PlayerPrefs.SetInt (MASTER_VOLUME_KEY, 1);
-		} else {
-			PlayerPrefs.SetInt (MASTER_VOLUME_KEY, 0);
-		}
+	public static void SetMasterVolume(float value){
+		PlayerPrefs.SetFloat (MASTER_VOLUME_KEY, value);
 	}
 
-	public static int GetMasterVolume(){
-		return PlayerPrefs.GetInt (MASTER_VOLUME_KEY);
-	}
-
-
-
-	/// <summary>
-	/// SFX Volume
-	/// </summary>
-	public static void SetSFXVolume(int isVolumeOn){
-		if (isVolumeOn == 1) {
-			PlayerPrefs.SetInt (SFX_VOLUME_KEY, 1);
-		} else {
-			PlayerPrefs.SetInt (SFX_VOLUME_KEY, 0);
-		}
-	}
-
-	public static int GetSFXVolume(){
-		return PlayerPrefs.GetInt (SFX_VOLUME_KEY);
+	public static float GetMasterVolume(){
+		return PlayerPrefs.GetInt (MASTER_VOLUME_KEY, 1); // when master volume was not set, 1 will be returned
 	}
 
 	/// <summary>
@@ -50,7 +27,7 @@ public class PlayerPrefsManager : MonoBehaviour {
 	}
 
 	public static int GetFPS(){
-		return PlayerPrefs.GetInt (FPS);
+		return PlayerPrefs.GetInt (FPS, 60);
 	}
 		
 

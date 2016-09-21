@@ -48,6 +48,7 @@
      <Compile Include="Assets\Script\Manager\LevelManager.cs" />
      <Compile Include="Assets\Script\Manager\MusicManager.cs" />
      <Compile Include="Assets\Script\Manager\PlayerPrefManager.cs" />
+     <Compile Include="Assets\Script\MenuControllers\OptionController.cs" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
