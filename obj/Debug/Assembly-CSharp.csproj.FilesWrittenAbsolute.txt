@@ -15,3 +15,5 @@
 /Users/Home/Documents/FNancy/Temp/bin/Debug/Unity.CecilTools.dll
 /Users/Home/Documents/FNancy/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/Home/Documents/FNancy/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/Home/Documents/FNancy/Temp/bin/Debug/Assembly-CSharp-firstpass.dll
+/Users/Home/Documents/FNancy/Temp/bin/Debug/Assembly-CSharp-firstpass.dll.mdb
