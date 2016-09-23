@@ -15,12 +15,12 @@ public class StaticUtils : MonoBehaviour {
 	}
 
 	// create stage objects from json
-	public static Stage[] CreateStages(TextAsset StageJson){
+	public static StageData[] CreateStages(TextAsset StageJson){
 		if (StageJson){
 			string[] data = StageJson.text.Split ('$'); // split each stage into using $ sign
 
 			int count = data.Length;
-			Stage[] stages = new Stage[count];
+			StageData[] stages = new StageData[count];
 
 			for (int i = 0; i < data.Length; i++) {
 
@@ -28,7 +28,7 @@ public class StaticUtils : MonoBehaviour {
 				string json = data [i];
 
 				// create stage instance from json finally
-				Stage stage = JsonUtility.FromJson<Stage> (json);
+				StageData stage = JsonUtility.FromJson<StageData> (json);
 				stages [i] = stage;
 			}
 			return stages;
