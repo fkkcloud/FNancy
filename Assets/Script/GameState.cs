@@ -7,6 +7,7 @@ public class GameState : MonoBehaviour {
 	public TextAsset StageJson;
 	public GameObject StageObject;
 	public LevelManager LevelManager;
+	public GameObject ClearText;
 
 	private StageData[] _stageData;
 	private float _currentTime;
@@ -40,7 +41,7 @@ public class GameState : MonoBehaviour {
 		// touch on screen
 		if (Input.GetMouseButtonDown (0))
 		{
-			Debug.Log("Touched");
+			//Debug.Log("Touched");
 			if (CurrentStageElapsedTime >= _currentStageTime - 0.5f && CurrentStageElapsedTime <= _currentStageTime + 0.5f)
 				GoToNextStage ();
 			else
@@ -56,11 +57,16 @@ public class GameState : MonoBehaviour {
 		_stageData = StaticUtils.CreateStages (StageJson);
 		_stageInstances = new GameObject[_stageData.Length];
 
-		float ZPos = 0.0f;
+		float YRot = 0f;
 		for (int i = 0; i < _stageData.Length; i++) {
 			GameObject StageInstance = Instantiate (StageObject);
-			StageInstance.transform.position = new Vector3(0, 0, ZPos);
-			ZPos += 4.5f;
+			Vector3 RotAxis = new Vector3 (0, 1, 0);
+			StageInstance.transform.RotateAround(StageInstance.transform.position, RotAxis, YRot);
+			YRot += 90f;
+
+			if (i != 0)
+				StageInstance.SetActive (false);
+			
 			_stageInstances [i] = StageInstance;
 		}
 
@@ -71,7 +77,7 @@ public class GameState : MonoBehaviour {
 		TextMesh[] childrens = _stageInstances[_currentStageID].GetComponentsInChildren<TextMesh>();
 		foreach (TextMesh child in childrens) {
 
-			Debug.Log (child.gameObject.tag);
+			//Debug.Log (child.gameObject.tag);
 
 			// do what you want with the transform
 			if (child.gameObject.tag == "TimerBomb") {
@@ -87,8 +93,17 @@ public class GameState : MonoBehaviour {
 	}
 
 	void GoToNextStage(){
-		if (_stageInstances.Length < _currentStageID + 2)
+		//if (_stageInstances.Length < _currentStageID + 2)
+		//	return;
+
+		if (_stageInstances.Length - 1 == _currentStageID) {
+			HandleClear ();
 			return;
+		}
+
+		// disable prev stage inactive
+		if (_currentStageID - 1 > -1)
+			_stageInstances [_currentStageID - 1].SetActive (false);
 
 		// animate current stage 
 		Animator Anim = _stageInstances[_currentStageID].GetComponent<Animator> ();
@@ -96,21 +111,24 @@ public class GameState : MonoBehaviour {
 		_currentTextMeshBombTimer.gameObject.SetActive (false);
 		_currentTextMeshStageTimer.gameObject.SetActive (false);
 
-
 		// update current stage to next
 		_currentStageID += 1;
 		_currentStageTime = _stageData [_currentStageID].time;
+
+		// activate next stage
+		_stageInstances [_currentStageID].SetActive (true);
 
 		// animate next stage
 		Anim = _stageInstances[_currentStageID].GetComponent<Animator> ();
 		Anim.SetTrigger ("ActivateTrigger");
 
 		// move all the stages
-		float ZPos = 4.5f;
+		float YRotDelta = -90f;
 		for (int i = 0; i < _stageData.Length; i++) {
 			GameObject CurrStage = _stageInstances [i];
-			float newZPos = CurrStage.transform.position.z - ZPos;
-			LeanTween.moveZ (CurrStage, newZPos, 1.0f).setEase (LeanTweenType.easeInCubic);
+			float newYRot = CurrStage.transform.rotation.eulerAngles.y + YRotDelta;
+			//Debug.Log (CurrStage.transform.rotation.eulerAngles.y + ":" + newYRot);
+			LeanTween.rotateY (CurrStage, newYRot, 1.0f).setEase (LeanTweenType.easeInCubic);
 		}
 
 		_levelStartTime = Time.timeSinceLevelLoad;
@@ -129,5 +147,11 @@ public class GameState : MonoBehaviour {
 			}
 		}
 
+	}
+
+	void HandleClear()
+	{
+		_stageInstances [_currentStageID].SetActive (false);
+		ClearText.SetActive (true);
 	}
 }
