@@ -8,6 +8,7 @@ public class GameState : MonoBehaviour {
 	public GameObject StageObject;
 	public LevelManager LevelManager;
 	public GameObject ClearText;
+	public float StageLength = 4.5f;
 
 	private StageData[] _stageData;
 	private float _currentTime;
@@ -57,16 +58,12 @@ public class GameState : MonoBehaviour {
 		_stageData = StaticUtils.CreateStages (StageJson);
 		_stageInstances = new GameObject[_stageData.Length];
 
-		float YRot = 0f;
-		for (int i = 0; i < _stageData.Length; i++) {
+		float ZPos = 0.0f;
+		for (int i = 0; i < _stageData.Length; i++) 
+		{
 			GameObject StageInstance = Instantiate (StageObject);
-			Vector3 RotAxis = new Vector3 (0, 1, 0);
-			StageInstance.transform.RotateAround(StageInstance.transform.position, RotAxis, YRot);
-			YRot += 90f;
-
-			if (i != 0)
-				StageInstance.SetActive (false);
-			
+			StageInstance.transform.position = new Vector3(0, 0, ZPos);
+			ZPos += StageLength;
 			_stageInstances [i] = StageInstance;
 		}
 
@@ -76,9 +73,6 @@ public class GameState : MonoBehaviour {
 
 		TextMesh[] childrens = _stageInstances[_currentStageID].GetComponentsInChildren<TextMesh>();
 		foreach (TextMesh child in childrens) {
-
-			//Debug.Log (child.gameObject.tag);
-
 			// do what you want with the transform
 			if (child.gameObject.tag == "TimerBomb") {
 				_currentTextMeshBombTimer = child;
@@ -123,12 +117,11 @@ public class GameState : MonoBehaviour {
 		Anim.SetTrigger ("ActivateTrigger");
 
 		// move all the stages
-		float YRotDelta = -90f;
+		float ZPos = StageLength;
 		for (int i = 0; i < _stageData.Length; i++) {
 			GameObject CurrStage = _stageInstances [i];
-			float newYRot = CurrStage.transform.rotation.eulerAngles.y + YRotDelta;
-			//Debug.Log (CurrStage.transform.rotation.eulerAngles.y + ":" + newYRot);
-			LeanTween.rotateY (CurrStage, newYRot, 1.0f).setEase (LeanTweenType.easeInCubic);
+			float newZPos = CurrStage.transform.position.z - ZPos;
+			LeanTween.moveZ (CurrStage, newZPos, 1.0f).setEase (LeanTweenType.easeInCubic);
 		}
 
 		_levelStartTime = Time.timeSinceLevelLoad;
