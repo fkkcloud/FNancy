@@ -5,10 +5,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 422434}
-  - 114: {fileID: 11452402}
+  - component: {fileID: 422434}
+  - component: {fileID: 11452402}
   m_Layer: 0
   m_Name: GameState
   m_TagString: Untagged
@@ -23,11 +23,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140352}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.042037, y: -3.6879463, z: 0.5729932}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &11452402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -39,8 +40,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed8ff50d415d417584932f26ed2ccfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StageJson: {fileID: 0}
-  StageObject: {fileID: 0}
+  StageJson: {fileID: 4900000, guid: 7770cff4ff32a4f5098ff787b0910436, type: 3}
+  StageObject: {fileID: 1204687257126472, guid: a6debb5037fb64461ac6ea523b8fc781,
+    type: 2}
+  LevelManager: {fileID: 11437750, guid: 7c19177ef584c4a50b61c9db0b4cf382, type: 2}
+  ClearText: {fileID: 0}
+  StageLength: 4.5
+  Audio: {fileID: 0}
+  TimerSpeed: 0.8
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -7,8 +7,16 @@ public class MusicManager : MonoBehaviour {
 
 	private AudioSource music_player;
 
+	private static GameObject _instance;
+
 	void Awake() {
 		// have it work as singleton
+		if (_instance) {
+			DestroyImmediate (gameObject);
+			return;
+		}
+
+		_instance = gameObject;
 		DontDestroyOnLoad (gameObject);
 	}
 

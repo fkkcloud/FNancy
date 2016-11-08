@@ -17,3 +17,9 @@
 /Users/Home/Documents/FNancy/Temp/bin/Debug/Mono.Cecil.Mdb.dll
 /Users/Home/Documents/FNancy/Temp/bin/Debug/Assembly-CSharp-firstpass.dll
 /Users/Home/Documents/FNancy/Temp/bin/Debug/Assembly-CSharp-firstpass.dll.mdb
+/Users/Home/Documents/FNancy/Temp/bin/Debug/UnityEngine.Advertisements.dll
+/Users/Home/Documents/FNancy/Temp/bin/Debug/UnityEngine.PlaymodeTestsRunner.dll
+/Users/Home/Documents/FNancy/Temp/bin/Debug/UnityEngine.Analytics.dll
+/Users/Home/Documents/FNancy/Temp/bin/Debug/UnityEngine.HoloLens.dll
+/Users/Home/Documents/FNancy/Temp/bin/Debug/UnityEngine.Purchasing.dll
+/Users/Home/Documents/FNancy/Temp/bin/Debug/UnityEngine.VR.dll

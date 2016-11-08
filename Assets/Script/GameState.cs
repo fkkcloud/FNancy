@@ -9,6 +9,9 @@ public class GameState : MonoBehaviour {
 	public LevelManager LevelManager;
 	public GameObject ClearText;
 	public float StageLength = 4.5f;
+	public GameObject Audio;
+
+	public float TimerSpeed = 0.8f;
 
 	private StageData[] _stageData;
 	private float _currentTime;
@@ -16,9 +19,13 @@ public class GameState : MonoBehaviour {
 	private int _currentStageID;
 	private GameObject[] _stageInstances;
 	private Animator _anim;
-	private float _levelStartTime;
 	private TextMesh _currentTextMeshBombTimer;
 	private TextMesh _currentTextMeshStageTimer;
+
+	private float timer = 0f;
+	private bool timerOn = true;
+
+	private GameObject _prevStage;
 
 	// Use this for initialization
 	void Start () {
@@ -26,28 +33,31 @@ public class GameState : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		_currentTime = Time.timeSinceLevelLoad;
+		if (timerOn) {
+			timer += (TimerSpeed * Time.deltaTime);
 
-		float CurrentStageElapsedTime = _currentTime - _levelStartTime;
-		if (CurrentStageElapsedTime > _currentStageTime + 0.5) {
-			// go to main menu
-			LevelManager.LoadMainMenu();
-		}
-
-		// update timer
-		if (_currentTextMeshBombTimer != null)
-			_currentTextMeshBombTimer.text = CurrentStageElapsedTime.ToString("0.0");
-	
-			
-		// touch on screen
-		if (Input.GetMouseButtonDown (0))
-		{
-			//Debug.Log("Touched");
-			if (CurrentStageElapsedTime >= _currentStageTime - 0.5f && CurrentStageElapsedTime <= _currentStageTime + 0.5f)
-				GoToNextStage ();
-			else
+			// when player does not do anything
+			if (timer > _currentStageTime + 0.5) {
+				// go to main menu
 				LevelManager.LoadMainMenu();
-		}   
+			}
+
+			// update timer
+			if (_currentTextMeshBombTimer != null)
+				_currentTextMeshBombTimer.text = timer.ToString("0.0");
+
+
+			// touch on screen
+			if (Input.GetMouseButtonDown (0))
+			{
+				//Debug.Log("Touched");
+				if (timer >= _currentStageTime - 0.5f && timer <= _currentStageTime + 0.5f)
+					GoToNextStage ();
+				else
+					LevelManager.LoadMainMenu();
+			}
+		}
+		   
 	}
 
 	void OnLevelWasLoaded(int level){
@@ -64,6 +74,18 @@ public class GameState : MonoBehaviour {
 			GameObject StageInstance = Instantiate (StageObject);
 			StageInstance.transform.position = new Vector3(0, 0, ZPos);
 			ZPos += StageLength;
+
+			// reset text to
+			TextMesh[] childrens = StageInstance.GetComponentsInChildren<TextMesh>();
+			foreach (TextMesh child in childrens) {
+				// do what you want with the transform
+				if (child.gameObject.tag == "TimerBomb") {
+					child.text = "";
+				} else if (child.gameObject.tag == "TimerStage") {
+					child.text = "";
+				}
+			}
+
 			_stageInstances [i] = StageInstance;
 		}
 
@@ -71,12 +93,12 @@ public class GameState : MonoBehaviour {
 		_currentStageTime = _stageData [_currentStageID].time;
 
 
-		TextMesh[] childrens = _stageInstances[_currentStageID].GetComponentsInChildren<TextMesh>();
-		foreach (TextMesh child in childrens) {
+		TextMesh[] children = _stageInstances[_currentStageID].GetComponentsInChildren<TextMesh>();
+		foreach (TextMesh child in children) {
 			// do what you want with the transform
 			if (child.gameObject.tag == "TimerBomb") {
 				_currentTextMeshBombTimer = child;
-				_currentTextMeshBombTimer.text = 0.0f.ToString ("#.#");;
+				_currentTextMeshBombTimer.text = 0.0f.ToString ("#.#");
 				_currentTextMeshBombTimer.gameObject.SetActive (true);
 			} else if (child.gameObject.tag == "TimerStage") {
 				_currentTextMeshStageTimer = child;
@@ -89,6 +111,8 @@ public class GameState : MonoBehaviour {
 	void GoToNextStage(){
 		//if (_stageInstances.Length < _currentStageID + 2)
 		//	return;
+		if (Audio)
+			Audio.GetComponent<AudioSource> ().Play ();
 
 		if (_stageInstances.Length - 1 == _currentStageID) {
 			HandleClear ();
@@ -96,8 +120,9 @@ public class GameState : MonoBehaviour {
 		}
 
 		// disable prev stage inactive
-		if (_currentStageID - 1 > -1)
-			_stageInstances [_currentStageID - 1].SetActive (false);
+		if (_currentStageID - 1 > -1) {
+			_prevStage = _stageInstances [_currentStageID - 1];
+		}
 
 		// animate current stage 
 		Animator Anim = _stageInstances[_currentStageID].GetComponent<Animator> ();
@@ -118,13 +143,17 @@ public class GameState : MonoBehaviour {
 
 		// move all the stages
 		float ZPos = StageLength;
+		float MoveSpeed = 1.0f;
 		for (int i = 0; i < _stageData.Length; i++) {
 			GameObject CurrStage = _stageInstances [i];
 			float newZPos = CurrStage.transform.position.z - ZPos;
-			LeanTween.moveZ (CurrStage, newZPos, 1.0f).setEase (LeanTweenType.easeInCubic);
+			LeanTween.moveZ (CurrStage, newZPos, MoveSpeed).setEase (LeanTweenType.easeInQuad);
 		}
+		Invoke ("DisablePrevStage", MoveSpeed * 2f);
+		Invoke ("EnableTimer", MoveSpeed * 1f);
 
-		_levelStartTime = Time.timeSinceLevelLoad;
+		timer = 0f;
+		timerOn = false;
 
 		TextMesh[] childrens = _stageInstances[_currentStageID].GetComponentsInChildren<TextMesh>();
 		foreach (TextMesh child in childrens) {
@@ -139,7 +168,17 @@ public class GameState : MonoBehaviour {
 				_currentTextMeshStageTimer.gameObject.SetActive (true);
 			}
 		}
+	}
 
+	void DisablePrevStage()
+	{
+		if (_prevStage)
+			_prevStage.SetActive (false);
+	}
+
+	void EnableTimer()
+	{
+		timerOn = true;
 	}
 
 	void HandleClear()
