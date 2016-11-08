@@ -27,7 +27,7 @@ Material:
       second: 0.0005
     - first:
         name: _RimPower
-      second: 2.5982144
+      second: 1.33
     m_Colors:
     - first:
         name: _Color

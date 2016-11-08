@@ -25,7 +25,13 @@ Material:
     - first:
         name: _Curvature
       second: 0.0005
+    - first:
+        name: _RimPower
+      second: 3
     m_Colors:
     - first:
         name: _Color
       second: {r: 1, g: 1, b: 1, a: 1}
+    - first:
+        name: _RimColor
+      second: {r: 0.26, g: 0.19, b: 0.16, a: 0}
