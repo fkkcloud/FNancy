@@ -10,6 +10,7 @@ public class GameState : MonoBehaviour {
 	public GameObject ClearText;
 	public float StageLength = 4.5f;
 	public GameObject Audio;
+	public GameObject Character;
 
 	public float TimerSpeed = 0.8f;
 
@@ -29,6 +30,7 @@ public class GameState : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Character.GetComponent<Animation> ().Play ("Wait");
 	}
 	
 	// Update is called once per frame
@@ -39,6 +41,7 @@ public class GameState : MonoBehaviour {
 			// when player does not do anything
 			if (timer > _currentStageTime + 0.5) {
 				// go to main menu
+				Character.GetComponent<Animation> ().Play ("Dead");
 				LevelManager.LoadMainMenu();
 			}
 
@@ -50,11 +53,16 @@ public class GameState : MonoBehaviour {
 			// touch on screen
 			if (Input.GetMouseButtonDown (0))
 			{
+				Character.GetComponent<Animation> ().Play ("Attack");
+
 				//Debug.Log("Touched");
-				if (timer >= _currentStageTime - 0.5f && timer <= _currentStageTime + 0.5f)
+				if (timer >= _currentStageTime - 0.5f && timer <= _currentStageTime + 0.5f) {
+					Character.GetComponent<Animation> ().Play ("Damage");
 					GoToNextStage ();
-				else
-					LevelManager.LoadMainMenu();
+				} else {
+					Character.GetComponent<Animation> ().Play ("Dead");
+					LevelManager.LoadMainMenu ();
+				}
 			}
 		}
 		   
@@ -109,6 +117,8 @@ public class GameState : MonoBehaviour {
 	}
 
 	void GoToNextStage(){
+		if (Character)
+			Character.GetComponent<Animation> ().Play ("Walk");
 		//if (_stageInstances.Length < _currentStageID + 2)
 		//	return;
 		if (Audio)
@@ -179,6 +189,7 @@ public class GameState : MonoBehaviour {
 	void EnableTimer()
 	{
 		timerOn = true;
+		Character.GetComponent<Animation> ().Play ("Wait");
 	}
 
 	void HandleClear()
