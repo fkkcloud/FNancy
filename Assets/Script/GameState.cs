@@ -4,15 +4,27 @@ using System.Collections;
 
 public class GameState : MonoBehaviour {
 
-	public TextAsset StageJson;
-	public GameObject StageObject;
+	[Space(10)]
+	[Header("General")]
 	public LevelManager LevelManager;
 	public GameObject ClearText;
+	public float TimerSpeed = 0.8f;
+
+	[Space(10)]
+	[Header("Stage")]
+	public TextAsset StageJson;
+	public GameObject StageObject;
 	public float StageLength = 4.5f;
-	public GameObject Audio;
+
+	[Space(10)]
+	[Header("Character")]
 	public GameObject Character;
 
-	public float TimerSpeed = 0.8f;
+	[Space(10)]
+	[Header("Audio")]
+	public GameObject Audio;
+	public AudioClip SoundSuccess;
+	public AudioClip SoundFail;
 
 	private StageData[] _stageData;
 	private float _currentTime;
@@ -30,7 +42,12 @@ public class GameState : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		InitStages ();
 		Character.GetComponent<Animation> ().Play ("Wait");
+
+		if (!GameObject.FindObjectOfType<MusicManager> ().IsPlaying ()) {
+			GameObject.FindObjectOfType<MusicManager> ().Play (Application.loadedLevel);
+		}
 	}
 	
 	// Update is called once per frame
@@ -41,8 +58,11 @@ public class GameState : MonoBehaviour {
 			// when player does not do anything
 			if (timer > _currentStageTime + 0.5) {
 				// go to main menu
+				GameObject.FindObjectOfType<MusicManager> ().Stop ();
 				Character.GetComponent<Animation> ().Play ("Dead");
-				LevelManager.LoadMainMenu();
+				Audio.GetComponent<AudioSource> ().clip = SoundFail;
+				Audio.GetComponent<AudioSource> ().Play ();
+				Invoke ("GoToMainMenu", SoundFail.length);
 			}
 
 			// update timer
@@ -58,10 +78,15 @@ public class GameState : MonoBehaviour {
 				//Debug.Log("Touched");
 				if (timer >= _currentStageTime - 0.5f && timer <= _currentStageTime + 0.5f) {
 					Character.GetComponent<Animation> ().Play ("Damage");
+					Audio.GetComponent<AudioSource> ().clip = SoundSuccess;
+					Audio.GetComponent<AudioSource> ().Play ();
 					GoToNextStage ();
 				} else {
+					GameObject.FindObjectOfType<MusicManager> ().Stop ();
 					Character.GetComponent<Animation> ().Play ("Dead");
-					LevelManager.LoadMainMenu ();
+					Audio.GetComponent<AudioSource> ().clip = SoundFail;
+					Audio.GetComponent<AudioSource> ().Play ();
+					Invoke ("GoToMainMenu", SoundFail.length);
 				}
 			}
 		}
@@ -69,7 +94,7 @@ public class GameState : MonoBehaviour {
 	}
 
 	void OnLevelWasLoaded(int level){
-		InitStages ();
+		//InitStages ();
 	}
 
 	void InitStages(){
@@ -121,8 +146,7 @@ public class GameState : MonoBehaviour {
 			Character.GetComponent<Animation> ().Play ("Walk");
 		//if (_stageInstances.Length < _currentStageID + 2)
 		//	return;
-		if (Audio)
-			Audio.GetComponent<AudioSource> ().Play ();
+
 
 		if (_stageInstances.Length - 1 == _currentStageID) {
 			HandleClear ();
@@ -196,5 +220,10 @@ public class GameState : MonoBehaviour {
 	{
 		_stageInstances [_currentStageID].SetActive (false);
 		ClearText.SetActive (true);
+	}
+
+	void GoToMainMenu()
+	{
+		LevelManager.LoadMainMenu();
 	}
 }

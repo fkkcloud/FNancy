@@ -365,17 +365,13 @@ Prefab:
       value: 
       objectReference: {fileID: 536140520}
     - target: {fileID: 11452402, guid: f11cc502cb64c40bf87067ff6c3031a1, type: 2}
-      propertyPath: Audio
-      value: 
-      objectReference: {fileID: 1445129983}
-    - target: {fileID: 11452402, guid: f11cc502cb64c40bf87067ff6c3031a1, type: 2}
       propertyPath: Character
       value: 
       objectReference: {fileID: 1182282796}
     - target: {fileID: 11452402, guid: f11cc502cb64c40bf87067ff6c3031a1, type: 2}
-      propertyPath: TimerSpeed
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: Audio
+      value: 
+      objectReference: {fileID: 1445129983}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f11cc502cb64c40bf87067ff6c3031a1, type: 2}
   m_IsPrefabParent: 0
@@ -512,7 +508,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: aa90639b403df4340ba644345ba7725c, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.6
   m_Pitch: 1.83
