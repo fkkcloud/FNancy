@@ -4,7 +4,14 @@ using UnityEngine.UI;
 [System.Serializable]
 public class StageData
 {
-	public int level = 1; // current level
-	public float time = 1.0f; // json controlled for balance
-	public float reward = 0.0f;
+	public int level; // current level
+	public float[] layers;
+	public float [] reward;
+
+}
+
+[CreateAssetMenu(fileName = "Data", menuName = "GameDesign/StageDesigner", order = 1)]
+public class StageDesigner : ScriptableObject
+{
+	public StageData[] stageDatas;
 }
