@@ -258,6 +258,11 @@ Prefab:
       propertyPath: m_Animations.Array.data[4]
       value: 
       objectReference: {fileID: 7400000, guid: afa46a7eafad7874da3988d082799d38, type: 3}
+    - target: {fileID: 114792109328524310, guid: 2967d9d63659c4d368569394f51924ff,
+        type: 2}
+      propertyPath: Postprod
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2967d9d63659c4d368569394f51924ff, type: 2}
   m_IsPrefabParent: 0

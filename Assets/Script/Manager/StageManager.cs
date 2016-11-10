@@ -62,28 +62,45 @@ public class StageManager : MonoBehaviour {
 				_gameState.PlayerAction ();
 
 				if (_gameCharacter._state == GameCharacter.CurrentState.Undefeatable) {
-					_gameCharacter.currentPostProd += 1;
+
+					_gameCharacter.currentUndefeatCount += 1;
 					_gameCharacter.UpdateCharacterState ();
-					StageClear ();
 
 					if (_gameCharacter._state == GameCharacter.CurrentState.Undefeatable)
-						_feedMsg.text = "Undefeatable\n" + _gameCharacter.currentPostProd + "/" + (_gameCharacter.Postprod-1);
+						_feedMsg.text = "Undefeatable\n" + _gameCharacter.currentUndefeatCount + "/" + _gameCharacter.undefeatMax;
 					else
 						_feedMsg.text = "Done";
+					
+
+
+					StageClear ();
+
+
+					
 					return;
 				}
 
 				if (timer >= CurrentLayerTime - 0.5f && timer <= CurrentLayerTime + 0.5f) {
 					
 					if (timer >= CurrentLayerTime - 0.2f && timer <= CurrentLayerTime + 0.2f) {
-						_gameCharacter.currentPreProd += 1;
+						
+						_gameCharacter.currentPerfect += 1;
 						_gameCharacter.UpdateCharacterState ();
-						_feedMsg.text = "PERFECT\n" + (_gameCharacter.Preprod - _gameCharacter.currentPreProd + 1) + " more!";
+
+						if (_gameCharacter._state == GameCharacter.CurrentState.Undefeatable)
+							_feedMsg.text = "Undefeatable\n" + _gameCharacter.currentUndefeatCount + "/" + _gameCharacter.undefeatMax;
+						else
+							_feedMsg.text = "PERFECT\n" + (_gameCharacter.perfectMax - _gameCharacter.currentPerfect) + " more!";
+
+
+
 					} else {
-						_gameCharacter.currentPreProd = 0;
-						_gameCharacter.UpdateCharacterState ();
+						
+						_gameCharacter.StateReset ();
 						_feedMsg.text = "Good";
+
 					}
+
 					Evaluate ();
 				} else {
 					_feedMsg.text = "GameOver";

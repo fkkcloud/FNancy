@@ -5,10 +5,10 @@ using UnityEngine;
 public class GameCharacter : MonoBehaviour {
 
 	public GameObject CharacterObj;
-	public int Preprod = 2;
-	public int Postprod = 4;
-	public int currentPostProd = 0;
-	public int currentPreProd = 0;
+	public int perfectMax = 2;
+	public int undefeatMax = 3;
+	public int currentUndefeatCount = 0;
+	public int currentPerfect = 0;
 
 	public enum CurrentState {Normal, Undefeatable, Tired, Drunken};
 	public CurrentState _state = CurrentState.Normal;
@@ -22,14 +22,17 @@ public class GameCharacter : MonoBehaviour {
 		
 	}
 
-	public void UpdateCharacterState(){
-		if (currentPostProd == Postprod - 1) {
-			_state = CurrentState.Normal;
-			currentPreProd = 0;
-			currentPostProd = 0;
-		}
+	public void StateReset(){
+		currentPerfect = 0;
+		currentUndefeatCount = 0;
+		_state = CurrentState.Normal;
+	}
 
-		if (Preprod-1 == currentPreProd) {
+	public void UpdateCharacterState(){
+		if (currentUndefeatCount == undefeatMax) {
+			StateReset ();
+		}
+		if (currentPerfect == perfectMax) {
 			_state = CurrentState.Undefeatable;
 
 		}
