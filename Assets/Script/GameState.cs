@@ -22,14 +22,14 @@ public class GameState : MonoBehaviour {
 	public AudioClip SoundFail;
 
 	public enum CurrentState {Playing, Loading, Moving, Dead};
-	public CurrentState _state;
+	public CurrentState _state = CurrentState.Playing;
 
 	private StageManager _stageManager;
 
 
 	// Use this for initialization
 	void Start () {
-		Character.GetComponent<Animation> ().Play ("Wait");
+		Character.GetComponent<GameCharacter> ().Play ("Wait");
 
 		if (!GameObject.FindObjectOfType<MusicManager> ().IsPlaying ()) {
 			GameObject.FindObjectOfType<MusicManager> ().Play (Application.loadedLevel);
@@ -38,7 +38,6 @@ public class GameState : MonoBehaviour {
 		_stageManager = GameObject.FindObjectOfType<StageManager> ();
 		_stageManager.InitStages ();
 
-		_state = CurrentState.Playing;
 	}
 	
 	// Update is called once per frame
@@ -51,26 +50,25 @@ public class GameState : MonoBehaviour {
 	}
 
 	public void PlayerAction(){
-		Character.GetComponent<Animation> ().Play ("Attack");
+		Character.GetComponent<GameCharacter> ().Play ("Attack");
 
 	}
 
 	public void PlayerDead(){
 		_state = CurrentState.Dead;
 		GameObject.FindObjectOfType<MusicManager> ().Stop ();
-		Character.GetComponent<Animation> ().Play ("Dead");
+		Character.GetComponent<GameCharacter> ().Play ("Dead");
 		Audio.GetComponent<AudioSource> ().clip = SoundFail;
 		Audio.GetComponent<AudioSource> ().Play ();
 		Invoke ("GoToMainMenu", SoundFail.length);
 	}
 
 	public void PlayerMove(){
-		Character.GetComponent<Animation> ().Play ("Walk");
-
+		Character.GetComponent<GameCharacter> ().Play ("Walk");
 	}
 
 	public void PlayerIdle(){
-		Character.GetComponent<Animation> ().Play ("Wait");
+		Character.GetComponent<GameCharacter> ().Play ("Wait");
 	}
 
 	public void HandleClear()

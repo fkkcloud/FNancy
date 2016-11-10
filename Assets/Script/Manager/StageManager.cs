@@ -14,15 +14,21 @@ public class StageManager : MonoBehaviour {
 	private float timer = 0f;
 	private bool timerOn = true;
 
+	private float CurrentLayerTime;
+
 	private int _currentStageID;
 	private Stage[] _stages;
 	private GameObject _prevStage;
 
 	private GameState _gameState;
+	private GameCharacter _gameCharacter;
+	private TextMesh _feedMsg;
 
 	// Use this for initialization
 	void Start () {
 		_gameState = GameObject.FindObjectOfType<GameState> ();
+		_gameCharacter = GameObject.FindObjectOfType<GameCharacter> ();
+		_feedMsg = GameObject.FindWithTag ("TimerFeed").GetComponent<TextMesh>();
 	}
 	
 	// Update is called once per frame
@@ -33,10 +39,11 @@ public class StageManager : MonoBehaviour {
 		if (timerOn) {
 			timer += (TimerSpeed * Time.deltaTime);
 
-			float CurrentLayerTime = _stages [_currentStageID].GetCurrentLayerTime ();
+			CurrentLayerTime = _stages [_currentStageID].GetCurrentLayerTime ();
 
 			// when player does not do anything
 			if (timer > CurrentLayerTime + 0.5f) {
+				_feedMsg.text = "GameOver";
 				_gameState.PlayerDead ();
 			}
 
@@ -47,34 +54,73 @@ public class StageManager : MonoBehaviour {
 			// touch on screen
 			if (Input.GetMouseButtonDown (0))
 			{
+				if (_gameState._state == GameState.CurrentState.Moving)
+					return;
+
+				Debug.Log (_gameCharacter._state);
+
 				_gameState.PlayerAction ();
 
+				if (_gameCharacter._state == GameCharacter.CurrentState.Undefeatable) {
+					_gameCharacter.currentPostProd += 1;
+					_gameCharacter.UpdateCharacterState ();
+					StageClear ();
+
+					if (_gameCharacter._state == GameCharacter.CurrentState.Undefeatable)
+						_feedMsg.text = "Undefeatable\n" + _gameCharacter.currentPostProd + "/" + (_gameCharacter.Postprod-1);
+					else
+						_feedMsg.text = "Done";
+					return;
+				}
+
 				if (timer >= CurrentLayerTime - 0.5f && timer <= CurrentLayerTime + 0.5f) {
-					if (_stages[_currentStageID].IsClear()) {
-
-						_gameState.Audio.GetComponent<AudioSource> ().clip = _gameState.SoundSuccess;
-						_gameState.Audio.GetComponent<AudioSource> ().pitch = (CurrentLayerTime + 1) * 1.1f;
-						_gameState.Audio.GetComponent<AudioSource> ().Play ();
-
-						_gameState.PlayerMove ();
-						GoToNextStage ();
-
+					
+					if (timer >= CurrentLayerTime - 0.2f && timer <= CurrentLayerTime + 0.2f) {
+						_gameCharacter.currentPreProd += 1;
+						_gameCharacter.UpdateCharacterState ();
+						_feedMsg.text = "PERFECT\n" + (_gameCharacter.Preprod - _gameCharacter.currentPreProd + 1) + " more!";
 					} else {
-
-						_gameState.Audio.GetComponent<AudioSource> ().clip = _gameState.SoundSuccess;
-						_gameState.Audio.GetComponent<AudioSource> ().pitch = (CurrentLayerTime + 1) * 1.1f;
-						_gameState.Audio.GetComponent<AudioSource> ().Play ();
-
-						_stages[_currentStageID].CurrentLayerID += 1;
-						_stages [_currentStageID].UpdateIndicator ();
-
+						_gameCharacter.currentPreProd = 0;
+						_gameCharacter.UpdateCharacterState ();
+						_feedMsg.text = "Good";
 					}
-
+					Evaluate ();
 				} else {
+					_feedMsg.text = "GameOver";
 					_gameState.PlayerDead ();
 				}
 			}
 		}  
+	}
+
+	private void StageClear(){
+		_gameState.Audio.GetComponent<AudioSource> ().clip = _gameState.SoundSuccess;
+		_gameState.Audio.GetComponent<AudioSource> ().pitch = (CurrentLayerTime + 1) * 1.1f;
+		_gameState.Audio.GetComponent<AudioSource> ().Play ();
+
+		_gameState.PlayerMove ();
+		GoToNextStage ();
+	}
+
+	private void StageProceed(){
+		_gameState.Audio.GetComponent<AudioSource> ().clip = _gameState.SoundSuccess;
+		_gameState.Audio.GetComponent<AudioSource> ().pitch = (CurrentLayerTime + 1) * 1.1f;
+		_gameState.Audio.GetComponent<AudioSource> ().Play ();
+
+		_stages[_currentStageID].CurrentLayerID += 1;
+		_stages [_currentStageID].UpdateIndicator ();
+	}
+
+	private void Evaluate(){
+		if (_stages[_currentStageID].IsClear()) {
+
+			StageClear ();
+
+		} else {
+
+			StageProceed ();
+
+		}
 	}
 
 	public void InitStages(){
@@ -107,6 +153,8 @@ public class StageManager : MonoBehaviour {
 			_gameState.HandleClear ();
 			return;
 		}
+
+		_gameState._state = GameState.CurrentState.Moving;
 
 		// disable prev stage inactive
 		if (_currentStageID - 1 > -1) {
@@ -157,5 +205,6 @@ public class StageManager : MonoBehaviour {
 	{
 		timerOn = true;
 		_gameState.PlayerIdle ();
+		_gameState._state = GameState.CurrentState.Playing;
 	}
 }
