@@ -134,9 +134,9 @@ MonoBehaviour:
     reward: []
   - level: 0
     layers:
-    - 0
-    - 0
-    - 0
+    - 1
+    - 2
+    - 3
     reward: []
   - level: 0
     layers:
