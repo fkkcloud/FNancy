@@ -22,13 +22,41 @@ public class StageManager : MonoBehaviour {
 
 	private GameState _gameState;
 	private GameCharacter _gameCharacter;
-	private TextMesh _feedMsg;
+
+	public float duration;
+	public float magnitude;
+
+	IEnumerator Shake() {
+
+		float elapsed = 0.0f;
+
+		Vector3 originalCamPos = Camera.main.transform.position;
+
+		while (elapsed < duration) {
+
+			elapsed += Time.deltaTime;          
+
+			float percentComplete = elapsed / duration;         
+			float damper = 1.0f - Mathf.Clamp(4.0f * percentComplete - 3.0f, 0.0f, 1.0f);
+
+			// map value to [-1, 1]
+			float x = Random.value * 2.0f - 1.0f;
+			float y = Random.value * 2.0f - 1.0f;
+			x *= magnitude * damper;
+			y *= magnitude * damper;
+
+			Camera.main.transform.position = new Vector3(originalCamPos.x + x, originalCamPos.y + y, originalCamPos.z);
+
+			yield return null;
+		}
+
+		Camera.main.transform.position = originalCamPos;
+	}
 
 	// Use this for initialization
 	void Start () {
 		_gameState = GameObject.FindObjectOfType<GameState> ();
 		_gameCharacter = GameObject.FindObjectOfType<GameCharacter> ();
-		_feedMsg = GameObject.FindWithTag ("TimerFeed").GetComponent<TextMesh>();
 	}
 	
 	// Update is called once per frame
@@ -37,19 +65,26 @@ public class StageManager : MonoBehaviour {
 			return;
 
 		if (timerOn) {
+
+			// for default warrior
+			if (_gameCharacter._state == GameCharacter.CurrentState.Undefeatable) {
+				_gameCharacter.currentUndefeatCount += 1;
+				_gameCharacter.UpdateCharacterState ();
+				StartCoroutine("Shake");
+				StageClear ();
+				return;
+			}
+
+			// update timer
 			timer += (TimerSpeed * Time.deltaTime);
+			_stages[_currentStageID].TextMeshTimer.text = timer.ToString("0.0"); // TODO : make it as function for polyomrphism
 
 			CurrentLayerTime = _stages [_currentStageID].GetCurrentLayerTime ();
 
 			// when player does not do anything
 			if (timer > CurrentLayerTime + 0.5f) {
-				_feedMsg.text = "GameOver";
 				_gameState.PlayerDead ();
 			}
-
-			// update timer
-			_stages[_currentStageID].TextMeshTimer.text = timer.ToString("0.0"); // TODO : make it as function for polyomrphism
-
 
 			// touch on screen
 			if (Input.GetMouseButtonDown (0))
@@ -57,10 +92,10 @@ public class StageManager : MonoBehaviour {
 				if (_gameState._state == GameState.CurrentState.Moving)
 					return;
 
-				Debug.Log (_gameCharacter._state);
-
+				StartCoroutine("Shake");
 				_gameState.PlayerAction ();
 
+				/*
 				if (_gameCharacter._state == GameCharacter.CurrentState.Undefeatable) {
 
 					_gameCharacter.currentUndefeatCount += 1;
@@ -70,15 +105,11 @@ public class StageManager : MonoBehaviour {
 						_feedMsg.text = "Undefeatable\n" + _gameCharacter.currentUndefeatCount + "/" + _gameCharacter.undefeatMax;
 					else
 						_feedMsg.text = "Done";
-					
-
 
 					StageClear ();
-
-
-					
 					return;
 				}
+				*/
 
 				if (timer >= CurrentLayerTime - 0.5f && timer <= CurrentLayerTime + 0.5f) {
 					
@@ -87,23 +118,14 @@ public class StageManager : MonoBehaviour {
 						_gameCharacter.currentPerfect += 1;
 						_gameCharacter.UpdateCharacterState ();
 
-						if (_gameCharacter._state == GameCharacter.CurrentState.Undefeatable)
-							_feedMsg.text = "Undefeatable\n" + _gameCharacter.currentUndefeatCount + "/" + _gameCharacter.undefeatMax;
-						else
-							_feedMsg.text = "PERFECT\n" + (_gameCharacter.perfectMax - _gameCharacter.currentPerfect) + " more!";
-
-
-
 					} else {
 						
 						_gameCharacter.StateReset ();
-						_feedMsg.text = "Good";
 
 					}
 
 					Evaluate ();
 				} else {
-					_feedMsg.text = "GameOver";
 					_gameState.PlayerDead ();
 				}
 			}
@@ -154,6 +176,7 @@ public class StageManager : MonoBehaviour {
 			_stages [i] = new Stage ();
 			_stages [i].InitStageObj (ref StageObject, pos);
 			_stages [i].SetStageData (StageDesignData.stageDatas [i]);
+			_stages [i].StageObj.SetActive (false);
 
 			ZPos += StageLength;
 		}
@@ -161,6 +184,7 @@ public class StageManager : MonoBehaviour {
 		_currentStageID = 0;
 
 		// init current stages text
+		_stages [_currentStageID].StageObj.SetActive (true);
 		_stages [_currentStageID].InitText ();
 	}
 
@@ -195,15 +219,15 @@ public class StageManager : MonoBehaviour {
 
 		// move all the stages
 		float ZPos = StageLength;
-		float MoveSpeed = 1.0f;
+		float MoveDuration = 0.9f;
 		for (int i = 0; i < _stages.Length; i++) {
 			GameObject CurrStage = _stages [i].StageObj;
 			float newZPos = CurrStage.transform.position.z - ZPos;
-			LeanTween.moveZ (CurrStage, newZPos, MoveSpeed).setEase (LeanTweenType.easeInQuad);
+			LeanTween.moveZ (CurrStage, newZPos, MoveDuration).setEase (LeanTweenType.easeInQuad);
 		}
 
-		Invoke ("DisablePrevStage", MoveSpeed * 2f);
-		Invoke ("EnableTimer", MoveSpeed * 0.96f);
+		Invoke ("DisablePrevStage", MoveDuration * 2f);
+		Invoke ("EnableTimer", MoveDuration * 1.2f);
 
 		timer = 0f;
 		timerOn = false;

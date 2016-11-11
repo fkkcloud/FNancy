@@ -1,14 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/GameState.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Manager/StageManager.cs">
     <Files>
-      <File FileName="Assets/Script/GameState.cs" Line="61" Column="58" />
-      <File FileName="Assets/Script/SmoothFollow.cs" Line="1" Column="1" />
-      <File FileName="Assets/CameraSmooth.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/MenuControllers/OptionController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/GameState.cs" Line="61" Column="55" />
       <File FileName="Assets/Script/StaticUtils.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/Manager/MusicManager.cs" Line="56" Column="28" />
-      <File FileName="Assets/Script/Manager/LevelManager.cs" Line="27" Column="49" />
+      <File FileName="Assets/Script/Manager/MusicManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Manager/LevelManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/Data/StageData.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Manager/StageManager.cs" Line="74" Column="6" />
+      <File FileName="Assets/Script/GameCharacter.cs" Line="25" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
