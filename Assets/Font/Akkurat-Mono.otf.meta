@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 4badcb83b9a9242b8a0b82090a981cd1
+timeCreated: 1479142124
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Akkurat Mono
+  fontNames:
+  - Akkurat Mono
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

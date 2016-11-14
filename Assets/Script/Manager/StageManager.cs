@@ -11,6 +11,9 @@ public class StageManager : MonoBehaviour {
 	public float StageLength = 4.5f;
 	public float TimerSpeed = 0.8f;
 
+	private GameObject _bombObj;
+	private GameObject _perfectText;
+
 	private float timer = 0f;
 	private bool timerOn = true;
 
@@ -53,6 +56,33 @@ public class StageManager : MonoBehaviour {
 		Camera.main.transform.position = originalCamPos;
 	}
 
+	IEnumerator ShakeBomb() {
+
+		float elapsed = 0.0f;
+
+		Vector3 originalCamPos = _bombObj.transform.position;
+
+		while (elapsed < duration) {
+
+			elapsed += Time.deltaTime;          
+
+			float percentComplete = elapsed / duration;         
+			float damper = 1.0f - Mathf.Clamp(4.0f * percentComplete - 3.0f, 0.0f, 1.0f);
+
+			// map value to [-1, 1]
+			float x = Random.value * 2.0f - 1.0f;
+			float y = Random.value * 2.0f - 1.0f;
+			x *= 2f * damper;
+			y *= 2f * damper;
+
+			_bombObj.transform.position = new Vector3(originalCamPos.x + x, originalCamPos.y + y, originalCamPos.z);
+
+			yield return null;
+		}
+
+		_bombObj.transform.position = originalCamPos;
+	}
+		
 	// Use this for initialization
 	void Start () {
 		_gameState = GameObject.FindObjectOfType<GameState> ();
@@ -71,6 +101,7 @@ public class StageManager : MonoBehaviour {
 				_gameCharacter.currentUndefeatCount += 1;
 				_gameCharacter.UpdateCharacterState ();
 				StartCoroutine("Shake");
+				_gameState.PlayRegularClearSound ();
 				StageClear ();
 				return;
 			}
@@ -84,6 +115,10 @@ public class StageManager : MonoBehaviour {
 			// when player does not do anything
 			if (timer > CurrentLayerTime + 0.5f) {
 				_gameState.PlayerDead ();
+			}
+
+			if (timer > CurrentLayerTime + 0.2f) {
+				//StartCoroutine("ShakeBomb");
 			}
 
 			// touch on screen
@@ -111,15 +146,19 @@ public class StageManager : MonoBehaviour {
 				}
 				*/
 
-				if (timer >= CurrentLayerTime - 0.5f && timer <= CurrentLayerTime + 0.5f) {
+				if (timer >= CurrentLayerTime - 0.25f && timer <= CurrentLayerTime + 0.25f) {
 					
-					if (timer >= CurrentLayerTime - 0.2f && timer <= CurrentLayerTime + 0.2f) {
-						
+					if (timer >= CurrentLayerTime - 0.1f && timer <= CurrentLayerTime + 0.1f) {
+
+						_perfectText.transform.position = new Vector3 (4f, _perfectText.transform.position.y, _perfectText.transform.position.z);
+						LeanTween.moveLocalX (_perfectText, -5.5f, 0.38f);
+
 						_gameCharacter.currentPerfect += 1;
+						PlayPerfectSound ();
 						_gameCharacter.UpdateCharacterState ();
 
 					} else {
-						
+						_gameState.PlayRegularClearSound ();
 						_gameCharacter.StateReset ();
 
 					}
@@ -132,19 +171,21 @@ public class StageManager : MonoBehaviour {
 		}  
 	}
 
-	private void StageClear(){
-		_gameState.Audio.GetComponent<AudioSource> ().clip = _gameState.SoundSuccess;
+	private void PlayPerfectSound()
+	{
+		_gameState.Audio.GetComponent<AudioSource> ().clip = _gameState.SoundPerfect;
 		_gameState.Audio.GetComponent<AudioSource> ().pitch = (CurrentLayerTime + 1) * 1.1f;
 		_gameState.Audio.GetComponent<AudioSource> ().Play ();
+	}
+
+	private void StageClear(){
 
 		_gameState.PlayerMove ();
 		GoToNextStage ();
 	}
 
 	private void StageProceed(){
-		_gameState.Audio.GetComponent<AudioSource> ().clip = _gameState.SoundSuccess;
-		_gameState.Audio.GetComponent<AudioSource> ().pitch = (CurrentLayerTime + 1) * 1.1f;
-		_gameState.Audio.GetComponent<AudioSource> ().Play ();
+
 
 		_stages[_currentStageID].CurrentLayerID += 1;
 		_stages [_currentStageID].UpdateIndicator ();
@@ -186,6 +227,21 @@ public class StageManager : MonoBehaviour {
 		// init current stages text
 		_stages [_currentStageID].StageObj.SetActive (true);
 		_stages [_currentStageID].InitText ();
+
+
+		foreach(Transform child in _stages[_currentStageID].StageObj.transform){
+			if(child.gameObject.tag == "BombObject"){
+				_bombObj = child.gameObject;
+				break;
+			}
+		}
+
+		foreach(Transform child in _stages[_currentStageID].StageObj.transform){
+			if(child.gameObject.tag == "PerfectText"){
+				_perfectText = child.gameObject;
+				break;
+			}
+		}
 	}
 
 	void GoToNextStage(){
@@ -227,13 +283,26 @@ public class StageManager : MonoBehaviour {
 		}
 
 		Invoke ("DisablePrevStage", MoveDuration * 2f);
-		Invoke ("EnableTimer", MoveDuration * 1.2f);
+		Invoke ("EnableTimer", MoveDuration * 1.025f);
 
 		timer = 0f;
 		timerOn = false;
 
 		// init current stages text
 		_stages [_currentStageID].InitText ();
+		foreach(Transform child in _stages[_currentStageID].StageObj.transform){
+			if(child.gameObject.tag == "BombObject"){
+				_bombObj = child.gameObject;
+				break;
+			}
+		}
+
+		foreach(Transform child in _stages[_currentStageID].StageObj.transform){
+			if(child.gameObject.tag == "PerfectText"){
+				_perfectText = child.gameObject;
+				break;
+			}
+		}
 	}
 
 	void DisablePrevStage()

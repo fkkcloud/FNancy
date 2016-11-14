@@ -18,8 +18,10 @@ public class GameState : MonoBehaviour {
 	[Space(10)]
 	[Header("Audio")]
 	public GameObject Audio;
-	public AudioClip SoundSuccess;
+	public AudioClip SoundPerfect;
 	public AudioClip SoundFail;
+	public AudioClip SoundClear;
+
 
 	public enum CurrentState {Playing, Loading, Moving, Dead};
 	public CurrentState _state = CurrentState.Playing;
@@ -52,6 +54,11 @@ public class GameState : MonoBehaviour {
 	public void PlayerAction(){
 		Character.GetComponent<GameCharacter> ().Play ("Attack");
 
+	}
+
+	public void PlayRegularClearSound(){
+		Audio.GetComponent<AudioSource> ().clip = SoundClear;
+		Audio.GetComponent<AudioSource> ().Play ();
 	}
 
 	public void PlayerDead(){

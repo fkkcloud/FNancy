@@ -55,7 +55,7 @@ public class Stage : MonoBehaviour
 	{
 		TextMeshTimerIndicator.text = _stageData.layers[CurrentLayerID].ToString();
 	}
-
+		
 	public void InitText()
 	{
 		foreach (TextMesh child in _textMeshes) {

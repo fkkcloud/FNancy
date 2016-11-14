@@ -15,68 +15,46 @@ MonoBehaviour:
   - level: 0
     layers:
     - 0.7
-    - 1.5
-    - 2
     reward: []
   - level: 0
     layers:
     - 0.7
-    - 1.5
-    - 2
     reward: []
   - level: 0
     layers:
     - 0.8
-    - 1.3
-    - 2.1
     reward: []
   - level: 0
     layers:
     - 0.9
-    - 1.5
-    - 2
     reward: []
   - level: 0
     layers:
     - 0.6
-    - 1
-    - 1.8
     reward: []
   - level: 0
     layers:
     - 0.9
-    - 1.6
-    - 2.3
     reward: []
   - level: 0
     layers:
     - 1
-    - 2
-    - 3
     reward: []
   - level: 0
     layers:
     - 1
-    - 2
-    - 3
     reward: []
   - level: 0
     layers:
     - 1
-    - 1.6
-    - 2.2
     reward: []
   - level: 0
     layers:
-    - 0
-    - 0
-    - 0
+    - 1
     reward: []
   - level: 0
     layers:
     - 1.2
-    - 1.8
-    - 2.2
     reward: []
   - level: 0
     layers:
@@ -87,72 +65,48 @@ MonoBehaviour:
   - level: 0
     layers:
     - 1
-    - 1.7
-    - 2.3
     reward: []
   - level: 0
     layers:
     - 1
-    - 1.8
-    - 2.6
     reward: []
   - level: 0
     layers:
     - 1
-    - 2
-    - 3
     reward: []
   - level: 0
     layers:
     - 1
-    - 2
-    - 3
     reward: []
   - level: 0
     layers:
     - 1
-    - 2
-    - 3
     reward: []
   - level: 0
     layers:
     - 1
-    - 2
-    - 3
     reward: []
   - level: 0
     layers:
     - 1
-    - 2
-    - 3
     reward: []
   - level: 0
     layers:
     - 1
-    - 2
-    - 3
     reward: []
   - level: 0
     layers:
     - 1
-    - 2
-    - 3
     reward: []
   - level: 0
     layers:
     - 1
-    - 2
-    - 3
     reward: []
   - level: 0
     layers:
     - 1
-    - 2
-    - 3
     reward: []
   - level: 0
     layers:
     - 1
-    - 2
-    - 3
     reward: []
