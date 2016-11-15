@@ -10,6 +10,7 @@ public class GameState : MonoBehaviour {
 	[Header("General")]
 	public LevelManager LevelManager;
 	public GameObject ClearText;
+	public GameObject BombFX;
 
 	[Space(10)]
 	[Header("Character")]
@@ -68,6 +69,9 @@ public class GameState : MonoBehaviour {
 		Audio.GetComponent<AudioSource> ().clip = SoundFail;
 		Audio.GetComponent<AudioSource> ().Play ();
 		Invoke ("GoToMainMenu", SoundFail.length);
+		BombFX.SetActive (true);
+		BombFX.GetComponent<ParticleSystem> ().Play ();
+		_stageManager.HideBomb ();
 	}
 
 	public void PlayerMove(){

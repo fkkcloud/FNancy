@@ -10,6 +10,10 @@ public class GameCharacter : MonoBehaviour {
 	public int currentUndefeatCount = 0;
 	public int currentPerfect = 0;
 
+	public GameObject HighlightFX; // y = 0.64 ~ 0.82
+
+	public GameObject ChaModel;
+
 	public enum CurrentState {Normal, Undefeatable, Tired, Drunken};
 	public CurrentState _state = CurrentState.Normal;
 
@@ -26,6 +30,12 @@ public class GameCharacter : MonoBehaviour {
 		currentPerfect = 0;
 		currentUndefeatCount = 0;
 		_state = CurrentState.Normal;
+
+		HighlightFX.SetActive (false); 
+	}
+
+	public float Remap (float value, float from1, float to1, float from2, float to2) {
+		return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
 	}
 
 	public void UpdateCharacterState(){
@@ -34,7 +44,11 @@ public class GameCharacter : MonoBehaviour {
 		}
 		if (currentPerfect == perfectMax) {
 			_state = CurrentState.Undefeatable;
-
+		}
+		if (currentPerfect > 0) {
+			if (HighlightFX.active != true)
+				HighlightFX.SetActive (true);
+			LeanTween.moveLocalY (HighlightFX, Remap (currentPerfect, 1, perfectMax, 0.52f, 0.82f), 0.3f);
 		}
 	}
 

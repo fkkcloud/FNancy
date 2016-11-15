@@ -98,6 +98,7 @@ public class StageManager : MonoBehaviour {
 	void Start () {
 		_gameState = GameObject.FindObjectOfType<GameState> ();
 		_gameCharacter = GameObject.FindObjectOfType<GameCharacter> ();
+
 	}
 
 	void ResetBombShakable(){
@@ -182,6 +183,7 @@ public class StageManager : MonoBehaviour {
 				if (timer >= CurrentLayerTime - 0.25f && timer < CurrentLayerTime + 0.05f) {
 					
 					if (timer >= CurrentLayerTime - 0.1f && timer < CurrentLayerTime + 0.05f) {
+						// CASE PERFECT
 
 						StartCoroutine ("ShowPerfectUI");
 
@@ -206,7 +208,7 @@ public class StageManager : MonoBehaviour {
 	private void PlayPerfectSound()
 	{
 		_gameState.Audio.GetComponent<AudioSource> ().clip = _gameState.SoundPerfect;
-		_gameState.Audio.GetComponent<AudioSource> ().pitch = (_gameCharacter.currentPerfect + 1) * 0.7f;
+		_gameState.Audio.GetComponent<AudioSource> ().pitch = (_gameCharacter.currentPerfect + 1) * 0.8f;
 		_gameState.Audio.GetComponent<AudioSource> ().Play ();
 	}
 
@@ -233,6 +235,10 @@ public class StageManager : MonoBehaviour {
 			StageProceed ();
 
 		}
+	}
+
+	public void HideBomb(){
+		_bombObj.SetActive (false);
 	}
 
 	public void InitStages(){
