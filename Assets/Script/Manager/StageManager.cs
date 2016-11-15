@@ -141,6 +141,8 @@ public class StageManager : MonoBehaviour {
 				_stages [_currentStageID].TextMeshTimer.color = new Color (0.9f, 0.2f, 0.2f);
 			} else if (timer >= CurrentLayerTime - 0.25f && timer <= CurrentLayerTime - 0.1f) {
 				_stages [_currentStageID].TextMeshTimer.color = new Color (0.9f, 0.9f, 0.2f);
+			} else if(timer > CurrentLayerTime + 0.05f) {
+				_stages [_currentStageID].TextMeshTimer.color = new Color (0.9f, 0.2f, 0.2f);
 			} else {
 				_stages [_currentStageID].TextMeshTimer.color = new Color (0.2f, 0.9f, 0.2f);
 			}
