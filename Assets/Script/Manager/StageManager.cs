@@ -116,7 +116,7 @@ public class StageManager : MonoBehaviour {
 				_gameCharacter.currentUndefeatCount += 1;
 				_gameCharacter.UpdateCharacterState ();
 				StartCoroutine("Shake");
-				_gameState.PlayRegularClearSound ();
+				PlayPerfectSound ();
 				StageClear ();
 				return;
 			}
