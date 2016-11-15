@@ -447,10 +447,6 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: -0.2988362
       objectReference: {fileID: 0}
-    - target: {fileID: 1204687257126472, guid: a6debb5037fb64461ac6ea523b8fc781, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a6debb5037fb64461ac6ea523b8fc781, type: 2}
   m_IsPrefabParent: 0

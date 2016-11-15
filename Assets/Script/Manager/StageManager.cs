@@ -126,10 +126,23 @@ public class StageManager : MonoBehaviour {
 			_stages[_currentStageID].TextMeshTimer.text = timer.ToString("0.0"); // TODO : make it as function for polyomrphism
 
 			CurrentLayerTime = _stages [_currentStageID].GetCurrentLayerTime ();
+			foreach (Renderer r in _bombObj.GetComponentsInChildren<Renderer>()) {
+				Color c = r.material.GetColor ("_Color");
+				r.material.SetColor("_Color", new Color(c.r + 0.014f, c.g, c.b));
+
+			}
 
 			// when player does not do anything
 			if (timer > CurrentLayerTime + 0.05f) {
 				_gameState.PlayerDead ();
+			}
+
+			if (timer < CurrentLayerTime - 0.25f) {
+				_stages [_currentStageID].TextMeshTimer.color = new Color (0.9f, 0.2f, 0.2f);
+			} else if (timer >= CurrentLayerTime - 0.25f && timer <= CurrentLayerTime - 0.1f) {
+				_stages [_currentStageID].TextMeshTimer.color = new Color (0.9f, 0.9f, 0.2f);
+			} else {
+				_stages [_currentStageID].TextMeshTimer.color = new Color (0.2f, 0.9f, 0.2f);
 			}
 
 			if (timer > CurrentLayerTime - 0.28f && IsBombShakable) {
