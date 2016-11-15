@@ -29,6 +29,8 @@ public class StageManager : MonoBehaviour {
 	public float duration;
 	public float magnitude;
 
+	private bool IsBombShakable = true;
+
 	IEnumerator Shake() {
 
 		float elapsed = 0.0f;
@@ -56,37 +58,49 @@ public class StageManager : MonoBehaviour {
 		Camera.main.transform.position = originalCamPos;
 	}
 
+	IEnumerator ShowPerfectUI(){
+		_perfectText.transform.position = new Vector3 (4f, _perfectText.transform.position.y, _perfectText.transform.position.z);
+		LeanTween.moveLocalX (_perfectText, -5.5f, 0.38f);
+		yield return null;
+	}
+
 	IEnumerator ShakeBomb() {
 
 		float elapsed = 0.0f;
 
-		Vector3 originalCamPos = _bombObj.transform.position;
+		Vector3 bombOriginalPos = _bombObj.transform.position;
 
-		while (elapsed < duration) {
+		while (elapsed < 4f) {
 
 			elapsed += Time.deltaTime;          
 
-			float percentComplete = elapsed / duration;         
+			float percentComplete = elapsed / 4f;         
 			float damper = 1.0f - Mathf.Clamp(4.0f * percentComplete - 3.0f, 0.0f, 1.0f);
 
 			// map value to [-1, 1]
 			float x = Random.value * 2.0f - 1.0f;
 			float y = Random.value * 2.0f - 1.0f;
-			x *= 2f * damper;
-			y *= 2f * damper;
+			x *= 20f * damper;
+			y *= 20f * damper;
 
-			_bombObj.transform.position = new Vector3(originalCamPos.x + x, originalCamPos.y + y, originalCamPos.z);
+			_bombObj.transform.position = new Vector3(bombOriginalPos.x + x, bombOriginalPos.y + y, bombOriginalPos.z);
 
 			yield return null;
 		}
 
-		_bombObj.transform.position = originalCamPos;
+		//_bombObj.transform.position = bombOriginalPos;
+
+		//IsBombShakable = true;
 	}
 		
 	// Use this for initialization
 	void Start () {
 		_gameState = GameObject.FindObjectOfType<GameState> ();
 		_gameCharacter = GameObject.FindObjectOfType<GameCharacter> ();
+	}
+
+	void ResetBombShakable(){
+		IsBombShakable = true;
 	}
 	
 	// Update is called once per frame
@@ -117,8 +131,11 @@ public class StageManager : MonoBehaviour {
 				_gameState.PlayerDead ();
 			}
 
-			if (timer > CurrentLayerTime + 0.2f) {
-				//StartCoroutine("ShakeBomb");
+			if (timer > CurrentLayerTime - 0.28f && IsBombShakable) {
+				IsBombShakable = false;
+				Animator Anim = _stages[_currentStageID].StageObj.GetComponent<Animator> ();
+				Anim.SetTrigger ("BombShakeTrigger");
+				Invoke ("ResetBombShakable", 1f);
 			}
 
 			// touch on screen
@@ -150,11 +167,10 @@ public class StageManager : MonoBehaviour {
 					
 					if (timer >= CurrentLayerTime - 0.1f && timer <= CurrentLayerTime + 0.1f) {
 
-						_perfectText.transform.position = new Vector3 (4f, _perfectText.transform.position.y, _perfectText.transform.position.z);
-						LeanTween.moveLocalX (_perfectText, -5.5f, 0.38f);
+						StartCoroutine ("ShowPerfectUI");
 
-						_gameCharacter.currentPerfect += 1;
 						PlayPerfectSound ();
+						_gameCharacter.currentPerfect += 1;
 						_gameCharacter.UpdateCharacterState ();
 
 					} else {
@@ -282,7 +298,7 @@ public class StageManager : MonoBehaviour {
 			LeanTween.moveZ (CurrStage, newZPos, MoveDuration).setEase (LeanTweenType.easeInQuad);
 		}
 
-		Invoke ("DisablePrevStage", MoveDuration * 2f);
+		Invoke ("DisablePrevStage", MoveDuration * 1f);
 		Invoke ("EnableTimer", MoveDuration * 1.025f);
 
 		timer = 0f;
