@@ -312,7 +312,7 @@ Prefab:
     - target: {fileID: 114792109328524310, guid: 2967d9d63659c4d368569394f51924ff,
         type: 2}
       propertyPath: perfectMax
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2967d9d63659c4d368569394f51924ff, type: 2}
@@ -809,7 +809,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.6
+  m_Volume: 0.735
   m_Pitch: 1.83
   Loop: 0
   Mute: 0
@@ -1117,7 +1117,7 @@ Prefab:
     - target: {fileID: 114975770748071162, guid: dad29ea632f374006bdd5a843466a0ad,
         type: 2}
       propertyPath: TimerSpeed
-      value: 0.4
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 114975770748071162, guid: dad29ea632f374006bdd5a843466a0ad,
         type: 2}

@@ -116,7 +116,7 @@ public class StageManager : MonoBehaviour {
 				_gameCharacter.currentUndefeatCount += 1;
 				_gameCharacter.UpdateCharacterState ();
 				StartCoroutine("Shake");
-				PlayPerfectSound ();
+				PlayPerfectSound (); 
 				StageClear ();
 				return;
 			}
@@ -206,7 +206,7 @@ public class StageManager : MonoBehaviour {
 	private void PlayPerfectSound()
 	{
 		_gameState.Audio.GetComponent<AudioSource> ().clip = _gameState.SoundPerfect;
-		_gameState.Audio.GetComponent<AudioSource> ().pitch = (CurrentLayerTime + 1) * 1.1f;
+		_gameState.Audio.GetComponent<AudioSource> ().pitch = (_gameCharacter.currentPerfect + 1) * 0.7f;
 		_gameState.Audio.GetComponent<AudioSource> ().Play ();
 	}
 
