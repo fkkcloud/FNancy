@@ -26,7 +26,7 @@ Category {
         uniform lowp sampler2D _MainTex;
         uniform lowp vec4 _Color;
         void main() {
-            gl_FragColor = _Color;
+            gl_FragColor = _Color ;
         }
         #endif     
         ENDGLSL

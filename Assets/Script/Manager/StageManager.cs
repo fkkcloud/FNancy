@@ -13,6 +13,7 @@ public class StageManager : MonoBehaviour {
 
 	private GameObject _bombObj;
 	private GameObject _perfectText;
+	public GameObject StageBar;
 
 	private float timer = 0f;
 	private bool timerOn = true;
@@ -127,7 +128,7 @@ public class StageManager : MonoBehaviour {
 			CurrentLayerTime = _stages [_currentStageID].GetCurrentLayerTime ();
 
 			// when player does not do anything
-			if (timer > CurrentLayerTime + 0.5f) {
+			if (timer > CurrentLayerTime + 0.05f) {
 				_gameState.PlayerDead ();
 			}
 
@@ -163,9 +164,9 @@ public class StageManager : MonoBehaviour {
 				}
 				*/
 
-				if (timer >= CurrentLayerTime - 0.25f && timer <= CurrentLayerTime + 0.25f) {
+				if (timer >= CurrentLayerTime - 0.25f && timer < CurrentLayerTime + 0.05f) {
 					
-					if (timer >= CurrentLayerTime - 0.1f && timer <= CurrentLayerTime + 0.1f) {
+					if (timer >= CurrentLayerTime - 0.1f && timer < CurrentLayerTime + 0.05f) {
 
 						StartCoroutine ("ShowPerfectUI");
 
@@ -237,6 +238,8 @@ public class StageManager : MonoBehaviour {
 
 			ZPos += StageLength;
 		}
+
+		StageBar.GetComponent<BarAnimator> ().Setup (StageDesignData.stageDatas.Length);
 
 		_currentStageID = 0;
 
@@ -319,6 +322,8 @@ public class StageManager : MonoBehaviour {
 				break;
 			}
 		}
+
+		StageBar.GetComponent<BarAnimator> ().UpdateDotPosition (_currentStageID);
 	}
 
 	void DisablePrevStage()
