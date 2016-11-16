@@ -7,6 +7,8 @@ public class StageData
 	public int level; // current level
 	public float[] layers;
 	public float [] reward;
+	public int gamemode;
+	public int hp;
 
 }
 
