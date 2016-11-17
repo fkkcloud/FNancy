@@ -222,6 +222,7 @@ public class StageManager : MonoBehaviour {
 						PlayHitFX ();
 					} else {
 						StartCoroutine("Shake");
+						PlayPerfectSound ();
 						StageClear ();
 					}  
 				}
