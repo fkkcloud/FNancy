@@ -95,7 +95,7 @@ public class StageManager : MonoBehaviour {
 	}
 		
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		_gameState = GameObject.FindObjectOfType<GameState> ();
 		_gameCharacter = GameObject.FindObjectOfType<GameCharacter> ();
 
@@ -107,7 +107,7 @@ public class StageManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (_stages.Length < 1 || _gameState._state == GameState.CurrentState.Dead)
+		if (!_gameState || _stages.Length < 0 || _gameState._state == GameState.CurrentState.Dead)
 			return;
 
 		if (timerOn) {

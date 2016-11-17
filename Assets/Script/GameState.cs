@@ -12,6 +12,7 @@ public class GameState : MonoBehaviour {
 	public GameObject ClearText;
 	public GameObject BombFX;
 	public GameObject HitFX;
+	public GameObject StageManager;
 
 	[Space(10)]
 	[Header("Character")]
@@ -32,16 +33,19 @@ public class GameState : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
+		
+	}
+
+	void Start(){
 		Character.GetComponent<GameCharacter> ().Play ("Wait");
+
+		_stageManager = StageManager.GetComponent<StageManager> ();
+		_stageManager.InitStages ();
 
 		if (!GameObject.FindObjectOfType<MusicManager> ().IsPlaying ()) {
 			GameObject.FindObjectOfType<MusicManager> ().Play (Application.loadedLevel);
 		}
-
-		_stageManager = GameObject.FindObjectOfType<StageManager> ();
-		_stageManager.InitStages ();
-
 	}
 	
 	// Update is called once per frame

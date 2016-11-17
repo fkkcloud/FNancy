@@ -51,8 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916fdd90aaf51432f9353302395334b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StageDesignData: {fileID: 11400000, guid: c28c05aaf8c77468a867129384221a62, type: 2}
+  StageDesignData: {fileID: 11400000, guid: 96c450aa8ac57405d96f871aadd503d4, type: 2}
   StageObject: {fileID: 1204687257126472, guid: a6debb5037fb64461ac6ea523b8fc781,
     type: 2}
-  StageLength: 4.5
-  TimerSpeed: 0.8
+  StageLength: 4.47
+  TimerSpeed: 0.6
+  StageBar: {fileID: 0}
+  duration: 0.2
+  magnitude: 0.052

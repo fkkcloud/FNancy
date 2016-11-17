@@ -42,15 +42,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelManager: {fileID: 11437750, guid: 7c19177ef584c4a50b61c9db0b4cf382, type: 2}
   ClearText: {fileID: 0}
-  TimerSpeed: 0.4
-  StageJson: {fileID: 4900000, guid: 7770cff4ff32a4f5098ff787b0910436, type: 3}
-  StageObject: {fileID: 1204687257126472, guid: a6debb5037fb64461ac6ea523b8fc781,
-    type: 2}
-  StageLength: 4.5
+  BombFX: {fileID: 0}
+  HitFX: {fileID: 0}
+  StageManager: {fileID: 0}
   Character: {fileID: 0}
   Audio: {fileID: 0}
-  SoundSuccess: {fileID: 8300000, guid: aa90639b403df4340ba644345ba7725c, type: 3}
+  SoundPerfect: {fileID: 8300000, guid: aa90639b403df4340ba644345ba7725c, type: 3}
   SoundFail: {fileID: 8300000, guid: 131e20c91512347d0bf0f907b102a7a8, type: 3}
+  SoundClear: {fileID: 8300000, guid: 81b02915f78724722a420cebfee100ea, type: 3}
+  SoundHit: {fileID: 8300000, guid: c40dbd989aee24437aa872f81ed1e1f5, type: 3}
+  _state: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
