@@ -126,11 +126,21 @@ public class StageManager : MonoBehaviour {
 			timer += (TimerSpeed * Time.deltaTime);
 			_stages[_currentStageID].TextMeshTimer.text = timer.ToString("0.0"); // TODO : make it as function for polyomrphism
 
-			CurrentLayerTime = _stages [_currentStageID].GetCurrentLayerTime ();
-			foreach (Renderer r in _bombObj.GetComponentsInChildren<Renderer>()) {
-				Color c = r.material.GetColor ("_Color");
-				r.material.SetColor("_Color", new Color(c.r + 0.014f, c.g, c.b));
+			// coloring the bomb
+			if (_stages [_currentStageID]._stageData.gamemode == 0) {
+				CurrentLayerTime = _stages [_currentStageID].GetCurrentLayerTime ();
+				foreach (Renderer r in _bombObj.GetComponentsInChildren<Renderer>()) {
+					Color c = r.material.GetColor ("_Color");
+					r.material.SetColor ("_Color", new Color (c.r + 0.014f, c.g, c.b));
 
+				}	
+			} else if (_stages [_currentStageID]._stageData.gamemode == 1) {
+				CurrentLayerTime = _stages [_currentStageID].GetCurrentLayerTime ();
+				foreach (Renderer r in _bombObj.GetComponentsInChildren<Renderer>()) {
+					Color c = r.material.GetColor ("_Color");
+					r.material.SetColor ("_Color", new Color (c.r, c.g, c.b + 0.02f));
+
+				}
 			}
 
 			// when player does not do anything
@@ -229,7 +239,7 @@ public class StageManager : MonoBehaviour {
 	private void PlayHitSound()
 	{
 		_gameState.Audio.GetComponent<AudioSource> ().clip = _gameState.SoundHit;
-		_gameState.Audio.GetComponent<AudioSource> ().pitch = (_stages [_currentStageID]._stageData.hp) * 0.7f;
+		_gameState.Audio.GetComponent<AudioSource> ().pitch = 2f;
 		_gameState.Audio.GetComponent<AudioSource> ().Play ();
 	}
 
@@ -286,7 +296,7 @@ public class StageManager : MonoBehaviour {
 			ZPos += StageLength;
 		}
 
-		StageBar.GetComponent<BarAnimator> ().Setup (StageDesignData.stageDatas.Length);
+		StageBar.GetComponent<BarAnimator> ().Setup (StageDesignData.stageDatas);
 
 		_currentStageID = 0;
 

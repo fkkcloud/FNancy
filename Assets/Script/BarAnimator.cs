@@ -6,6 +6,7 @@ public class BarAnimator : MonoBehaviour {
 
 	public GameObject Bar;
 	public GameObject BarDot;
+	public GameObject BarDot2;
 
 	public float YMin;
 	public float YMax;
@@ -21,10 +22,16 @@ public class BarAnimator : MonoBehaviour {
 		
 	}
 
-	public void Setup(int StageCount){
-		pos = new float[StageCount];
-		for (int i = 0; i < StageCount; i++){
-			pos [i] = Remap (i, 0, StageCount - 1, YMin, YMax);
+	public void Setup(StageData[] stageDatas){
+		int stageCount = stageDatas.Length;
+		pos = new float[stageCount];
+		for (int i = 0; i < stageCount; i++){
+			pos [i] = Remap (i, 0, stageCount - 1, YMin, YMax);
+			if (stageDatas [i].gamemode == 1) {
+				GameObject cube = Instantiate(BarDot2);
+				Vector3 barRelative = Bar.transform.TransformPoint (cube.transform.position);
+				cube.transform.position = new Vector3(barRelative.x, pos [i], barRelative.z);
+			}
 		}
 	}
 	

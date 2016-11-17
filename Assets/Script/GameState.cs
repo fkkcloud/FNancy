@@ -60,6 +60,7 @@ public class GameState : MonoBehaviour {
 
 	public void PlayRegularClearSound(){
 		Audio.GetComponent<AudioSource> ().clip = SoundClear;
+		Audio.GetComponent<AudioSource> ().pitch = 1.0f;
 		Audio.GetComponent<AudioSource> ().Play ();
 	}
 
@@ -68,6 +69,7 @@ public class GameState : MonoBehaviour {
 		GameObject.FindObjectOfType<MusicManager> ().Stop ();
 		Character.GetComponent<GameCharacter> ().Play ("Dead");
 		Audio.GetComponent<AudioSource> ().clip = SoundFail;
+		Audio.GetComponent<AudioSource> ().pitch = 1.0f;
 		Audio.GetComponent<AudioSource> ().Play ();
 		Invoke ("GoToMainMenu", SoundFail.length);
 		BombFX.SetActive (true);

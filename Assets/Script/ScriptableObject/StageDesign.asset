@@ -16,39 +16,59 @@ MonoBehaviour:
     layers:
     - 0.7
     reward: []
+    gamemode: 0
+    hp: 0
   - level: 0
     layers:
     - 0.7
     reward: []
+    gamemode: 0
+    hp: 0
   - level: 0
     layers:
     - 0.8
     reward: []
+    gamemode: 0
+    hp: 0
   - level: 0
     layers:
     - 0.9
     reward: []
+    gamemode: 0
+    hp: 0
   - level: 0
     layers:
     - 0.6
     reward: []
+    gamemode: 0
+    hp: 0
   - level: 0
     layers:
     - 0.9
     reward: []
+    gamemode: 1
+    hp: 5
   - level: 0
     layers:
     - 1
     reward: []
+    gamemode: 0
+    hp: 0
   - level: 0
     layers:
     - 1
     reward: []
+    gamemode: 0
+    hp: 0
   - level: 0
     layers:
     - 1
     reward: []
+    gamemode: 0
+    hp: 0
   - level: 0
     layers:
     - 1
     reward: []
+    gamemode: 0
+    hp: 0
