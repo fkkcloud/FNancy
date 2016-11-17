@@ -503,7 +503,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: b011e86fe076b8145bd8261020e2fac2, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: b011e86fe076b8145bd8261020e2fac2, type: 2}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b011e86fe076b8145bd8261020e2fac2, type: 2}
