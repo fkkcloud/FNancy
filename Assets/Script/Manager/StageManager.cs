@@ -138,15 +138,20 @@ public class StageManager : MonoBehaviour {
 				_gameState.PlayerDead ();
 			}
 
+
+
+			// coloring the text
 			if (timer < CurrentLayerTime - 0.25f) {
 				_stages [_currentStageID].TextMeshTimer.color = new Color (0.9f, 0.2f, 0.2f);
 			} else if (timer >= CurrentLayerTime - 0.25f && timer <= CurrentLayerTime - 0.1f) {
 				_stages [_currentStageID].TextMeshTimer.color = new Color (0.9f, 0.9f, 0.2f);
-			} else if(timer > CurrentLayerTime + 0.05f) {
+			} else if (timer > CurrentLayerTime + 0.05f) {
 				_stages [_currentStageID].TextMeshTimer.color = new Color (0.9f, 0.2f, 0.2f);
 			} else {
 				_stages [_currentStageID].TextMeshTimer.color = new Color (0.2f, 0.9f, 0.2f);
 			}
+			
+
 
 			if (timer > CurrentLayerTime - 0.28f && IsBombShakable) {
 				IsBombShakable = false;
@@ -156,12 +161,11 @@ public class StageManager : MonoBehaviour {
 			}
 
 			// touch on screen
-			if (Input.GetMouseButtonDown (0))
-			{
+			if (Input.GetMouseButtonDown (0)) {
 				if (_gameState._state == GameState.CurrentState.Moving)
 					return;
 
-				StartCoroutine("Shake");
+				StartCoroutine ("Shake");
 				_gameState.PlayerAction ();
 
 				/*
@@ -179,27 +183,37 @@ public class StageManager : MonoBehaviour {
 					return;
 				}
 				*/
+				if (_stages [_currentStageID]._stageData.gamemode == 0){
+					if (timer >= CurrentLayerTime - 0.25f && timer < CurrentLayerTime + 0.05f) {
+						
+						if (timer >= CurrentLayerTime - 0.1f && timer < CurrentLayerTime + 0.05f) {
+							// CASE PERFECT
 
-				if (timer >= CurrentLayerTime - 0.25f && timer < CurrentLayerTime + 0.05f) {
-					
-					if (timer >= CurrentLayerTime - 0.1f && timer < CurrentLayerTime + 0.05f) {
-						// CASE PERFECT
+							StartCoroutine ("ShowPerfectUI");
 
-						StartCoroutine ("ShowPerfectUI");
+							PlayPerfectSound ();
+							_gameCharacter.currentPerfect += 1;
+							_gameCharacter.UpdateCharacterState ();
 
-						PlayPerfectSound ();
-						_gameCharacter.currentPerfect += 1;
-						_gameCharacter.UpdateCharacterState ();
+						} else {
+							_gameState.PlayRegularClearSound ();
+							_gameCharacter.StateReset ();
 
+						}
+
+						Evaluate ();
 					} else {
-						_gameState.PlayRegularClearSound ();
-						_gameCharacter.StateReset ();
-
+						_gameState.PlayerDead ();
 					}
-
-					Evaluate ();
-				} else {
-					_gameState.PlayerDead ();
+				} else if (_stages [_currentStageID]._stageData.gamemode == 1) {
+					if (_stages [_currentStageID]._stageData.hp > _stages [_currentStageID].CurrentHP) {
+						_stages [_currentStageID].CurrentHP++;
+						PlayHitSound ();
+						PlayHitFX ();
+					} else {
+						StartCoroutine("Shake");
+						StageClear ();
+					}  
 				}
 			}
 		}  
@@ -210,6 +224,18 @@ public class StageManager : MonoBehaviour {
 		_gameState.Audio.GetComponent<AudioSource> ().clip = _gameState.SoundPerfect;
 		_gameState.Audio.GetComponent<AudioSource> ().pitch = (_gameCharacter.currentPerfect + 1) * 0.8f;
 		_gameState.Audio.GetComponent<AudioSource> ().Play ();
+	}
+
+	private void PlayHitSound()
+	{
+		_gameState.Audio.GetComponent<AudioSource> ().clip = _gameState.SoundHit;
+		_gameState.Audio.GetComponent<AudioSource> ().pitch = (_stages [_currentStageID]._stageData.hp) * 0.7f;
+		_gameState.Audio.GetComponent<AudioSource> ().Play ();
+	}
+
+	private void PlayHitFX()
+	{
+		_gameState.HitFX.GetComponent<ParticleSystem> ().Play ();
 	}
 
 	private void StageClear(){

@@ -11,6 +11,7 @@ public class GameState : MonoBehaviour {
 	public LevelManager LevelManager;
 	public GameObject ClearText;
 	public GameObject BombFX;
+	public GameObject HitFX;
 
 	[Space(10)]
 	[Header("Character")]
@@ -22,7 +23,7 @@ public class GameState : MonoBehaviour {
 	public AudioClip SoundPerfect;
 	public AudioClip SoundFail;
 	public AudioClip SoundClear;
-
+	public AudioClip SoundHit;
 
 	public enum CurrentState {Playing, Loading, Moving, Dead};
 	public CurrentState _state = CurrentState.Playing;

@@ -5,6 +5,8 @@ public class Stage : MonoBehaviour
 {
 	public StageData _stageData;
 
+	public int CurrentHP = 0;
+
 	private float _life;
 
 	public int CurrentLayerID;
