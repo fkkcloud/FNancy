@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BarAnimator : MonoBehaviour {
+public class BarAnimator : MonoBehaviourHelper {
 
 	public GameObject Bar;
 	public GameObject BarDot;
 	public GameObject BarDot2;
 
-	public float YMin;
-	public float YMax;
+	public float YMin = 0.5f;
+	public float YMax = 1.5f;
 
 	private float[] pos;
 
@@ -29,10 +29,13 @@ public class BarAnimator : MonoBehaviour {
 			pos [i] = Remap (i, 0, stageCount - 1, YMin, YMax);
 			if (stageDatas [i].gamemode == 1) {
 				GameObject cube = Instantiate(BarDot2);
+				cube.transform.parent = Bar.transform;
 				Vector3 barRelative = Bar.transform.TransformPoint (cube.transform.position);
 				cube.transform.position = new Vector3(barRelative.x, pos [i], barRelative.z);
 			}
 		}
+
+		gameObject.transform.Rotate(12f, 0f, 2.75f);
 	}
 	
 	// Update is called once per frame
@@ -40,7 +43,8 @@ public class BarAnimator : MonoBehaviour {
 		
 	}
 
-	public void UpdateDotPosition(int id){
+	public void UpdateDotPosition(){
+		int id = stageManager.currentStageID;
 		LeanTween.moveLocalY(BarDot, pos[id], 0.3f);
 	}
 }

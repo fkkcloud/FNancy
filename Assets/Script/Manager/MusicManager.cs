@@ -5,7 +5,7 @@ public class MusicManager : MonoBehaviour {
 
 	public AudioClip[] level_musics;
 
-	private AudioSource music_player;
+	private AudioSource _musicPlayer;
 
 	private static GameObject _instance;
 
@@ -22,21 +22,21 @@ public class MusicManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		music_player = GetComponent<AudioSource> ();
+		_musicPlayer = GetComponent<AudioSource> ();
 	}
 
 	void OnLevelWasLoaded(int level){
 
 		AudioClip level_music = level_musics [level];
-		if (level_music & music_player) {
-			music_player.clip = level_music;
-			music_player.loop = true;
-			music_player.Play ();
+		if (level_music & _musicPlayer) {
+			_musicPlayer.clip = level_music;
+			_musicPlayer.loop = true;
+			_musicPlayer.Play ();
 		}
 	}
 
 	public void SetVolume(float volume){
-		music_player.volume = volume;
+		_musicPlayer.volume = volume;
 	}
 
 	// Update is called once per frame
@@ -45,20 +45,20 @@ public class MusicManager : MonoBehaviour {
 	}
 
 	public void Stop(){
-		music_player.Stop ();
+		_musicPlayer.Stop ();
 	}
 
 	public bool IsPlaying()
 	{
-		return music_player.isPlaying;
+		return _musicPlayer.isPlaying;
 	}
 
 	public void Play(int level){
 		AudioClip level_music = level_musics [level];
-		if (level_music & music_player) {
-			music_player.clip = level_music;
-			music_player.loop = true;
-			music_player.Play ();
+		if (level_music & _musicPlayer) {
+			_musicPlayer.clip = level_music;
+			_musicPlayer.loop = true;
+			_musicPlayer.Play ();
 		}
 	}
 }

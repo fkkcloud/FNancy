@@ -371,7 +371,7 @@ GameObject:
   - component: {fileID: 23379046835950356}
   - component: {fileID: 102885606977252646}
   m_Layer: 0
-  m_Name: New Text
+  m_Name: PerfectText
   m_TagString: PerfectText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

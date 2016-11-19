@@ -12,8 +12,6 @@ public class GameCharacter : MonoBehaviour {
 
 	public GameObject HighlightFX; // y = 0.64 ~ 0.82
 
-	public GameObject ChaModel;
-
 	public enum CurrentState {Normal, Undefeatable, Tired, Drunken};
 	public CurrentState _state = CurrentState.Normal;
 

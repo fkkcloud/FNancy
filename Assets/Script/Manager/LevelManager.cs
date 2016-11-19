@@ -30,6 +30,5 @@ public class LevelManager : MonoBehaviour {
 	public void LoadMainMenu(){
 		Application.LoadLevel ("01_000_MainMenu");
 	}
-
 }
-
+	

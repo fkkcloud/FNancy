@@ -1020,7 +1020,12 @@ Animation:
   m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 0}
-  m_Animations: []
+  m_Animations:
+  - {fileID: 7400000, guid: 49b297db20eec434cb72977e88d5107b, type: 3}
+  - {fileID: 7400000, guid: cb0d6a1bee21e754e955d5a0bed61fdf, type: 3}
+  - {fileID: 7400000, guid: 119550f2b2b0fe748875dc68a648b28c, type: 3}
+  - {fileID: 7400000, guid: ac1d9b0420ad1b146b5d57d7729b647e, type: 3}
+  - {fileID: 7400000, guid: afa46a7eafad7874da3988d082799d38, type: 3}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -1037,8 +1042,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterObj: {fileID: 1612210611236294}
-  pre_prod: 2
-  post_prod: 4
+  perfectMax: 5
+  undefeatMax: 3
+  currentUndefeatCount: 0
+  currentPerfect: 0
+  HighlightFX: {fileID: 0}
+  _state: 0
 --- !u!137 &137432864964791380
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
