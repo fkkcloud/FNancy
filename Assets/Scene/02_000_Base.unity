@@ -1022,6 +1022,14 @@ Prefab:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 19800006, guid: 9a092a27cf592a4468d89abca26f2e30, type: 2}
+      propertyPath: randomSeed
+      value: -1268867501
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800006, guid: 9a092a27cf592a4468d89abca26f2e30, type: 2}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9a092a27cf592a4468d89abca26f2e30, type: 2}
   m_IsPrefabParent: 0
