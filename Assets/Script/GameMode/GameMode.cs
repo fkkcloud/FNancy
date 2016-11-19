@@ -32,7 +32,7 @@ public class GameMode : MonoBehaviourHelper {
 			_timer += (gameDesignVariables.TimerSpeed * Time.deltaTime);
 			currentStage.TextMeshTimer.text = _timer.ToString("0.0"); // TODO : make it as function for polyomrphism
 
-			if (_timer > _timeLimit - 0.28f) {
+			if (_timer > _timeLimit - 0.35f) {
 				currentStage.Animate (Stage.AnimType.BombShake);
 			}
 

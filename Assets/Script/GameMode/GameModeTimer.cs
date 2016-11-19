@@ -35,6 +35,7 @@ public class GameModeTimer : GameMode {
 				r.material.SetColor ("_Color", new Color (c.r + 0.014f, c.g, c.b));
 
 			}
+
 		}
 	}
 
