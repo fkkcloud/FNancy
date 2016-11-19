@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class GameModeClicker : GameMode {
 
-	public int CurrentHP;
+	public int currentDamage;
+	private int _stageHP;
 
 	public override void Init(){
 		base.Init ();
 
-		CurrentHP = 0;
-
-		Debug.Log ("HP:" + CurrentHP);
+		currentDamage = 0;
+		_stageHP = currentStage.stageData.hp;
 	}
 
 	public override void Tick() {
 		base.Tick ();
 
+		if (!_timerOn)
+			return;
+
 		// color bomb
 		foreach (Renderer r in currentStage.bombObj.GetComponentsInChildren<Renderer>()) {
+			if (r.gameObject.tag == "PlayMat")
+				continue;
 			Color c = r.material.GetColor ("_Color");
 			r.material.SetColor ("_Color", new Color (c.r, c.g, c.b + 0.02f));
 		}
@@ -27,13 +32,23 @@ public class GameModeClicker : GameMode {
 	public override void Act() {
 		base.Act ();
 
-		if (currentStage.stageData.hp > CurrentHP) {
-			CurrentHP++;
+		if (_stageHP > currentDamage) {
+			currentDamage++;
 			gameState.PlayHitSound ();
 			gameState.PlayHitFX ();
-		} else {
-			gameState.PlayPerfectSound ();
-			gameState.StageClear ();
-		}  
+			if (_stageHP <= currentDamage) {
+				gameState.PlayPerfectSound ();
+				gameState.StageClear ();
+			}
+		}
 	}
+
+	public override void StartGame(){
+		base.StartGame ();
+	}
+
+	public override void StopGame(){
+		base.StopGame ();
+	}
+
 }

@@ -45,8 +45,8 @@ MonoBehaviour:
   - level: 0
     timeLimit: 1
     reward: []
-    gamemode: 0
-    hp: 0
+    gamemode: 1
+    hp: 4
   - level: 0
     timeLimit: 1
     reward: []

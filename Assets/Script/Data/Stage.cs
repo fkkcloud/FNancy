@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,8 @@ public class Stage : MonoBehaviourHelper
 	public StageData stageData;
 
 	public GameMode gameMode;
+
+	private List<GameObject> _gameUI = new List<GameObject> ();
 
 	private GameObject _stageObj;
 	public GameObject stageObj
@@ -37,7 +40,7 @@ public class Stage : MonoBehaviourHelper
 	}
 
 	private GameObject _perfectText;
-	public GameObject perfectText
+	public GameObject UIPerfect
 	{
 		get
 		{
@@ -49,11 +52,14 @@ public class Stage : MonoBehaviourHelper
 		}
 	}
 
-	public TextMesh TextMeshTimerIndicator;
-	public TextMesh TextMeshTimer;
-
+	public TextMesh UITextMeshTimerIndicator;
+	public TextMesh UITextMeshTimer;
 
 	private Animator _anim;
+	private StageElements _elems;
+
+	// UI
+	public List<GameObject> _gamePlayUI = new List<GameObject>();
 
 	public void Awake(){
 		
@@ -76,33 +82,22 @@ public class Stage : MonoBehaviourHelper
 		stageObj = Instantiate (StageObject);
 		stageObj.transform.position = pos;
 		_anim = stageObj.GetComponent<Animator> ();
+		_elems = stageObj.GetComponent<StageElements> ();
 
-		// reset 3d text meshes to none
-		TextMesh[] childrens = stageObj.GetComponentsInChildren<TextMesh>();
-		foreach (TextMesh child in childrens) {
-			// do what you want with the transform
-			if (child.gameObject.tag == "TimerBomb") {
-				child.text = "";
-			} else if (child.gameObject.tag == "TimerStage") {
-				child.text = "";
-			}
-		}
+		// SET UI stuff for stage
+		UITextMeshTimer = _elems.TextBombTimer.GetComponent<TextMesh>();
+		UITextMeshTimer.text = "0.0";
+		UITextMeshTimer.gameObject.SetActive (false);
 
-		foreach(Transform child in stageObj.transform){
-			if(child.gameObject.tag == "BombObject"){
-				bombObj = child.gameObject;
-				break;
-			}
-		}
+		UITextMeshTimerIndicator = _elems.TextTimerIndicator.GetComponent<TextMesh>();
+		UITextMeshTimerIndicator.text = stageData.timeLimit.ToString();
+		UITextMeshTimerIndicator.gameObject.SetActive (false);
 
-		foreach(Transform child in stageObj.transform){
-			if(child.gameObject.tag == "PerfectText"){
-				perfectText = child.gameObject;
-				break;
-			}
-		}
+		UIPerfect = _elems.PerfectText;
+		UIPerfect.SetActive (false);
 
-		InitText ();
+		bombObj = _elems.BombObj;
+
 		InitGameMode ();
 	}
 
@@ -115,7 +110,6 @@ public class Stage : MonoBehaviourHelper
 
 	public void DeActivate(){
 		Animate(Stage.AnimType.BombDown);
-		HideTexts ();
 		gameMode.StopGame ();
 	}
 
@@ -124,8 +118,8 @@ public class Stage : MonoBehaviourHelper
 	}
 
 	public void AnimatePerfectFeedBack(){
-		perfectText.transform.position = new Vector3 (4f, perfectText.transform.position.y, perfectText.transform.position.z);
-		LeanTween.moveLocalX (perfectText, -5.5f, 0.38f);
+		UIPerfect.transform.position = new Vector3 (4f, UIPerfect.transform.position.y, UIPerfect.transform.position.z);
+		LeanTween.moveLocalX (UIPerfect, -5.5f, 0.38f);
 	}
 
 	public float GetCurrentLimitTime()
@@ -135,42 +129,63 @@ public class Stage : MonoBehaviourHelper
 
 	public void UpdateIndicator()
 	{
-		TextMeshTimerIndicator.text = stageData.timeLimit.ToString();
-	}
-		
-	private void InitText()
-	{
-		TextMesh[] _textMeshes = stageObj.GetComponentsInChildren<TextMesh>();;
-
-		foreach (TextMesh child in _textMeshes) {
-			// do what you want with the transform
-			if (child.gameObject.tag == "TimerBomb") {
-				child.text = 0.0f.ToString("#.#");
-				child.gameObject.SetActive (true);
-				TextMeshTimer = child;
-			} else if (child.gameObject.tag == "TimerStage") {
-				child.text = stageData.timeLimit.ToString();
-				child.gameObject.SetActive (true);
-				TextMeshTimerIndicator = child;
-			}
-		}
-
-		_perfectText = stageObj.transform.FindChild ("PerfectText").gameObject;
+		UITextMeshTimerIndicator.text = stageData.timeLimit.ToString();
 	}
 
-	public void InitGameMode(){
-		if (stageData.gamemode == 0)
+	void InitGameMode(){
+		if (stageData.gamemode == 0) {
 			gameMode = gameModeTimer;
-		else if (stageData.gamemode == 1)
+
+			// setup UI
+			_gameUI.Add (UIPerfect);
+			_gameUI.Add (UITextMeshTimer.gameObject);
+			_gameUI.Add (UITextMeshTimerIndicator.gameObject);
+			_gameUI.Add (_elems.GameMode0_UI);
+		} else if (stageData.gamemode == 1) {
 			gameMode = gameModeClicker;
+
+			// setup UI
+			_gameUI.Add (UIPerfect);
+			_gameUI.Add (UITextMeshTimer.gameObject);
+			_gameUI.Add (UITextMeshTimerIndicator.gameObject);
+			_gameUI.Add (_elems.GameMode1_UI);
+
+			float playMatLength = _elems.PlayMat.transform.lossyScale.x;
+			Vector3 playMatPos = _elems.PlayMat.transform.position;
+			float playMatMostLeftX = playMatPos.x - playMatLength * 0.5f;
+			for (int i = 0; i < stageData.hp; i++) {
+				float div = playMatLength / (stageData.hp + 1);
+				float scale = div * 0.666f;
+
+				Vector3 pos = new Vector3 (playMatMostLeftX + div * (i+1), playMatPos.y, playMatPos.z);
+				GameObject dot = Instantiate (_elems.UI_DOT);
+
+				dot.transform.position = pos;
+				dot.transform.localScale = new Vector3 (scale, scale, scale);
+				dot.transform.parent = _elems.GameMode1_UI.transform;
+				_gamePlayUI.Add (dot);
+			}
+
+		}
 	}
 
-	public void HideTexts(){
-		TextMeshTimer.gameObject.SetActive (false);
-		TextMeshTimerIndicator.gameObject.SetActive (false);
+	public void UpdateUI(){
+		if (stageData.gamemode == 0) {
+			_elems.GameMode0_UI.SetActive (false);
+		} else if (stageData.gamemode == 1) {
+			GameModeClicker gmc = gameMode as GameModeClicker;
+			if (gmc.currentDamage < stageData.hp)
+				_gamePlayUI [gmc.currentDamage].SetActive (false);
+		}
 	}
 
-	public void ShowPerfectUI()
+	public void ToggleUIVisibility(bool val){
+		for (int i = 0; i < _gameUI.Count; i++) {
+			_gameUI [i].SetActive (val);
+		}
+	}
+
+	public void AnimatePerfectUI()
 	{
 		_perfectText.transform.position = new Vector3 (4f, _perfectText.transform.position.y, _perfectText.transform.position.z);
 		LeanTween.moveLocalX (_perfectText, -5.5f, 0.38f);

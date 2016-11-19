@@ -9,32 +9,28 @@ public class GameModeTimer : GameMode {
 	}
 
 	public override void Tick() {
-
 		base.Tick ();
 
-		//Debug.Log ("game timer tick");
+		if (!_timerOn)
+			return;
 
-		if (timerOn) {
+		// coloring the text
+		if (_timer < _timeLimit - 0.25f) {
+			currentStage.UITextMeshTimer.color = new Color (0.9f, 0.2f, 0.2f);
+		} else if (_timer >= _timeLimit - 0.25f && _timer <= _timeLimit - 0.1f) {
+			currentStage.UITextMeshTimer.color = new Color (0.9f, 0.9f, 0.2f);
+		} else if (_timer > _timeLimit + 0.05f) {
+			currentStage.UITextMeshTimer.color = new Color (0.9f, 0.2f, 0.2f);
+		} else {
+			currentStage.UITextMeshTimer.color = new Color (0.2f, 0.9f, 0.2f);
+		}
 
-			//Debug.Log ("game timer tick timerOn");
-
-			// coloring the text
-			if (_timer < _timeLimit - 0.25f) {
-				currentStage.TextMeshTimer.color = new Color (0.9f, 0.2f, 0.2f);
-			} else if (_timer >= _timeLimit - 0.25f && _timer <= _timeLimit - 0.1f) {
-				currentStage.TextMeshTimer.color = new Color (0.9f, 0.9f, 0.2f);
-			} else if (_timer > _timeLimit + 0.05f) {
-				currentStage.TextMeshTimer.color = new Color (0.9f, 0.2f, 0.2f);
-			} else {
-				currentStage.TextMeshTimer.color = new Color (0.2f, 0.9f, 0.2f);
-			}
-
-			// color bomb
-			foreach (Renderer r in currentStage.bombObj.GetComponentsInChildren<Renderer>()) {
-				Color c = r.material.GetColor ("_Color");
-				r.material.SetColor ("_Color", new Color (c.r + 0.014f, c.g, c.b));
-
-			}
+		// color bomb
+		foreach (Renderer r in currentStage.bombObj.GetComponentsInChildren<Renderer>()) {
+			if (r.gameObject.tag == "PlayMat")
+				continue;
+			Color c = r.material.GetColor ("_Color");
+			r.material.SetColor ("_Color", new Color (c.r + 0.014f, c.g, c.b));
 
 		}
 	}
@@ -44,7 +40,7 @@ public class GameModeTimer : GameMode {
 		if (_timer >= _timeLimit - 0.25f && _timer < _timeLimit + 0.05f) {
 
 			if (_timer >= _timeLimit - 0.1f && _timer < _timeLimit + 0.05f) {
-				currentStage.ShowPerfectUI ();
+				currentStage.AnimatePerfectUI ();
 				gameState.PlayPerfectSound ();
 				gameCharacter.currentPerfect += 1;
 				gameCharacter.UpdateCharacterState ();
@@ -52,11 +48,18 @@ public class GameModeTimer : GameMode {
 				gameState.PlayRegularClearSound ();
 				gameCharacter.StateReset ();
 			}
+				
 			gameState.StageClear ();
 		} else {
 			gameState.GameOver ();
 		}
 	}
 
+	public override void StartGame(){
+		base.StartGame ();
+	}
 
+	public override void StopGame(){
+		base.StopGame ();
+	}
 }

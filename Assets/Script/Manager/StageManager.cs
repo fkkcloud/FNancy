@@ -85,7 +85,7 @@ public class StageManager : MonoBehaviourHelper {
 
 	void TimerOnCallBack()
 	{
-		currentStage.gameMode.timerOn = true;
+		currentStage.gameMode.StartGame ();
 		gameState.PlayerIdle ();
 		gameState.state = GameState.CurrentState.Playing;
 		Debug.Log ("CurrentStage:" + currentStageID + 1);
