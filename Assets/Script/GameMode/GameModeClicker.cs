@@ -35,7 +35,7 @@ public class GameModeClicker : GameMode {
 		if (_stageHP > currentDamage) {
 			currentDamage++;
 			gameState.PlayHitSound ();
-			gameState.PlayHitFX ();
+			gameState.PlayHitFX (new Vector3(1.1f, 0.66f, -2.86f));
 			if (_stageHP <= currentDamage) {
 				gameState.PlayPerfectSound ();
 				gameState.StageClear ();

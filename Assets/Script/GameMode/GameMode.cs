@@ -22,7 +22,7 @@ public class GameMode : MonoBehaviourHelper {
 		if (_timerOn) {
 			
 			// when player does not do anything
-			if (_timer > _timeLimit + 0.05f) {
+			if (_timer > _timeLimit + 0.15f) {
 				gameState.GameOver ();
 			}
 

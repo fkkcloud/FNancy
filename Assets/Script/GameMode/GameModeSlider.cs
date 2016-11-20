@@ -44,7 +44,7 @@ public class GameModeSlider : GameMode {
 					currentDamage++;
 					currentStage.gamePlayUI [i].SetActive (false);
 					currentStage.gamePlayUI.Remove (currentStage.gamePlayUI [i]);
-					//gameState.PlayHitFX ();
+					//gameState.PlayHitFX (currentStage.gamePlayUI [i].transform.position);
 					if (_stageHP <= currentDamage) {
 						gameState.PlayPerfectSound ();
 						gameState.StageClear ();

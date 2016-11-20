@@ -79,9 +79,10 @@ public class GameState : MonoBehaviourHelper {
 		_sfxPlayer.GetComponent<AudioSource> ().pitch = pitch;
 		_sfxPlayer.GetComponent<AudioSource> ().Play ();
 	}
-
-	public void PlayHitFX()
+		
+	public void PlayHitFX(Vector3 position)
 	{
+		gameState.HitFX.transform.position = position;
 		gameState.HitFX.GetComponent<ParticleSystem> ().Play ();
 	}
 
