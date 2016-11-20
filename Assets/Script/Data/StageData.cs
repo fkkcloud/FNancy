@@ -9,5 +9,4 @@ public class StageData
 	public float [] reward;
 	public int gamemode;
 	public int hp;
-
 }

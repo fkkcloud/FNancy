@@ -115,4 +115,16 @@ public class MonoBehaviourHelper : MonoBehaviour
 			return _gameModeTimer;
 		}
 	}
+
+	private GameModeSlider _gameModeSlider;
+	public GameModeSlider gameModeSlider
+	{
+		get
+		{
+			if (_gameModeSlider == null)
+				_gameModeSlider = new GameModeSlider ();
+
+			return _gameModeSlider;
+		}
+	}
 }

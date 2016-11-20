@@ -59,7 +59,7 @@ public class Stage : MonoBehaviourHelper
 	private StageElements _elems;
 
 	// UI
-	public List<GameObject> _gamePlayUI = new List<GameObject>();
+	public List<GameObject> gamePlayUI = new List<GameObject>();
 
 	public void Awake(){
 		
@@ -133,7 +133,8 @@ public class Stage : MonoBehaviourHelper
 	}
 
 	void InitGameMode(){
-		if (stageData.gamemode == 0) {
+		if (stageData.gamemode == 0) 
+		{
 			gameMode = gameModeTimer;
 
 			// setup UI
@@ -141,11 +142,11 @@ public class Stage : MonoBehaviourHelper
 			_gameUI.Add (UITextMeshTimer.gameObject);
 			_gameUI.Add (UITextMeshTimerIndicator.gameObject);
 			_gameUI.Add (_elems.GameMode0_UI);
-		} else if (stageData.gamemode == 1) {
+		} 
+		else if (stageData.gamemode == 1) {
 			gameMode = gameModeClicker;
 
 			// setup UI
-			_gameUI.Add (UIPerfect);
 			_gameUI.Add (UITextMeshTimer.gameObject);
 			_gameUI.Add (UITextMeshTimerIndicator.gameObject);
 			_gameUI.Add (_elems.GameMode1_UI);
@@ -163,19 +164,60 @@ public class Stage : MonoBehaviourHelper
 				dot.transform.position = pos;
 				dot.transform.localScale = new Vector3 (scale, scale, scale);
 				dot.transform.parent = _elems.GameMode1_UI.transform;
-				_gamePlayUI.Add (dot);
+				gamePlayUI.Add (dot);
+			}
+		} 
+		else if (stageData.gamemode == 2)
+		{
+			gameMode = gameModeSlider;
+
+			// setup UI
+			_gameUI.Add (UITextMeshTimer.gameObject);
+			_gameUI.Add (UITextMeshTimerIndicator.gameObject);
+			_gameUI.Add (_elems.GameMode2_UI);
+
+			float playMatLength = _elems.PlayMat.transform.lossyScale.x;
+			Vector3 playMatPos = _elems.PlayMat.transform.position;
+
+			float playMatMostLeftX = playMatPos.x - playMatLength * 0.5f;
+			float playMatMostRightX = playMatPos.x + playMatLength * 0.5f;
+
+			float div = playMatLength / (stageData.hp + 1);
+			float scale = div * 0.666f;
+
+			for (int i = 0; i < stageData.hp; i++) {
+
+				float val = Random.Range (playMatMostLeftX + playMatLength * 0.1f, playMatMostRightX - playMatLength * 0.1f);
+				Vector3 pos = new Vector3 (val, playMatPos.y, playMatPos.z);
+				GameObject dot = Instantiate (_elems.UI_DOT);
+
+				dot.transform.position = pos;
+				dot.transform.localScale = new Vector3 (scale * 0.4f, scale * 0.8f, scale);
+				dot.transform.parent = _elems.GameMode2_UI.transform;
+				gamePlayUI.Add (dot);
 			}
 
+			GameObject slider = Instantiate (_elems.UI_CYLINDER);
+			Vector3 sliderPosition = new Vector3 (playMatMostLeftX + playMatLength * 0.1f, playMatPos.y, playMatPos.z);
+
+			slider.transform.position = sliderPosition;
+
+			GameModeSlider gml = currentStage.gameMode as GameModeSlider;
+			gml.slider = slider;
+			gml.rightEndX = playMatMostRightX - playMatLength * 0.1f;
+			slider.transform.parent = _elems.GameMode2_UI.transform;
 		}
 	}
 
-	public void UpdateUI(){
+	public void ActUpdateUI(){
 		if (stageData.gamemode == 0) {
 			_elems.GameMode0_UI.SetActive (false);
 		} else if (stageData.gamemode == 1) {
 			GameModeClicker gmc = gameMode as GameModeClicker;
 			if (gmc.currentDamage < stageData.hp)
-				_gamePlayUI [gmc.currentDamage].SetActive (false);
+				gamePlayUI [gmc.currentDamage].SetActive (false);
+		} else if (stageData.gamemode == 2){
+			
 		}
 	}
 

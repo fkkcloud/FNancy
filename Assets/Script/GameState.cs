@@ -101,6 +101,7 @@ public class GameState : MonoBehaviourHelper {
 	}
 
 	public void GameOver(){
+
 		state = CurrentState.GameOver;
 
 		musicManager.Stop ();

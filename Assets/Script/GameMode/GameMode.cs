@@ -45,7 +45,7 @@ public class GameMode : MonoBehaviourHelper {
 	}
 
 	public virtual void Act (){
-		currentStage.UpdateUI ();
+		currentStage.ActUpdateUI ();
 	}
 
 	public virtual void StartGame(){ 

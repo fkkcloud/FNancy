@@ -88,7 +88,7 @@ public class StageManager : MonoBehaviourHelper {
 		currentStage.gameMode.StartGame ();
 		gameState.PlayerIdle ();
 		gameState.state = GameState.CurrentState.Playing;
-		Debug.Log ("CurrentStage:" + currentStageID + 1);
+		Debug.Log ("CurrentStage:" + (currentStageID + 1));
 	}
 
 	void MoveStages(){
