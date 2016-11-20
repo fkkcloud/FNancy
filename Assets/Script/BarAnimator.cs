@@ -27,7 +27,7 @@ public class BarAnimator : MonoBehaviourHelper {
 		pos = new float[stageCount];
 		for (int i = 0; i < stageCount; i++){
 			pos [i] = Remap (i, 0, stageCount - 1, YMin, YMax);
-			if (stageDatas [i].gamemode == 1) {
+			if (stageDatas [i].gamemode != 0) {
 				GameObject cube = Instantiate(BarDot2);
 				cube.transform.parent = Bar.transform;
 				Vector3 barRelative = Bar.transform.TransformPoint (cube.transform.position);
