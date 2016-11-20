@@ -52,4 +52,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StageDesignData: {fileID: 11400000, guid: 96c450aa8ac57405d96f871aadd503d4, type: 2}
-  StageObject: {fileID: 0}
+  StageObject: {fileID: 1204687257126472, guid: a6debb5037fb64461ac6ea523b8fc781,
+    type: 2}

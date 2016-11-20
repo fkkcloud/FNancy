@@ -38,17 +38,20 @@ public class StageManager : MonoBehaviourHelper {
 	}
 
 	public void InitStages(){
-		_stages = new Stage[StageDesignData.stageDatas.Length];
+		int stageCount = StageDesignData.stageDatas.Length;
+		_stages = new Stage[stageCount];
 
 		// create all the stages : TODO : create the stages to be optimized!
 		float ZPos = 0.0f;
-		for (int i = 0; i < StageDesignData.stageDatas.Length; i++) 
+		for (int i = 0; i < stageCount; i++) 
 		{
 			Vector3 pos = new Vector3 (0f, 0f, ZPos);
 			_stages [i] = new Stage ();
 			_stages [i].Init (StageDesignData.stageDatas [i], ref StageObject, pos);
 			_stages [i].stageObj.SetActive (false);
 			ZPos += gameDesignVariables.StageLength;
+
+
 		}
 
 		// set current stage

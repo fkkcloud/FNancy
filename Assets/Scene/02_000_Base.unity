@@ -1276,16 +1276,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 114975770748071162, guid: dad29ea632f374006bdd5a843466a0ad,
-        type: 2}
-      propertyPath: StageObject
-      value: 
-      objectReference: {fileID: 2007250469}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dad29ea632f374006bdd5a843466a0ad, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &2007250469 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1204687257126472, guid: a6debb5037fb64461ac6ea523b8fc781,
-    type: 2}
-  m_PrefabInternal: {fileID: 1470975583}
