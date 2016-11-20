@@ -202,7 +202,7 @@ public class Stage : MonoBehaviourHelper
 
 			slider.transform.position = sliderPosition;
 
-			GameModeSlider gml = currentStage.gameMode as GameModeSlider;
+			GameModeSlider gml = gameMode as GameModeSlider;
 			gml.slider = slider;
 			gml.rightEndX = playMatMostRightX - playMatLength * 0.1f;
 			slider.transform.parent = _elems.GameMode2_UI.transform;
