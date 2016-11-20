@@ -11,8 +11,17 @@ public class GameModeTimer : GameMode {
 	public override void Tick() {
 		base.Tick ();
 
+
 		if (!_timerOn)
 			return;
+
+		if (gameCharacter._state == GameCharacter.CurrentState.Undefeatable) {
+			gameCharacter.currentUndefeatCount += 1;
+			gameCharacter.UpdateCharacterState ();
+
+			gameState.PlayPerfectSound (); 
+			gameState.StageClear ();
+		}
 
 		// coloring the text
 		if (_timer < _timeLimit - 0.25f) {

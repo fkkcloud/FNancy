@@ -33,14 +33,7 @@ public class GameMode : MonoBehaviourHelper {
 			if (_timer > _timeLimit - 0.35f) {
 				currentStage.Animate (Stage.AnimType.BombShake);
 			}
-
-			if (gameCharacter._state == GameCharacter.CurrentState.Undefeatable) {
-				gameCharacter.currentUndefeatCount += 1;
-				gameCharacter.UpdateCharacterState ();
-
-				gameState.PlayPerfectSound (); 
-				gameState.StageClear ();
-			}
+				
 		}
 	}
 

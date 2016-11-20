@@ -20,6 +20,10 @@ public class GameModeClicker : GameMode {
 		if (!_timerOn)
 			return;
 
+		if (gameCharacter._state == GameCharacter.CurrentState.Undefeatable) {
+			gameCharacter.StateReset ();
+		}
+
 		// color bomb
 		foreach (Renderer r in currentStage.bombObj.GetComponentsInChildren<Renderer>()) {
 			if (r.gameObject.tag == "PlayMat")
