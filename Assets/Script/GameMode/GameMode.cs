@@ -20,15 +20,14 @@ public class GameMode : MonoBehaviourHelper {
 
 	public virtual void Tick (){
 		if (_timerOn) {
+
+			// update timer
+			_timer += (gameDesignVariables.TimerSpeed * Time.deltaTime);
 			
 			// when player does not do anything
 			if (_timer > _timeLimit + 0.15f) {
 				gameState.GameOver ();
 			}
-
-			// update timer
-			_timer += (gameDesignVariables.TimerSpeed * Time.deltaTime);
-			currentStage.UITextMeshTimer.text = _timer.ToString("0.0"); // TODO : make it as function for polyomrphism
 
 			if (_timer > _timeLimit - 0.35f) {
 				currentStage.Animate (Stage.AnimType.BombShake);

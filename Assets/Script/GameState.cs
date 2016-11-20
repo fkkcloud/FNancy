@@ -31,7 +31,7 @@ public class GameState : MonoBehaviourHelper {
 
 		stageManager.InitStages ();
 
-		barAnimator.Setup (stageManager.StageDesignData.stageDatas);
+		barAnimator.Setup (stageManager.stageDocuments[stageManager.selectedStageDocumentID].StageDesignData.stageDatas);
 
 		if (!musicManager.IsPlaying ()) {
 			musicManager.Play (Application.loadedLevel);

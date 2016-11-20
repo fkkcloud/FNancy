@@ -20,6 +20,9 @@ public class GameModeClicker : GameMode {
 		if (!_timerOn)
 			return;
 
+		float timerDisplay = Mathf.Max (0.0f, (currentStage.stageData.timeLimit - _timer));
+		currentStage.UITextMeshTimer.text = timerDisplay.ToString("0.0"); // TODO : make it as function for polyomrphism
+
 		if (gameCharacter._state == GameCharacter.CurrentState.Undefeatable) {
 			gameCharacter.StateReset ();
 		}

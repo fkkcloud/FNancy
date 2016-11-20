@@ -15,6 +15,8 @@ public class GameModeTimer : GameMode {
 		if (!_timerOn)
 			return;
 
+		currentStage.UITextMeshTimer.text = _timer.ToString("0.0"); // TODO : make it as function for polyomrphism
+
 		if (gameCharacter._state == GameCharacter.CurrentState.Undefeatable) {
 			gameCharacter.currentUndefeatCount += 1;
 			gameCharacter.UpdateCharacterState ();

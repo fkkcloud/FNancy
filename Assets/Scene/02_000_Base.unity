@@ -1257,6 +1257,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114975770748071162, guid: dad29ea632f374006bdd5a843466a0ad,
+        type: 2}
+      propertyPath: stageDocuments.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4874285066415096, guid: dad29ea632f374006bdd5a843466a0ad, type: 2}
       propertyPath: m_LocalPosition.x
       value: 1.1
@@ -1294,6 +1299,29 @@ Prefab:
       propertyPath: StageObject
       value: 
       objectReference: {fileID: 2007250469}
+    - target: {fileID: 114975770748071162, guid: dad29ea632f374006bdd5a843466a0ad,
+        type: 2}
+      propertyPath: selectedStageDocumentID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975770748071162, guid: dad29ea632f374006bdd5a843466a0ad,
+        type: 2}
+      propertyPath: stageDocuments.Array.data[0].StageDesignData
+      value: 
+      objectReference: {fileID: 11400000, guid: 96c450aa8ac57405d96f871aadd503d4,
+        type: 2}
+    - target: {fileID: 114975770748071162, guid: dad29ea632f374006bdd5a843466a0ad,
+        type: 2}
+      propertyPath: stageDocuments.Array.data[1].StageDesignData
+      value: 
+      objectReference: {fileID: 11400000, guid: d3b4154181cfe49b28d0aa49d0e176bc,
+        type: 2}
+    - target: {fileID: 114975770748071162, guid: dad29ea632f374006bdd5a843466a0ad,
+        type: 2}
+      propertyPath: stageDocuments.Array.data[2].StageDesignData
+      value: 
+      objectReference: {fileID: 11400000, guid: a7a79843487a944c7a36fb6e08e42563,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dad29ea632f374006bdd5a843466a0ad, type: 2}
   m_IsPrefabParent: 0

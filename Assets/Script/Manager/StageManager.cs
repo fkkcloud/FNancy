@@ -2,11 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct Stages
+{
+	public StageDesigner StageDesignData;
+}
+
 public class StageManager : MonoBehaviourHelper {
 
 	[Space(10)]
 	[Header("Stage")]
-	public StageDesigner StageDesignData;
+
+	public int selectedStageDocumentID ;
+	public Stages[] stageDocuments;
+
 	public GameObject StageObject;
 
 	private float _currentTimeLimit;
@@ -38,7 +47,7 @@ public class StageManager : MonoBehaviourHelper {
 	}
 
 	public void InitStages(){
-		int stageCount = StageDesignData.stageDatas.Length;
+		int stageCount = stageDocuments[selectedStageDocumentID].StageDesignData.stageDatas.Length;
 		_stages = new Stage[stageCount];
 
 		// create all the stages : TODO : create the stages to be optimized!
@@ -47,7 +56,7 @@ public class StageManager : MonoBehaviourHelper {
 		{
 			Vector3 pos = new Vector3 (0f, 0f, ZPos);
 			_stages [i] = new Stage ();
-			_stages [i].Init (StageDesignData.stageDatas [i], ref StageObject, pos);
+			_stages [i].Init (stageDocuments[selectedStageDocumentID].StageDesignData.stageDatas [i], ref StageObject, pos);
 			_stages [i].stageObj.SetActive (false);
 			ZPos += gameDesignVariables.StageLength;
 

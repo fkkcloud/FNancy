@@ -86,7 +86,7 @@ public class Stage : MonoBehaviourHelper
 
 		// SET UI stuff for stage
 		UITextMeshTimer = _elems.TextBombTimer.GetComponent<TextMesh>();
-		UITextMeshTimer.text = "0.0";
+		UITextMeshTimer.text = "";
 		UITextMeshTimer.gameObject.SetActive (false);
 
 		UITextMeshTimerIndicator = _elems.TextTimerIndicator.GetComponent<TextMesh>();
@@ -148,7 +148,7 @@ public class Stage : MonoBehaviourHelper
 
 			// setup UI
 			_gameUI.Add (UITextMeshTimer.gameObject);
-			_gameUI.Add (UITextMeshTimerIndicator.gameObject);
+			//_gameUI.Add (UITextMeshTimerIndicator.gameObject);
 			_gameUI.Add (_elems.GameMode1_UI);
 
 			float playMatLength = _elems.PlayMat.transform.lossyScale.x;
@@ -173,7 +173,7 @@ public class Stage : MonoBehaviourHelper
 
 			// setup UI
 			_gameUI.Add (UITextMeshTimer.gameObject);
-			_gameUI.Add (UITextMeshTimerIndicator.gameObject);
+			//_gameUI.Add (UITextMeshTimerIndicator.gameObject);
 			_gameUI.Add (_elems.GameMode2_UI);
 
 			float playMatLength = _elems.PlayMat.transform.lossyScale.x;
