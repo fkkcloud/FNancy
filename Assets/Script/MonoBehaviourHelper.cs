@@ -127,4 +127,16 @@ public class MonoBehaviourHelper : MonoBehaviour
 			return _gameModeSlider;
 		}
 	}
+
+	private GameModeColor _gameModeColor;
+	public GameModeColor gameModeColor
+	{
+		get
+		{
+			if (_gameModeColor == null)
+				_gameModeColor = new GameModeColor ();
+
+			return _gameModeColor;
+		}
+	}
 }

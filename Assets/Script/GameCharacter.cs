@@ -25,9 +25,9 @@ public class GameCharacter : MonoBehaviour {
 	}
 
 	public void StateReset(){
+		_state = CurrentState.Normal;
 		currentPerfect = 0;
 		currentUndefeatCount = 0;
-		_state = CurrentState.Normal;
 
 		HighlightFX.SetActive (false); 
 	}

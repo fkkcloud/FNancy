@@ -15,47 +15,47 @@ MonoBehaviour:
   - level: 0
     timeLimit: 1
     reward: []
-    gamemode: 2
+    gamemode: 3
     hp: 1
   - level: 0
     timeLimit: 0.8
     reward: []
-    gamemode: 0
+    gamemode: 3
     hp: 0
   - level: 0
     timeLimit: 1
     reward: []
-    gamemode: 0
+    gamemode: 3
     hp: 0
   - level: 0
     timeLimit: 0.8
     reward: []
-    gamemode: 0
+    gamemode: 3
     hp: 0
   - level: 0
     timeLimit: 0.9
     reward: []
-    gamemode: 0
+    gamemode: 3
     hp: 0
   - level: 0
     timeLimit: 1.2
     reward: []
-    gamemode: 0
+    gamemode: 3
     hp: 0
   - level: 0
     timeLimit: 1.1
     reward: []
-    gamemode: 0
+    gamemode: 3
     hp: 0
   - level: 0
     timeLimit: 1
     reward: []
-    gamemode: 0
+    gamemode: 3
     hp: 0
   - level: 0
     timeLimit: 1.1
     reward: []
-    gamemode: 0
+    gamemode: 3
     hp: 0
   - level: 0
     timeLimit: 1

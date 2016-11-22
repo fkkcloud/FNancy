@@ -13,8 +13,13 @@ public class StageElements : MonoBehaviour {
 	public GameObject GameMode0_UI;
 	public GameObject GameMode1_UI;
 	public GameObject GameMode2_UI;
+	public GameObject GameMode3_UI;
 
 	public GameObject UI_DOT;
 	public GameObject UI_CYLINDER;
+
+	public GameObject UI_BOMB;
+
+	public GameObject MiniGameText;
 
 }

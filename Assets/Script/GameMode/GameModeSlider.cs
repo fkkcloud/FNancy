@@ -45,12 +45,12 @@ public class GameModeSlider : GameMode {
 
 			gameState.PlayHitSound ();
 
-			for (int i = 0; i < currentStage.gamePlayUI.Count; i++) {
-				float x_diff = Mathf.Abs(slider.transform.position.x - currentStage.gamePlayUI [i].transform.position.x);
+			for (int i = 0; i < currentStage.minigamePlayUI.Count; i++) {
+				float x_diff = Mathf.Abs(slider.transform.position.x - currentStage.minigamePlayUI [i].transform.position.x);
 				if (x_diff < 0.08666f) {
 					currentDamage++;
-					currentStage.gamePlayUI [i].SetActive (false);
-					currentStage.gamePlayUI.Remove (currentStage.gamePlayUI [i]);
+					currentStage.minigamePlayUI [i].SetActive (false);
+					currentStage.minigamePlayUI.Remove (currentStage.minigamePlayUI [i]);
 					//gameState.PlayHitFX (currentStage.gamePlayUI [i].transform.position);
 					if (_stageHP <= currentDamage) {
 						gameState.PlayPerfectSound ();

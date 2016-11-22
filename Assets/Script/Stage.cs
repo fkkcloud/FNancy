@@ -56,10 +56,10 @@ public class Stage : MonoBehaviourHelper
 	public TextMesh UITextMeshTimer;
 
 	private Animator _anim;
-	private StageElements _elems;
+	public StageElements UIElements;
 
 	// UI
-	public List<GameObject> gamePlayUI = new List<GameObject>();
+	public List<GameObject> minigamePlayUI = new List<GameObject>(); // used to eval any minigame UIs
 
 	public void Awake(){
 		
@@ -82,21 +82,21 @@ public class Stage : MonoBehaviourHelper
 		stageObj = Instantiate (StageObject);
 		stageObj.transform.position = pos;
 		_anim = stageObj.GetComponent<Animator> ();
-		_elems = stageObj.GetComponent<StageElements> ();
+		UIElements = stageObj.GetComponent<StageElements> ();
 
 		// SET UI stuff for stage
-		UITextMeshTimer = _elems.TextBombTimer.GetComponent<TextMesh>();
+		UITextMeshTimer = UIElements.TextBombTimer.GetComponent<TextMesh>();
 		UITextMeshTimer.text = "";
 		UITextMeshTimer.gameObject.SetActive (false);
 
-		UITextMeshTimerIndicator = _elems.TextTimerIndicator.GetComponent<TextMesh>();
+		UITextMeshTimerIndicator = UIElements.TextTimerIndicator.GetComponent<TextMesh>();
 		UITextMeshTimerIndicator.text = stageData.timeLimit.ToString();
 		UITextMeshTimerIndicator.gameObject.SetActive (false);
 
-		UIPerfect = _elems.PerfectText;
+		UIPerfect = UIElements.PerfectText;
 		UIPerfect.SetActive (false);
 
-		bombObj = _elems.BombObj;
+		bombObj = UIElements.BombObj;
 
 		InitGameMode ();
 	}
@@ -141,7 +141,7 @@ public class Stage : MonoBehaviourHelper
 			_gameUI.Add (UIPerfect);
 			_gameUI.Add (UITextMeshTimer.gameObject);
 			_gameUI.Add (UITextMeshTimerIndicator.gameObject);
-			_gameUI.Add (_elems.GameMode0_UI);
+			_gameUI.Add (UIElements.GameMode0_UI);
 		} 
 		else if (stageData.gamemode == 1) {
 			gameMode = gameModeClicker;
@@ -149,22 +149,22 @@ public class Stage : MonoBehaviourHelper
 			// setup UI
 			_gameUI.Add (UITextMeshTimer.gameObject);
 			//_gameUI.Add (UITextMeshTimerIndicator.gameObject);
-			_gameUI.Add (_elems.GameMode1_UI);
+			_gameUI.Add (UIElements.GameMode1_UI);
 
-			float playMatLength = _elems.PlayMat.transform.lossyScale.x;
-			Vector3 playMatPos = _elems.PlayMat.transform.position;
+			float playMatLength = UIElements.PlayMat.transform.lossyScale.x;
+			Vector3 playMatPos = UIElements.PlayMat.transform.position;
 			float playMatMostLeftX = playMatPos.x - playMatLength * 0.5f;
 			for (int i = 0; i < stageData.hp; i++) {
 				float div = playMatLength / (stageData.hp + 1);
 				float scale = div * 0.666f;
 
 				Vector3 pos = new Vector3 (playMatMostLeftX + div * (i+1), playMatPos.y, playMatPos.z);
-				GameObject dot = Instantiate (_elems.UI_DOT);
+				GameObject dot = Instantiate (UIElements.UI_DOT);
 
 				dot.transform.position = pos;
 				dot.transform.localScale = new Vector3 (scale, scale, scale);
-				dot.transform.parent = _elems.GameMode1_UI.transform;
-				gamePlayUI.Add (dot);
+				dot.transform.parent = UIElements.GameMode1_UI.transform;
+				minigamePlayUI.Add (dot);
 			}
 		} 
 		else if (stageData.gamemode == 2)
@@ -174,10 +174,10 @@ public class Stage : MonoBehaviourHelper
 			// setup UI
 			_gameUI.Add (UITextMeshTimer.gameObject);
 			//_gameUI.Add (UITextMeshTimerIndicator.gameObject);
-			_gameUI.Add (_elems.GameMode2_UI);
+			_gameUI.Add (UIElements.GameMode2_UI);
 
-			float playMatLength = _elems.PlayMat.transform.lossyScale.x;
-			Vector3 playMatPos = _elems.PlayMat.transform.position;
+			float playMatLength = UIElements.PlayMat.transform.lossyScale.x;
+			Vector3 playMatPos = UIElements.PlayMat.transform.position;
 
 			float playMatMostLeftX = playMatPos.x - playMatLength * 0.5f;
 			float playMatMostRightX = playMatPos.x + playMatLength * 0.5f;
@@ -189,15 +189,15 @@ public class Stage : MonoBehaviourHelper
 
 				float val = Random.Range (playMatMostLeftX + playMatLength * 0.1f, playMatMostRightX - playMatLength * 0.1f);
 				Vector3 pos = new Vector3 (val, playMatPos.y, playMatPos.z);
-				GameObject dot = Instantiate (_elems.UI_DOT);
+				GameObject dot = Instantiate (UIElements.UI_DOT);
 
 				dot.transform.position = pos;
 				dot.transform.localScale = new Vector3 (scale * 0.4f, scale * 0.8f, scale);
-				dot.transform.parent = _elems.GameMode2_UI.transform;
-				gamePlayUI.Add (dot);
+				dot.transform.parent = UIElements.GameMode2_UI.transform;
+				minigamePlayUI.Add (dot);
 			}
 
-			GameObject slider = Instantiate (_elems.UI_CYLINDER);
+			GameObject slider = Instantiate (UIElements.UI_CYLINDER);
 			Vector3 sliderPosition = new Vector3 (playMatMostLeftX + playMatLength * 0.1f, playMatPos.y, playMatPos.z);
 
 			slider.transform.position = sliderPosition;
@@ -205,17 +205,74 @@ public class Stage : MonoBehaviourHelper
 			GameModeSlider gml = gameMode as GameModeSlider;
 			gml.slider = slider;
 			gml.rightEndX = playMatMostRightX - playMatLength * 0.1f;
-			slider.transform.parent = _elems.GameMode2_UI.transform;
+			slider.transform.parent = UIElements.GameMode2_UI.transform;
+		} 
+		else if (stageData.gamemode == 3)
+		{
+			gameMode = gameModeColor;
+
+			// setup UI
+			_gameUI.Add (UITextMeshTimer.gameObject);
+			//_gameUI.Add (UITextMeshTimerIndicator.gameObject);
+			_gameUI.Add (UIElements.GameMode3_UI);
+
+			_gameUI.Add (UIElements.MiniGameText);
+
+			// hide original bomb
+			bombObj.SetActive(false);
+
+			float playMatLength = UIElements.PlayMat.transform.lossyScale.x;
+			Vector3 playMatPos = UIElements.PlayMat.transform.position;
+
+			float playMatMostLeftX = playMatPos.x - playMatLength * 0.5f;
+			float playMatMostRightX = playMatPos.x + playMatLength * 0.5f;
+
+			float[] xs = new float[3];
+			xs [0] = playMatMostLeftX;
+			xs [1] = playMatPos.x;
+			xs [2] = playMatMostRightX;
+			for (int i = 0; i < 3; i++) {
+
+				Vector3 pos = new Vector3 (xs[i], playMatPos.y - 0.1f, playMatPos.z);
+				GameObject bomb = Instantiate (UIElements.UI_BOMB);
+
+				bomb.transform.position = pos;
+				bomb.transform.parent = bombObj.transform.parent; // TODO : we have to have a mini game UI root transform..
+				minigamePlayUI.Add (bomb);
+
+				if (i == 0){
+					bomb.gameObject.tag = "minigame_bomb_r";
+				}
+				else if (i == 1){
+					bomb.gameObject.tag = "minigame_bomb_g";
+				}
+				else{
+					bomb.gameObject.tag = "minigame_bomb_b";
+				}
+
+				// color bombs
+				foreach (Renderer r in bomb.GetComponentsInChildren<Renderer>()) {
+					if (i == 0){
+						r.material.SetColor ("_Color", new Color (1f, 0f, 0f)); // r
+					}
+					else if (i == 1){
+						r.material.SetColor ("_Color", new Color (0f, 1f, 0f)); // g
+					}
+					else{
+						r.material.SetColor ("_Color", new Color (0f, 0f, 1f)); // b
+					}
+				}
+			}
 		}
 	}
 
 	public void ActUpdateUI(){
 		if (stageData.gamemode == 0) {
-			_elems.GameMode0_UI.SetActive (false);
+			UIElements.GameMode0_UI.SetActive (false);
 		} else if (stageData.gamemode == 1) {
 			GameModeClicker gmc = gameMode as GameModeClicker;
 			if (gmc.currentDamage < stageData.hp)
-				gamePlayUI [gmc.currentDamage].SetActive (false);
+				minigamePlayUI [gmc.currentDamage].SetActive (false);
 		} else if (stageData.gamemode == 2){
 			
 		}

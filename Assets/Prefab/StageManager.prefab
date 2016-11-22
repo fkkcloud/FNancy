@@ -51,6 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916fdd90aaf51432f9353302395334b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StageDesignData: {fileID: 11400000, guid: 96c450aa8ac57405d96f871aadd503d4, type: 2}
-  StageObject: {fileID: 1204687257126472, guid: a6debb5037fb64461ac6ea523b8fc781,
-    type: 2}
+  selectedStageDocumentID: 0
+  stageDocuments:
+  - StageDesignData: {fileID: 11400000, guid: 96c450aa8ac57405d96f871aadd503d4, type: 2}
+  - StageDesignData: {fileID: 11400000, guid: d3b4154181cfe49b28d0aa49d0e176bc, type: 2}
+  - StageDesignData: {fileID: 11400000, guid: a7a79843487a944c7a36fb6e08e42563, type: 2}
+  - StageDesignData: {fileID: 0}
+  - StageDesignData: {fileID: 0}
+  StageObject: {fileID: 0}

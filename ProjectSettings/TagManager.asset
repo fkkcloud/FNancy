@@ -10,6 +10,9 @@ TagManager:
   - BombObject
   - PerfectText
   - PlayMat
+  - minigame_bomb_r
+  - minigame_bomb_g
+  - minigame_bomb_b
   layers:
   - Default
   - TransparentFX
