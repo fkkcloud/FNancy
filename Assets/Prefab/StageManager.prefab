@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedStageDocumentID: 0
   stageDocuments:
-  - StageDesignData: {fileID: 11400000, guid: 96c450aa8ac57405d96f871aadd503d4, type: 2}
+  - StageDesignData: {fileID: 11400000, guid: d235759f1cfc71b4ca624350e3b23af5, type: 2}
   - StageDesignData: {fileID: 11400000, guid: d3b4154181cfe49b28d0aa49d0e176bc, type: 2}
   - StageDesignData: {fileID: 11400000, guid: a7a79843487a944c7a36fb6e08e42563, type: 2}
   - StageDesignData: {fileID: 0}

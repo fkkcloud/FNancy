@@ -15,50 +15,150 @@ MonoBehaviour:
   - level: 0
     timeLimit: 1
     reward: []
-    gamemode: 3
-    hp: 1
-  - level: 0
-    timeLimit: 0.8
-    reward: []
-    gamemode: 3
-    hp: 0
-  - level: 0
-    timeLimit: 1
-    reward: []
-    gamemode: 3
+    gamemode: 0
     hp: 0
   - level: 0
     timeLimit: 0.8
     reward: []
-    gamemode: 3
-    hp: 0
-  - level: 0
-    timeLimit: 0.9
-    reward: []
-    gamemode: 3
-    hp: 0
-  - level: 0
-    timeLimit: 1.2
-    reward: []
-    gamemode: 3
-    hp: 0
-  - level: 0
-    timeLimit: 1.1
-    reward: []
-    gamemode: 3
-    hp: 0
-  - level: 0
-    timeLimit: 1
-    reward: []
-    gamemode: 3
-    hp: 0
-  - level: 0
-    timeLimit: 1.1
-    reward: []
-    gamemode: 3
+    gamemode: 0
     hp: 0
   - level: 0
     timeLimit: 1
     reward: []
     gamemode: 0
     hp: 0
+  - level: 0
+    timeLimit: 0.5
+    reward: []
+    gamemode: 0
+    hp: 0
+  - level: 0
+    timeLimit: 0.9
+    reward: []
+    gamemode: 0
+    hp: 0
+  - level: 0
+    timeLimit: 1.2
+    reward: []
+    gamemode: 0
+    hp: 0
+  - level: 0
+    timeLimit: 5
+    reward: []
+    gamemode: 1
+    hp: 20
+  - level: 0
+    timeLimit: 0.8
+    reward: []
+    gamemode: 0
+    hp: 0
+  - level: 0
+    timeLimit: 1
+    reward: []
+    gamemode: 0
+    hp: 0
+  - level: 0
+    timeLimit: 0.6
+    reward: []
+    gamemode: 0
+    hp: 0
+  - level: 0
+    timeLimit: 0.8
+    reward: []
+    gamemode: 0
+    hp: 0
+  - level: 0
+    timeLimit: 1.2
+    reward: []
+    gamemode: 0
+    hp: 0
+  - level: 0
+    timeLimit: 0.5
+    reward: []
+    gamemode: 0
+    hp: 0
+  - level: 0
+    timeLimit: 5
+    reward: []
+    gamemode: 2
+    hp: 15
+  - level: 0
+    timeLimit: 0.5
+    reward: []
+    gamemode: 0
+    hp: 0
+  - level: 0
+    timeLimit: 0.7
+    reward: []
+    gamemode: 0
+    hp: 0
+  - level: 0
+    timeLimit: 0.9
+    reward: []
+    gamemode: 0
+    hp: 0
+  - level: 0
+    timeLimit: 1.1
+    reward: []
+    gamemode: 0
+    hp: 0
+  - level: 0
+    timeLimit: 0.5
+    reward: []
+    gamemode: 0
+    hp: 0
+  - level: 0
+    timeLimit: 0.7
+    reward: []
+    gamemode: 0
+    hp: 0
+  - level: 0
+    timeLimit: 3
+    reward: []
+    gamemode: 1
+    hp: 15
+  - level: 0
+    timeLimit: 0.7
+    reward: []
+    gamemode: 0
+    hp: 0
+  - level: 0
+    timeLimit: 0.9
+    reward: []
+    gamemode: 0
+    hp: 0
+  - level: 0
+    timeLimit: 0.7
+    reward: []
+    gamemode: 0
+    hp: 0
+  - level: 0
+    timeLimit: 1
+    reward: []
+    gamemode: 3
+    hp: 0
+  - level: 0
+    timeLimit: 0.7
+    reward: []
+    gamemode: 0
+    hp: 0
+  - level: 0
+    timeLimit: 0.6
+    reward: []
+    gamemode: 0
+    hp: 0
+  - level: 0
+    timeLimit: 1
+    reward: []
+    gamemode: 3
+    hp: 0
+  - level: 0
+    timeLimit: 0.6
+    reward: []
+    gamemode: 0
+    hp: 0
+  - level: 0
+    timeLimit: 3
+    reward: []
+    gamemode: 1
+    hp: 25
