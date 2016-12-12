@@ -46,6 +46,11 @@ public class StageManager : MonoBehaviourHelper {
 			return null;
 	}
 
+	public float GetCurrentStageTimeMult(){
+		float i = (float)currentStageID / stageDocuments [selectedStageDocumentID].StageDesignData.stageDatas.Length;
+		return stageDocuments[selectedStageDocumentID].StageDesignData.speedCurve.Evaluate(i);
+	}
+
 	public void InitStages(){
 		int stageCount = stageDocuments[selectedStageDocumentID].StageDesignData.stageDatas.Length;
 		_stages = new Stage[stageCount];
@@ -59,43 +64,44 @@ public class StageManager : MonoBehaviourHelper {
 			_stages [i].Init (stageDocuments[selectedStageDocumentID].StageDesignData.stageDatas [i], ref StageObject, pos);
 			_stages [i].stageObj.SetActive (false);
 			ZPos += gameDesignVariables.StageLength;
-
-
 		}
 
 		// set current stage
 		currentStageID = 0;
-		currentStage.Activate ();
-		Invoke ("TimerOnCallBack", gameDesignVariables.StageMoveDuration * 1.025f);
+		ActivateStage ();
 
 		if (_stages.Length > 0) IsReady = true;
 	}
 
 	public void GoToNextStage(){
-		// deactivate current stage;
+		// deactivate current stage with delay
 		currentStage.DeActivate ();
 		StartCoroutine (StaticUtils.Hide(currentStage.stageObj, gameDesignVariables.StageMoveDuration * 1.5f));
 
 		gameState.state = GameState.CurrentState.Moving;
 
-		// stage clear point
+		// check level CLEAR point - show summary
 		if (currentStageID == _stages.Length-1) {
 			gameState.Clear ();
 			return;
 		}
 
-		// currentStageID point to next stage
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// currentStageID point to next stage ////////////////////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		currentStageID++;
-
-		// activate next stage
-		currentStage.Activate();
-		Invoke ("TimerOnCallBack", gameDesignVariables.StageMoveDuration * 1.025f);
+		ActivateStage ();
 
 		// move all the stages
 		MoveStages();
 	}
 
-	void TimerOnCallBack()
+	void ActivateStage(){
+		currentStage.Activate();
+		Invoke ("TimerOnCallBack", gameDesignVariables.StageMoveDuration * 1.025f);
+	}
+
+	void TimerOnDelay()
 	{
 		currentStage.gameMode.StartGame ();
 		gameState.PlayerIdle ();

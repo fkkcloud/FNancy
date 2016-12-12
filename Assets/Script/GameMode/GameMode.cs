@@ -22,7 +22,8 @@ public class GameMode : MonoBehaviourHelper {
 		if (_timerOn) {
 
 			// update timer
-			_timer += (gameDesignVariables.TimerSpeed * Time.deltaTime);
+			float timeMult = stageManager.GetCurrentStageTimeMult();
+			_timer += (gameDesignVariables.TimerSpeed * timeMult * Time.deltaTime);
 			
 			// when player does not do anything
 			if (_timer > _timeLimit + 0.15f) {

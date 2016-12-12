@@ -21,5 +21,4 @@ public class StageElements : MonoBehaviour {
 	public GameObject UI_BOMB;
 
 	public GameObject MiniGameText;
-
 }

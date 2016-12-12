@@ -15,16 +15,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
-      time: 0
-      value: 1.0870523
-      inSlope: 0.58797216
-      outSlope: 0.58797216
+      time: 0.0050022593
+      value: 1.0804793
+      inSlope: 0.41252837
+      outSlope: 0.41252837
       tangentMode: 34
     - serializedVersion: 2
-      time: 1
-      value: 1.6750245
-      inSlope: 0.58797216
-      outSlope: 0.58797216
+      time: 0.9954414
+      value: 1.4890635
+      inSlope: 0.41252837
+      outSlope: 0.41252837
       tangentMode: 34
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -35,178 +35,148 @@ MonoBehaviour:
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 0.8
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 1
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 0.5
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 0.9
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 1.2
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 5
     reward: []
     gamemode: 1
     hp: 20
-    speed: 1
   - level: 0
     timeLimit: 0.8
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 1
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 0.6
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 0.8
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 1.2
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 0.5
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 5
     reward: []
     gamemode: 2
     hp: 15
-    speed: 1
   - level: 0
     timeLimit: 0.5
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 0.7
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 0.9
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 1.1
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 0.5
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 0.7
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 3
     reward: []
     gamemode: 1
     hp: 15
-    speed: 1
   - level: 0
     timeLimit: 0.7
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 0.9
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 0.7
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 1
     reward: []
     gamemode: 3
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 0.7
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 0.6
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 1
     reward: []
     gamemode: 3
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 0.6
     reward: []
     gamemode: 0
     hp: 0
-    speed: 1
   - level: 0
     timeLimit: 3
     reward: []
     gamemode: 1
     hp: 25
-    speed: 1
