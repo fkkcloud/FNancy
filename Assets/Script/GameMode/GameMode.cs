@@ -30,7 +30,7 @@ public class GameMode : MonoBehaviourHelper {
 			CalculateTimer ();
 			
 			// when player does not do anything
-			if (_timer > _timeLimit + 0.15f) {
+			if (_timer >= _timeLimit + 0.075f) {
 				gameState.GameOver ();
 			}
 

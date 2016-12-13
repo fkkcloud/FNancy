@@ -7,7 +7,10 @@ public class GlobalVariables : MonoBehaviour {
 	[Space(10)]
 	[Header("Stage")]
 
-	public int SelectedLevel = 1;
+	public int SelectedLevel = 0;
+
+	public bool StartedFromLevelRoom = false;
+	public bool Restarted = false;
 
 	public LevelData[] stageDocuments;
 

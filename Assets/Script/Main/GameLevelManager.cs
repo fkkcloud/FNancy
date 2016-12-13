@@ -17,7 +17,8 @@ public class GameLevelManager : MonoBehaviourHelper {
 	}
 
 	public void LevelOpen(int number){
+		globalVariables.StartedFromLevelRoom = true;
 		globalVariables.SelectedLevel = number;
-		LevelManager.LoadLevel ("02_000_Base");
+		LevelManager.LoadGameLevel ();
 	}
 }

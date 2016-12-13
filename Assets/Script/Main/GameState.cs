@@ -10,6 +10,8 @@ public class GameState : MonoBehaviourHelper {
 	public GameObject BombFX;
 	public GameObject HitFX;
 	public GameObject ClearScreen;
+	public GameObject MenuScreen;
+	public GameObject MenuButtons;
 	public GameObject ClearText;
 	public GameObject BarInfo;
 	public GameObject GameOverPage;
@@ -30,20 +32,48 @@ public class GameState : MonoBehaviourHelper {
 
 	private AudioSource _sfxPlayer;
 
+	private GameObject _initialStage;
+
 	void Start(){
 		_sfxPlayer = GetComponent<AudioSource> ();
 
-		StartGame ();
+		// main menu bg
+		_initialStage = Instantiate (stageManager.StageObject);
 
+		// skip the menu part if its started from level menu
+		if (globalVariables.StartedFromLevelRoom) {
+			StartGame ();
+		}
 	}
 
 	public void StartGame(){
+		_sfxPlayer.Play ();
 
-		Instantiate (Character);
+		if (!gameCharacter)
+			Instantiate (Character);
+		
 		gameCharacter.Activate ();
 		gameCharacter.Play ("Wait");
 
-		stageManager.InitStages ();
+		float delaytime = 0.5f;
+		stageManager.InitStages (delaytime); // with delaytime
+		_initialStage.SetActive (false);
+
+		if (globalVariables.StartedFromLevelRoom || globalVariables.Restarted) {
+			MenuScreen.SetActive (false);
+			MenuButtons.SetActive (false);
+			globalVariables.Restarted = false;
+			globalVariables.StartedFromLevelRoom = false;
+		} else {
+			Invoke ("TurnOffMenuScreen", 0.5f);
+			LeanTween.alpha (MenuScreen, 0f, 0.2f);
+			LeanTween.moveLocalY(MenuButtons, -132f, 0.4f);
+		}
+
+		Vector3 originalPos = gameCharacter.gameObject.transform.position;
+		gameCharacter.gameObject.transform.position = new Vector3 (originalPos.x, originalPos.y, -5.2f);
+		LeanTween.moveLocalZ (gameCharacter.gameObject, originalPos.z, 0.5f);
+		gameCharacter.Play ("Walk");
 
 		if (!musicManager.IsPlaying ()) {
 			musicManager.Play (Application.loadedLevel);
@@ -52,8 +82,15 @@ public class GameState : MonoBehaviourHelper {
 		//barAnimator.Setup (stageManager.stageDocuments[stageManager.selectedStageDocumentID].StageDesignData.stageDatas);
 	}
 
+	void TurnOffMenuScreen(){
+		MenuScreen.SetActive (false);
+		gameCharacter.Play ("Wait");
+	}
+
 	public void RestartGame(){
-		DestroyImmediate (gameCharacter);
+		globalVariables.Restarted = true;
+
+		DestroyImmediate (gameCharacter.gameObject);
 		stageManager.DestroyStages();
 
 		GameOverPage.SetActive (false);
@@ -84,7 +121,7 @@ public class GameState : MonoBehaviourHelper {
 		}
 	}
 
-	public void Clear(){
+	public void LevelClear(){
 		ClearScreen.SetActive (true);
 		LeanTween.alpha (ClearScreen, 1f, 1.1f);
 		LeanTween.moveLocalX (ClearText, -0.4f, 0.2f);
@@ -150,7 +187,6 @@ public class GameState : MonoBehaviourHelper {
 		gameCharacter.Play ("Dead");
 		gameCharacter.Deactivate ();
 
-
 		PlaySFX (SoundFail, 1.0f);
 
 		//Invoke ("GoToMainMenu", SoundFail.length);
@@ -181,8 +217,13 @@ public class GameState : MonoBehaviourHelper {
 		gameCharacter.Play ("Wait");
 	}
 		
-	void GoToMainMenu()
+	public void GoToMainMenu()
 	{
 		LevelManager.LoadMainMenu();
+	}
+
+	public void GoToLevelRoom()
+	{
+		LevelManager.LoadLevelRoom();
 	}
 }

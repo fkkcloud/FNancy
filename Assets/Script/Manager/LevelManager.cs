@@ -30,5 +30,13 @@ public class LevelManager : MonoBehaviour {
 	public void LoadMainMenu(){
 		Application.LoadLevel ("01_000_MainMenu");
 	}
+
+	public void LoadGameLevel(){
+		Application.LoadLevel ("02_000_Base");
+	}
+
+	public void LoadLevelRoom(){
+		Application.LoadLevel ("01_002_LevelRoom");
+	}
 }
 	

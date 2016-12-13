@@ -53,7 +53,7 @@ public class StageManager : MonoBehaviourHelper {
 		}
 	}
 
-	public void InitStages(){
+	public void InitStages(float DelayTime){
 		gameState.state = GameState.CurrentState.Playing;
 
 		int selectedLevel = globalVariables.SelectedLevel;
@@ -72,7 +72,7 @@ public class StageManager : MonoBehaviourHelper {
 
 		// set current stage
 		currentStageID = 0;
-		ActivateStage ();
+		ActivateStage (DelayTime);
 
 		if (_stages.Length > 0) IsReady = true;
 	}
@@ -86,7 +86,7 @@ public class StageManager : MonoBehaviourHelper {
 
 		// check level CLEAR point - show summary
 		if (currentStageID == _stages.Length-1) {
-			gameState.Clear ();
+			gameState.LevelClear ();
 			return;
 		}
 
@@ -94,15 +94,15 @@ public class StageManager : MonoBehaviourHelper {
 		// currentStageID point to next stage ////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		currentStageID++;
-		ActivateStage ();
+		ActivateStage (gameDesignVariables.StageMoveDuration * 1.025f);
 
 		// move all the stages
 		MoveStages();
 	}
 
-	void ActivateStage(){
+	void ActivateStage(float DelayTime){
 		currentStage.Open();
-		Invoke ("TimerOnDelay", gameDesignVariables.StageMoveDuration * 1.025f);
+		Invoke ("TimerOnDelay", DelayTime);
 	}
 
 	void TimerOnDelay()
