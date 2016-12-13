@@ -49,6 +49,8 @@ public class GameState : MonoBehaviourHelper {
 	public void StartGame(){
 		_sfxPlayer.Play ();
 
+		gameState.state = GameState.CurrentState.Playing;
+
 		if (!gameCharacter)
 			Instantiate (Character);
 		
@@ -88,6 +90,9 @@ public class GameState : MonoBehaviourHelper {
 	}
 
 	public void RestartGame(){
+
+		ResetSFX ();
+
 		globalVariables.Restarted = true;
 
 		DestroyImmediate (gameCharacter.gameObject);
@@ -145,6 +150,9 @@ public class GameState : MonoBehaviourHelper {
 		StartCoroutine (StaticUtils.AnimateFeedBackText(FeedbackText.GetComponent<Text>().rectTransform, 0.4f, 250f, -500f, 100f));
 	}
 
+	public void ResetSFX(){
+		_sfxPlayer.GetComponent<AudioSource> ().clip = null;
+	}
 
 	public void PlaySFX(AudioClip clip, float pitch){
 		_sfxPlayer.GetComponent<AudioSource> ().clip = clip;
@@ -188,8 +196,6 @@ public class GameState : MonoBehaviourHelper {
 		gameCharacter.Deactivate ();
 
 		PlaySFX (SoundFail, 1.0f);
-
-		//Invoke ("GoToMainMenu", SoundFail.length);
 		Invoke("ShowGameOverPage", SoundFail.length * 0.475f);
 
 		// bomb explosion

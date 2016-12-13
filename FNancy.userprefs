@@ -1,25 +1,29 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Manager/StageManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Main/GameState.cs">
     <Files>
-      <File FileName="Assets/Script/Manager/StageManager.cs" Line="60" Column="43" />
-      <File FileName="Assets/Script/ScriptableObject/StageData.cs" Line="8" Column="24" />
+      <File FileName="Assets/Script/Manager/LevelManager.cs" Line="26" Column="30" />
+      <File FileName="Assets/Script/Manager/StageManager.cs" Line="75" Column="18" />
+      <File FileName="Assets/Script/ScriptableObject/StageData.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/GameDesignVariables.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/MonoBehaviourHelper.cs" Line="150" Column="56" />
-      <File FileName="Assets/Script/StaticUtils.cs" Line="68" Column="1" />
+      <File FileName="Assets/Script/MonoBehaviourHelper.cs" Line="21" Column="2" />
+      <File FileName="Assets/Script/StaticUtils.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/BarAnimator.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/GameMode/GameMode.cs" Line="51" Column="11" />
-      <File FileName="Assets/Script/GameMode/GameModeClicker.cs" Line="40" Column="11" />
+      <File FileName="Assets/Script/GameMode/GameMode.cs" Line="33" Column="17" />
+      <File FileName="Assets/Script/GameMode/GameModeClicker.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/GameMode/GameModeTimer.cs" Line="35" Column="85" />
-      <File FileName="Assets/Script/GameMode/GameModeSlider.cs" Line="42" Column="11" />
-      <File FileName="Assets/Script/GameMode/GameModeColor.cs" Line="61" Column="11" />
-      <File FileName="Assets/Script/ScriptableObject/StageDesigner.cs" Line="9" Column="35" />
-      <File FileName="Assets/Script/Manager/LevelManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/GameMode/GameModeSlider.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/GameMode/GameModeColor.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/ScriptableObject/StageDesigner.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/Manager/PlayerPrefManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/Manager/MusicManager.cs" Line="8" Column="1" />
-      <File FileName="Assets/Script/Main/GlobalVariables.cs" Line="9" Column="2" />
-      <File FileName="Assets/Script/Main/GameLevelManager.cs" Line="21" Column="39" />
-      <File FileName="Assets/Script/Main/GameState.cs" Line="9" Column="2" />
+      <File FileName="Assets/Script/Main/GlobalVariables.cs" Line="13" Column="23" />
+      <File FileName="Assets/Script/Main/GameLevelManager.cs" Line="20" Column="3" />
+      <File FileName="Assets/Script/Main/GameState.cs" Line="187" Column="31" />
+      <File FileName="Assets/Script/Stage/StageElements.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Stage/Stage.cs" Line="95" Column="2" />
+      <File FileName="Assets/Script/MenuControllers/OptionController.cs" Line="42" Column="1" />
+      <File FileName="Assets/Script/Main/GameCharacter.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -27,12 +27,14 @@ public class MusicManager : MonoBehaviour {
 
 	void OnLevelWasLoaded(int level){
 
+		/*
 		AudioClip level_music = level_musics [level];
 		if (level_music & _musicPlayer) {
 			_musicPlayer.clip = level_music;
 			_musicPlayer.loop = true;
 			_musicPlayer.Play ();
 		}
+*/
 	}
 
 	public void SetVolume(float volume){

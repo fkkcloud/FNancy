@@ -54,7 +54,6 @@ public class StageManager : MonoBehaviourHelper {
 	}
 
 	public void InitStages(float DelayTime){
-		gameState.state = GameState.CurrentState.Playing;
 
 		int selectedLevel = globalVariables.SelectedLevel;
 		int stageCount = globalVariables.stageDocuments[selectedLevel].StageDesignData.stageDatas.Length;
