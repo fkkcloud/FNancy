@@ -2128,7 +2128,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 7
   m_Type: 2
-  m_Color: {r: 1, g: 0.8654713, b: 0.58823526, a: 1}
+  m_Color: {r: 0.9411765, g: 0.7916955, b: 0.56747407, a: 1}
   m_Intensity: 0.86
   m_Range: 5
   m_SpotAngle: 30
@@ -2162,8 +2162,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 7
   m_Type: 2
-  m_Color: {r: 1, g: 0.61176467, b: 0.3602941, a: 1}
-  m_Intensity: 1.43
+  m_Color: {r: 0.9117647, g: 0.5170981, b: 0.2614619, a: 1}
+  m_Intensity: 1
   m_Range: 5
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -2184,7 +2184,7 @@ Light:
     m_Bits: 4294967295
   m_Lightmapping: 2
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1.23
+  m_BounceIntensity: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!114 &114035661568941350

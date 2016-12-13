@@ -1037,6 +1037,48 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d12bc93e8cdb48f6bc3d031f2e7abdd, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &1080679897
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4389167843064444, guid: b866437c92fe44df2a0d43918cf6cb0a, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1.095
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389167843064444, guid: b866437c92fe44df2a0d43918cf6cb0a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.071
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389167843064444, guid: b866437c92fe44df2a0d43918cf6cb0a, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -4.249
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389167843064444, guid: b866437c92fe44df2a0d43918cf6cb0a, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389167843064444, guid: b866437c92fe44df2a0d43918cf6cb0a, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389167843064444, guid: b866437c92fe44df2a0d43918cf6cb0a, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389167843064444, guid: b866437c92fe44df2a0d43918cf6cb0a, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389167843064444, guid: b866437c92fe44df2a0d43918cf6cb0a, type: 2}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: b866437c92fe44df2a0d43918cf6cb0a, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1136500420
 Prefab:
   m_ObjectHideFlags: 0
@@ -1857,6 +1899,22 @@ Prefab:
       propertyPath: StageObject
       value: 
       objectReference: {fileID: 1204687257126472, guid: a6debb5037fb64461ac6ea523b8fc781,
+        type: 2}
+    - target: {fileID: 114975770748071162, guid: dad29ea632f374006bdd5a843466a0ad,
+        type: 2}
+      propertyPath: stageDocuments.Array.data[2].StageDesignData
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975770748071162, guid: dad29ea632f374006bdd5a843466a0ad,
+        type: 2}
+      propertyPath: stageDocuments.Array.data[1].StageDesignData
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975770748071162, guid: dad29ea632f374006bdd5a843466a0ad,
+        type: 2}
+      propertyPath: stageDocuments.Array.data[0].StageDesignData
+      value: 
+      objectReference: {fileID: 11400000, guid: 1a0c50e4d35f24638b7807482d81975c,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dad29ea632f374006bdd5a843466a0ad, type: 2}

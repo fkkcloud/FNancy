@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/Scene/01_001_Options.unity
   - enabled: 1
     path: Assets/Scene/02_000_Base.unity
+  - enabled: 1
+    path: Assets/Scene/01_002_LevelRoom.unity

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// this is sepcifially for in-game elements!
 public class MonoBehaviourHelper : MonoBehaviour 
 {
 	private GameState _gameState;
@@ -137,6 +138,18 @@ public class MonoBehaviourHelper : MonoBehaviour
 				_gameModeColor = new GameModeColor ();
 
 			return _gameModeColor;
+		}
+	}
+
+	private GlobalVariables _globalVariables;
+	public GlobalVariables globalVariables
+	{
+		get
+		{
+			if (_globalVariables == null)
+				_globalVariables = FindObjectOfType<GlobalVariables> ();
+
+			return _globalVariables;
 		}
 	}
 }

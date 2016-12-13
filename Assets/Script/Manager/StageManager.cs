@@ -10,12 +10,6 @@ public struct LevelData
 
 public class StageManager : MonoBehaviourHelper {
 
-	[Space(10)]
-	[Header("Stage")]
-
-	public int selectedStageDocumentID ;
-	public LevelData[] stageDocuments;
-
 	[Tooltip ("Prefab to grab to create stage env")]
 	public GameObject StageObject;
 
@@ -48,8 +42,8 @@ public class StageManager : MonoBehaviourHelper {
 	}
 
 	public float GetCurrentStageTimeMult(){
-		float i = (float)currentStageID / stageDocuments [selectedStageDocumentID].StageDesignData.stageDatas.Length;
-		return stageDocuments[selectedStageDocumentID].StageDesignData.speedCurve.Evaluate(i);
+		float i = (float)currentStageID / globalVariables.stageDocuments [globalVariables.SelectedLevel].StageDesignData.stageDatas.Length;
+		return globalVariables.stageDocuments[globalVariables.SelectedLevel].StageDesignData.speedCurve.Evaluate(i);
 	}
 
 	public void DestroyStages(){
@@ -62,7 +56,8 @@ public class StageManager : MonoBehaviourHelper {
 	public void InitStages(){
 		gameState.state = GameState.CurrentState.Playing;
 
-		int stageCount = stageDocuments[selectedStageDocumentID].StageDesignData.stageDatas.Length;
+		int selectedLevel = globalVariables.SelectedLevel;
+		int stageCount = globalVariables.stageDocuments[selectedLevel].StageDesignData.stageDatas.Length;
 		_stages = new Stage[stageCount];
 
 		// create all the stages : TODO : create the stages to be optimized!
@@ -71,7 +66,7 @@ public class StageManager : MonoBehaviourHelper {
 		{
 			Vector3 pos = new Vector3 (0f, 0f, ZPos);
 			_stages [i] = new Stage ();
-			_stages [i].Init (stageDocuments[selectedStageDocumentID].StageDesignData.stageDatas [i], ref StageObject, pos);
+			_stages [i].Init (globalVariables.stageDocuments[selectedLevel].StageDesignData.stageDatas [i], ref StageObject, pos);
 			ZPos += gameDesignVariables.StageLength;
 		}
 
