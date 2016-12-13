@@ -7,7 +7,6 @@ public class StageElements : MonoBehaviour {
 	public GameObject TextBombTimer;
 	public GameObject TextTimerIndicator;
 	public GameObject BombObj;
-	public GameObject PerfectText;
 	public GameObject PlayMat;
 
 	public GameObject GameMode0_UI;

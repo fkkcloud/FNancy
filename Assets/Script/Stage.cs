@@ -38,19 +38,6 @@ public class Stage : MonoBehaviourHelper
 		}
 	}
 
-	private GameObject _perfectText;
-	public GameObject UIPerfect
-	{
-		get
-		{
-			return _perfectText;
-		}
-		set
-		{
-			_perfectText = value;
-		}
-	}
-
 	public TextMesh UITextMeshTimerIndicator;
 	public TextMesh UITextMeshTimer;
 
@@ -95,8 +82,6 @@ public class Stage : MonoBehaviourHelper
 
 		UITextMeshTimerIndicator.gameObject.SetActive (false);
 
-		UIPerfect = UIElements.PerfectText;
-		UIPerfect.SetActive (false);
 
 		bombObj = UIElements.BombObj;
 
@@ -120,11 +105,6 @@ public class Stage : MonoBehaviourHelper
 
 	public void HideBomb(){
 		bombObj.SetActive (false);
-	}
-
-	public void AnimatePerfectFeedBack(){
-		UIPerfect.transform.position = new Vector3 (4f, UIPerfect.transform.position.y, UIPerfect.transform.position.z);
-		LeanTween.moveLocalX (UIPerfect, -5.5f, 0.38f);
 	}
 
 	public float GetCurrentLimitTime()
@@ -156,11 +136,5 @@ public class Stage : MonoBehaviourHelper
 		for (int i = 0; i < gameUIList.Count; i++) {
 			gameUIList [i].SetActive (val);
 		}
-	}
-
-	public void AnimatePerfectUI()
-	{
-		_perfectText.transform.position = new Vector3 (4f, _perfectText.transform.position.y, _perfectText.transform.position.z);
-		LeanTween.moveLocalX (_perfectText, -5.5f, 0.38f);
 	}
 }

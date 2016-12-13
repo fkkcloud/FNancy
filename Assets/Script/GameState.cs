@@ -13,6 +13,7 @@ public class GameState : MonoBehaviourHelper {
 	public GameObject ClearText;
 	public GameObject BarInfo;
 	public GameObject GameOverPage;
+	public GameObject FeedbackText;
 
 	[Space(10)]
 	[Header("Audio")]
@@ -23,6 +24,8 @@ public class GameState : MonoBehaviourHelper {
 
 	public enum CurrentState {Playing, Loading, Moving, GameOver};
 	public CurrentState state = CurrentState.Playing;
+
+	public enum FeedbackType {Perfect, Good};
 
 	private AudioSource _sfxPlayer;
 
@@ -91,6 +94,17 @@ public class GameState : MonoBehaviourHelper {
 	public void PlayerAction(){
 		gameCharacter.Play ("Attack");
 	}
+
+	public void PlayTextFeedBack (GameState.FeedbackType feedbacktype)
+	{
+		string word = "";
+		if (feedbacktype == GameState.FeedbackType.Perfect) {
+			word = "PERFECT";
+		}
+		FeedbackText.GetComponent<Text> ().text = word;
+		StartCoroutine (StaticUtils.AnimateFeedBackText(FeedbackText.GetComponent<Text>().rectTransform, 0.3f, 250f, -500f, 100f));
+	}
+
 
 	public void PlaySFX(AudioClip clip, float pitch){
 		_sfxPlayer.GetComponent<AudioSource> ().clip = clip;

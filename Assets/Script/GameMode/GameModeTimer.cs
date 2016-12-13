@@ -57,7 +57,7 @@ public class GameModeTimer : GameMode {
 		if (_timer >= _timeLimit - 0.25f && _timer < _timeLimit + 0.05f) {
 
 			if (_timer >= _timeLimit - 0.1f && _timer < _timeLimit + 0.05f) {
-				currentStage.AnimatePerfectUI ();
+				gameState.PlayTextFeedBack (GameState.FeedbackType.Perfect);
 				gameState.PlayPerfectSound ();
 				gameCharacter.currentPerfect += 1;
 				gameCharacter.UpdateCharacterState ();
@@ -83,7 +83,6 @@ public class GameModeTimer : GameMode {
 	public override void SetupUI(){
 
 		// setup UI
-		currentStage.gameUIList.Add (currentStage.UIPerfect);
 		currentStage.gameUIList.Add (currentStage.UITextMeshTimer.gameObject);
 		currentStage.gameUIList.Add (currentStage.UITextMeshTimerIndicator.gameObject);
 		currentStage.gameUIList.Add (currentStage.UIElements.GameMode0_UI);

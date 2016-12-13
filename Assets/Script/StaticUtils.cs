@@ -9,6 +9,10 @@ public class StaticUtils : MonoBehaviour {
 		return 1f;
 	}
 
+	public static float Remap (float value, float from1, float to1, float from2, float to2) {
+		return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
+	}
+
 	public static IEnumerator Shake(float magnitude, float duration) {
 
 		float elapsed = 0.0f;
@@ -34,6 +38,27 @@ public class StaticUtils : MonoBehaviour {
 		}
 
 		Camera.main.transform.position = originalCamPos;
+	}
+
+	public static IEnumerator AnimateFeedBackText(RectTransform rect, float duration, float from, float to, float y) {
+
+		float elapsed = 0.0f;
+
+		Vector3 originalCamPos = Camera.main.transform.position;
+
+		while (elapsed < duration) {
+
+			elapsed += Time.deltaTime;          
+
+			float percentComplete = elapsed / duration;         
+
+			float xPos = Remap (percentComplete, 0f, 1f, from, to);
+			rect.anchoredPosition = new Vector2 (xPos, y);
+
+			yield return null;
+		}
+
+		rect.anchoredPosition = new Vector2 (from, y);
 	}
 
 	public static IEnumerator Hide(GameObject obj, float time){
