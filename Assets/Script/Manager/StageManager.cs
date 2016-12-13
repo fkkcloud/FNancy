@@ -98,7 +98,7 @@ public class StageManager : MonoBehaviourHelper {
 
 	void ActivateStage(){
 		currentStage.Activate();
-		Invoke ("TimerOnCallBack", gameDesignVariables.StageMoveDuration * 1.025f);
+		Invoke ("TimerOnDelay", gameDesignVariables.StageMoveDuration * 1.025f);
 	}
 
 	void TimerOnDelay()

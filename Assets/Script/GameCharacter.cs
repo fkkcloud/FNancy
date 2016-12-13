@@ -44,13 +44,17 @@ public class GameCharacter : MonoBehaviour {
 			_state = CurrentState.Undefeatable;
 		}
 		if (currentPerfect > 0) {
-			if (HighlightFX.active != true)
-				HighlightFX.SetActive (true);
-			LeanTween.moveLocalY (HighlightFX, Remap (currentPerfect, 1, perfectMax, 0.52f, 0.82f), 0.3f);
+			HighlightFX.SetActive (true);
+			float size = Remap (currentPerfect, 1, perfectMax, 0.5f, 2f);
+			HighlightFX.transform.localScale = new Vector3 (size, size, size);
 		}
 	}
 
 	public void Play(string animation){
 		CharacterObj.GetComponent<Animation> ().Play (animation);	
+	}
+
+	public void Deactivate(){
+		HighlightFX.SetActive (false);
 	}
 }

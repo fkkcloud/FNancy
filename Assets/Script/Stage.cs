@@ -10,8 +10,7 @@ public class Stage : MonoBehaviourHelper
 	public StageData stageData;
 
 	public GameMode gameMode;
-
-	private List<GameObject> _gameUI = new List<GameObject> ();
+	public List<GameObject> gameUIList = new List<GameObject> ();
 
 	private GameObject _stageObj;
 	public GameObject stageObj
@@ -90,7 +89,8 @@ public class Stage : MonoBehaviourHelper
 		UITextMeshTimer.gameObject.SetActive (false);
 
 		UITextMeshTimerIndicator = UIElements.TextTimerIndicator.GetComponent<TextMesh>();
-		UITextMeshTimerIndicator.text = stageData.timeLimit.ToString();
+		UITextMeshTimerIndicator.text = stageData.timeLimit.ToString("0.0");
+
 		UITextMeshTimerIndicator.gameObject.SetActive (false);
 
 		UIPerfect = UIElements.PerfectText;
@@ -105,7 +105,6 @@ public class Stage : MonoBehaviourHelper
 		stageObj.SetActive (true);
 		Animate(Stage.AnimType.Activate);
 		gameMode.Init ();
-
 	}
 
 	public void DeActivate(){
@@ -133,154 +132,23 @@ public class Stage : MonoBehaviourHelper
 	}
 
 	void InitGameMode(){
-		if (stageData.gamemode == 0) 
-		{
-			gameMode = gameModeTimer;
-
-			// setup UI
-			_gameUI.Add (UIPerfect);
-			_gameUI.Add (UITextMeshTimer.gameObject);
-			_gameUI.Add (UITextMeshTimerIndicator.gameObject);
-			_gameUI.Add (UIElements.GameMode0_UI);
-		} 
-		else if (stageData.gamemode == 1) {
-			gameMode = gameModeClicker;
-
-			// setup UI
-			_gameUI.Add (UITextMeshTimer.gameObject);
-			//_gameUI.Add (UITextMeshTimerIndicator.gameObject);
-			_gameUI.Add (UIElements.GameMode1_UI);
-
-			float playMatLength = UIElements.PlayMat.transform.lossyScale.x;
-			Vector3 playMatPos = UIElements.PlayMat.transform.position;
-			float playMatMostLeftX = playMatPos.x - playMatLength * 0.5f;
-			for (int i = 0; i < stageData.hp; i++) {
-				float div = playMatLength / (stageData.hp + 1);
-				float scale = div * 0.666f;
-
-				Vector3 pos = new Vector3 (playMatMostLeftX + div * (i+1), playMatPos.y, playMatPos.z);
-				GameObject dot = Instantiate (UIElements.UI_DOT);
-
-				dot.transform.position = pos;
-				dot.transform.localScale = new Vector3 (scale, scale, scale);
-				dot.transform.parent = UIElements.GameMode1_UI.transform;
-				minigamePlayUI.Add (dot);
-			}
-		} 
-		else if (stageData.gamemode == 2)
-		{
-			gameMode = gameModeSlider;
-
-			// setup UI
-			_gameUI.Add (UITextMeshTimer.gameObject);
-			//_gameUI.Add (UITextMeshTimerIndicator.gameObject);
-			_gameUI.Add (UIElements.GameMode2_UI);
-
-			float playMatLength = UIElements.PlayMat.transform.lossyScale.x;
-			Vector3 playMatPos = UIElements.PlayMat.transform.position;
-
-			float playMatMostLeftX = playMatPos.x - playMatLength * 0.5f;
-			float playMatMostRightX = playMatPos.x + playMatLength * 0.5f;
-
-			float div = playMatLength / (stageData.hp + 1);
-			float scale = div * 0.666f;
-
-			for (int i = 0; i < stageData.hp; i++) {
-
-				float val = Random.Range (playMatMostLeftX + playMatLength * 0.1f, playMatMostRightX - playMatLength * 0.1f);
-				Vector3 pos = new Vector3 (val, playMatPos.y, playMatPos.z);
-				GameObject dot = Instantiate (UIElements.UI_DOT);
-
-				dot.transform.position = pos;
-				dot.transform.localScale = new Vector3 (scale * 0.4f, scale * 0.8f, scale);
-				dot.transform.parent = UIElements.GameMode2_UI.transform;
-				minigamePlayUI.Add (dot);
-			}
-
-			GameObject slider = Instantiate (UIElements.UI_CYLINDER);
-			Vector3 sliderPosition = new Vector3 (playMatMostLeftX + playMatLength * 0.1f, playMatPos.y, playMatPos.z);
-
-			slider.transform.position = sliderPosition;
-
-			GameModeSlider gml = gameMode as GameModeSlider;
-			gml.slider = slider;
-			gml.rightEndX = playMatMostRightX - playMatLength * 0.1f;
-			slider.transform.parent = UIElements.GameMode2_UI.transform;
-		} 
-		else if (stageData.gamemode == 3)
-		{
-			gameMode = gameModeColor;
-
-			// setup UI
-			_gameUI.Add (UITextMeshTimer.gameObject);
-			//_gameUI.Add (UITextMeshTimerIndicator.gameObject);
-			_gameUI.Add (UIElements.GameMode3_UI);
-
-			_gameUI.Add (UIElements.MiniGameText);
-
-			// hide original bomb
-			bombObj.SetActive(false);
-
-			float playMatLength = UIElements.PlayMat.transform.lossyScale.x;
-			Vector3 playMatPos = UIElements.PlayMat.transform.position;
-
-			float playMatMostLeftX = playMatPos.x - playMatLength * 0.5f;
-			float playMatMostRightX = playMatPos.x + playMatLength * 0.5f;
-
-			float[] xs = new float[3];
-			xs [0] = playMatMostLeftX;
-			xs [1] = playMatPos.x;
-			xs [2] = playMatMostRightX;
-			for (int i = 0; i < 3; i++) {
-
-				Vector3 pos = new Vector3 (xs[i], playMatPos.y - 0.1f, playMatPos.z);
-				GameObject bomb = Instantiate (UIElements.UI_BOMB);
-
-				bomb.transform.position = pos;
-				bomb.transform.parent = bombObj.transform.parent; // TODO : we have to have a mini game UI root transform..
-				minigamePlayUI.Add (bomb);
-
-				if (i == 0){
-					bomb.gameObject.tag = "minigame_bomb_r";
-				}
-				else if (i == 1){
-					bomb.gameObject.tag = "minigame_bomb_g";
-				}
-				else{
-					bomb.gameObject.tag = "minigame_bomb_b";
-				}
-
-				// color bombs
-				foreach (Renderer r in bomb.GetComponentsInChildren<Renderer>()) {
-					if (i == 0){
-						r.material.SetColor ("_Color", new Color (1f, 0f, 0f)); // r
-					}
-					else if (i == 1){
-						r.material.SetColor ("_Color", new Color (0f, 1f, 0f)); // g
-					}
-					else{
-						r.material.SetColor ("_Color", new Color (0f, 0f, 1f)); // b
-					}
-				}
-			}
-		}
-	}
-
-	public void ActUpdateUI(){
 		if (stageData.gamemode == 0) {
-			UIElements.GameMode0_UI.SetActive (false);
-		} else if (stageData.gamemode == 1) {
-			GameModeClicker gmc = gameMode as GameModeClicker;
-			if (gmc.currentDamage < stageData.hp)
-				minigamePlayUI [gmc.currentDamage].SetActive (false);
-		} else if (stageData.gamemode == 2){
-			
+			gameMode = gameModeTimer;
+		}
+		else if (stageData.gamemode == 1){
+			gameMode = gameModeClicker;
+		} 
+		else if (stageData.gamemode == 2){
+			gameMode = gameModeSlider;
+		}
+		else if (stageData.gamemode == 3){
+			gameMode = gameModeColor;
 		}
 	}
 
 	public void ToggleUIVisibility(bool val){
-		for (int i = 0; i < _gameUI.Count; i++) {
-			_gameUI [i].SetActive (val);
+		for (int i = 0; i < gameUIList.Count; i++) {
+			gameUIList [i].SetActive (val);
 		}
 	}
 

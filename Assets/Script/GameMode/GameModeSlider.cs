@@ -22,9 +22,6 @@ public class GameModeSlider : GameMode {
 		if (!_timerOn)
 			return;
 
-		float timerDisplay = Mathf.Max (0.0f, (currentStage.stageData.timeLimit - _timer));
-		currentStage.UITextMeshTimer.text = timerDisplay.ToString("0.0"); // TODO : make it as function for polyomrphism
-
 		if (gameCharacter._state == GameCharacter.CurrentState.Undefeatable) {
 			gameCharacter.StateReset ();
 		}
@@ -38,8 +35,8 @@ public class GameModeSlider : GameMode {
 		}
 	}
 
-	public override void Act() {
-		base.Act ();
+	public override void ReactOnTouch() {
+		base.ReactOnTouch ();
 
 		if (_stageHP > currentDamage) {
 
@@ -72,5 +69,42 @@ public class GameModeSlider : GameMode {
 		base.StopGame ();
 		_sliderAnimation.pause (); // maybe stop for forever..?
 		slider.SetActive (false);
+	}
+
+	public override void SetupUI(){
+
+		// setup UI
+		currentStage.gameUIList.Add (currentStage.UITextMeshTimer.gameObject);
+		//_gameUI.Add (UITextMeshTimerIndicator.gameObject);
+		currentStage.gameUIList.Add (currentStage.UIElements.GameMode2_UI);
+
+		float playMatLength = currentStage.UIElements.PlayMat.transform.lossyScale.x;
+		Vector3 playMatPos = currentStage.UIElements.PlayMat.transform.position;
+
+		float playMatMostLeftX = playMatPos.x - playMatLength * 0.5f;
+		float playMatMostRightX = playMatPos.x + playMatLength * 0.5f;
+
+		float div = playMatLength / (currentStage.stageData.hp + 1);
+		float scale = div * 0.666f;
+
+		for (int i = 0; i < currentStage.stageData.hp; i++) {
+
+			float val = Random.Range (playMatMostLeftX + playMatLength * 0.1f, playMatMostRightX - playMatLength * 0.1f);
+			Vector3 pos = new Vector3 (val, playMatPos.y, playMatPos.z);
+			GameObject dot = Instantiate (currentStage.UIElements.UI_DOT);
+
+			dot.transform.position = pos;
+			dot.transform.localScale = new Vector3 (scale * 0.4f, scale * 0.8f, scale);
+			dot.transform.parent = currentStage.UIElements.GameMode2_UI.transform;
+			currentStage.minigamePlayUI.Add (dot);
+		}
+
+		slider = Instantiate (currentStage.UIElements.UI_CYLINDER);
+		Vector3 sliderPosition = new Vector3 (playMatMostLeftX + playMatLength * 0.1f, playMatPos.y, playMatPos.z);
+
+		slider.transform.position = sliderPosition;
+
+		rightEndX = playMatMostRightX - playMatLength * 0.1f;
+		slider.transform.parent = currentStage.UIElements.GameMode2_UI.transform;
 	}
 }

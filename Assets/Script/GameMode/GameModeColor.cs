@@ -48,17 +48,14 @@ public class GameModeColor : GameMode {
 		if (!_timerOn)
 			return;
 
-		float timerDisplay = Mathf.Max (0.0f, (currentStage.stageData.timeLimit - _timer));
-		currentStage.UITextMeshTimer.text = timerDisplay.ToString("0.0"); // TODO : make it as function for polyomrphism
-
 		// cancel highlight combo!
 		if (gameCharacter._state == GameCharacter.CurrentState.Undefeatable) {
 			gameCharacter.StateReset ();
 		}
 	}
 
-	public override void Act() {
-		base.Act ();
+	public override void ReactOnTouch() {
+		base.ReactOnTouch ();
 
 		gameState.PlayHitSound ();
 
@@ -89,4 +86,59 @@ public class GameModeColor : GameMode {
 		base.StopGame ();
 	}
 
+	public override void SetupUI(){
+
+		// setup UI
+		currentStage.gameUIList.Add (currentStage.UITextMeshTimer.gameObject);
+		//_gameUI.Add (UITextMeshTimerIndicator.gameObject);
+		currentStage.gameUIList.Add (currentStage.UIElements.GameMode3_UI);
+
+		currentStage.gameUIList.Add (currentStage.UIElements.MiniGameText);
+
+		// hide original bomb
+		currentStage.bombObj.SetActive(false);
+
+		float playMatLength = currentStage.UIElements.PlayMat.transform.lossyScale.x;
+		Vector3 playMatPos = currentStage.UIElements.PlayMat.transform.position;
+
+		float playMatMostLeftX = playMatPos.x - playMatLength * 0.5f;
+		float playMatMostRightX = playMatPos.x + playMatLength * 0.5f;
+
+		float[] xs = new float[3];
+		xs [0] = playMatMostLeftX;
+		xs [1] = playMatPos.x;
+		xs [2] = playMatMostRightX;
+		for (int i = 0; i < 3; i++) {
+
+			Vector3 pos = new Vector3 (xs[i], playMatPos.y - 0.1f, playMatPos.z);
+			GameObject bomb = Instantiate (currentStage.UIElements.UI_BOMB);
+
+			bomb.transform.position = pos;
+			bomb.transform.parent = currentStage.bombObj.transform.parent; // TODO : we have to have a mini game UI root transform..
+			currentStage.minigamePlayUI.Add (bomb);
+
+			if (i == 0){
+				bomb.gameObject.tag = "minigame_bomb_r";
+			}
+			else if (i == 1){
+				bomb.gameObject.tag = "minigame_bomb_g";
+			}
+			else{
+				bomb.gameObject.tag = "minigame_bomb_b";
+			}
+
+			// color bombs
+			foreach (Renderer r in bomb.GetComponentsInChildren<Renderer>()) {
+				if (i == 0){
+					r.material.SetColor ("_Color", new Color (1f, 0f, 0f)); // r
+				}
+				else if (i == 1){
+					r.material.SetColor ("_Color", new Color (0f, 1f, 0f)); // g
+				}
+				else{
+					r.material.SetColor ("_Color", new Color (0f, 0f, 1f)); // b
+				}
+			}
+		}
+	}
 }

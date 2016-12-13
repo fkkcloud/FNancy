@@ -11,6 +11,7 @@ public class GameState : MonoBehaviourHelper {
 	public GameObject HitFX;
 	public GameObject ClearScreen;
 	public GameObject ClearText;
+	public GameObject BarInfo;
 
 	[Space(10)]
 	[Header("Audio")]
@@ -31,7 +32,7 @@ public class GameState : MonoBehaviourHelper {
 
 		stageManager.InitStages ();
 
-		barAnimator.Setup (stageManager.stageDocuments[stageManager.selectedStageDocumentID].StageDesignData.stageDatas);
+		//barAnimator.Setup (stageManager.stageDocuments[stageManager.selectedStageDocumentID].StageDesignData.stageDatas);
 
 		if (!musicManager.IsPlaying ()) {
 			musicManager.Play (Application.loadedLevel);
@@ -40,19 +41,24 @@ public class GameState : MonoBehaviourHelper {
 
 	// Update is called once per frame
 	void Update () {
-		if (!stageManager.IsReady || gameState.state == GameState.CurrentState.GameOver)
-			return;
 
-		currentStage.gameMode.Tick();
+		// regular game tick
+		if (stageManager.IsReady && gameState.state != GameState.CurrentState.GameOver) {
+			
+			currentStage.gameMode.Tick ();
 
-		// touch on screen
-		if (Input.GetMouseButtonDown (0)) {
-			if (gameState.state == GameState.CurrentState.Moving)
-				return;
+			// touch on screen
+			if (Input.GetMouseButtonDown (0)) {
+				if (gameState.state == GameState.CurrentState.Moving)
+					return;
 
-			gameState.PlayerAction ();
+				gameState.PlayerAction ();
 
-			currentStage.gameMode.Act();
+				// each gamemode's update call
+				currentStage.gameMode.ReactOnTouch ();
+			}
+		} else if (gameState.state == GameState.CurrentState.GameOver) {
+			BarInfo.SetActive (true);
 		}
 	}
 
@@ -103,15 +109,19 @@ public class GameState : MonoBehaviourHelper {
 
 	public void GameOver(){
 
+		if (state == CurrentState.GameOver)
+			return;
+		
 		state = CurrentState.GameOver;
 
 		musicManager.Stop ();
 
 		gameCharacter.Play ("Dead");
+		gameCharacter.Deactivate ();
 
 		PlaySFX (SoundFail, 1.0f);
 
-		Invoke ("GoToMainMenu", SoundFail.length);
+		//Invoke ("GoToMainMenu", SoundFail.length);
 
 		BombFX.SetActive (true);
 		BombFX.GetComponent<ParticleSystem> ().Play ();
@@ -122,7 +132,7 @@ public class GameState : MonoBehaviourHelper {
 	public void StageClear(){
 		gameCharacter.Play ("Walk");
 		stageManager.GoToNextStage ();
-		barAnimator.UpdateDotPosition ();
+		//barAnimator.UpdateDotPosition ();
 		StartCoroutine (StaticUtils.Shake(0.2f, 0.052f));
 	}
 

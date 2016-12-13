@@ -15,7 +15,9 @@ public class GameMode : MonoBehaviourHelper {
 		_timeLimit = currentStage.GetCurrentLimitTime ();
 
 		// turn on corresponding UI elems
+		SetupUI ();
 		currentStage.ToggleUIVisibility (true);
+
 	}
 
 	public virtual void Tick (){
@@ -24,6 +26,8 @@ public class GameMode : MonoBehaviourHelper {
 			// update timer
 			float timeMult = stageManager.GetCurrentStageTimeMult();
 			_timer += (gameDesignVariables.TimerSpeed * timeMult * Time.deltaTime);
+
+			CalculateTimer ();
 			
 			// when player does not do anything
 			if (_timer > _timeLimit + 0.15f) {
@@ -37,8 +41,12 @@ public class GameMode : MonoBehaviourHelper {
 		}
 	}
 
-	public virtual void Act (){
-		currentStage.ActUpdateUI ();
+	public virtual void CalculateTimer(){
+		float timerDisplay = Mathf.Max (0.0f, (currentStage.stageData.timeLimit - _timer));
+		currentStage.UITextMeshTimer.text = timerDisplay.ToString("0.0");
+	}
+
+	public virtual void ReactOnTouch (){
 	}
 
 	public virtual void StartGame(){ 
@@ -49,5 +57,8 @@ public class GameMode : MonoBehaviourHelper {
 		currentStage.Animate (Stage.AnimType.BombShake); // trigger it to stop shaking
 	}
 
+	public virtual void SetupUI(){
+
+	}
 
 }

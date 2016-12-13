@@ -20,9 +20,6 @@ public class GameModeClicker : GameMode {
 		if (!_timerOn)
 			return;
 
-		float timerDisplay = Mathf.Max (0.0f, (currentStage.stageData.timeLimit - _timer));
-		currentStage.UITextMeshTimer.text = timerDisplay.ToString("0.0"); // TODO : make it as function for polyomrphism
-
 		if (gameCharacter._state == GameCharacter.CurrentState.Undefeatable) {
 			gameCharacter.StateReset ();
 		}
@@ -36,8 +33,11 @@ public class GameModeClicker : GameMode {
 		}
 	}
 
-	public override void Act() {
-		base.Act ();
+	public override void ReactOnTouch() {
+		base.ReactOnTouch ();
+
+		if (currentDamage < currentStage.stageData.hp)
+			currentStage.minigamePlayUI [currentDamage].SetActive (false);
 
 		if (_stageHP > currentDamage) {
 			currentDamage++;
@@ -58,4 +58,27 @@ public class GameModeClicker : GameMode {
 		base.StopGame ();
 	}
 
+	public override void SetupUI(){
+
+		// setup UI
+		currentStage.gameUIList.Add (currentStage.UITextMeshTimer.gameObject);
+		//_gameUI.Add (UITextMeshTimerIndicator.gameObject);
+		currentStage.gameUIList.Add (currentStage.UIElements.GameMode1_UI);
+
+		float playMatLength = currentStage.UIElements.PlayMat.transform.lossyScale.x;
+		Vector3 playMatPos = currentStage.UIElements.PlayMat.transform.position;
+		float playMatMostLeftX = playMatPos.x - playMatLength * 0.5f;
+		for (int i = 0; i < currentStage.stageData.hp; i++) {
+			float div = playMatLength / (currentStage.stageData.hp + 1);
+			float scale = div * 0.666f;
+
+			Vector3 pos = new Vector3 (playMatMostLeftX + div * (i+1), playMatPos.y, playMatPos.z);
+			GameObject dot = Instantiate (currentStage.UIElements.UI_DOT);
+
+			dot.transform.position = pos;
+			dot.transform.localScale = new Vector3 (scale, scale, scale);
+			dot.transform.parent = currentStage.UIElements.GameMode1_UI.transform;
+			currentStage.minigamePlayUI.Add (dot);
+		}
+	}
 }
