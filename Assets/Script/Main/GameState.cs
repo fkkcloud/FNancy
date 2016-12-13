@@ -41,8 +41,11 @@ public class GameState : MonoBehaviourHelper {
 		_initialStage = Instantiate (stageManager.StageObject);
 
 		// skip the menu part if its started from level menu
-		if (globalVariables.StartedFromLevelRoom) {
+		if (globalVariables.StartedFromLevelRoom ||  globalVariables.Restarted) {
 			StartGame ();
+		} else {
+			MenuScreen.SetActive (true);
+			MenuButtons.SetActive (true);
 		}
 	}
 
@@ -69,12 +72,12 @@ public class GameState : MonoBehaviourHelper {
 		} else {
 			Invoke ("TurnOffMenuScreen", 0.5f);
 			LeanTween.alpha (MenuScreen, 0f, 0.2f);
-			LeanTween.moveLocalY(MenuButtons, -132f, 0.4f);
+			LeanTween.moveLocalY(MenuButtons, -132f, 0.4f).setEase(LeanTweenType.easeInQuad);
 		}
 
 		Vector3 originalPos = gameCharacter.gameObject.transform.position;
 		gameCharacter.gameObject.transform.position = new Vector3 (originalPos.x, originalPos.y, -5.2f);
-		LeanTween.moveLocalZ (gameCharacter.gameObject, originalPos.z, 0.5f);
+		LeanTween.moveLocalZ (gameCharacter.gameObject, originalPos.z, 0.5f).setEase(LeanTweenType.easeOutQuad);
 		gameCharacter.Play ("Walk");
 
 		if (!musicManager.IsPlaying ()) {
