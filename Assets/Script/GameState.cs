@@ -102,7 +102,7 @@ public class GameState : MonoBehaviourHelper {
 			word = "PERFECT";
 		}
 		FeedbackText.GetComponent<Text> ().text = word;
-		StartCoroutine (StaticUtils.AnimateFeedBackText(FeedbackText.GetComponent<Text>().rectTransform, 0.3f, 250f, -500f, 100f));
+		StartCoroutine (StaticUtils.AnimateFeedBackText(FeedbackText.GetComponent<Text>().rectTransform, 0.4f, 250f, -500f, 100f));
 	}
 
 
