@@ -12,6 +12,7 @@ public class GameState : MonoBehaviourHelper {
 	public GameObject ClearScreen;
 	public GameObject ClearText;
 	public GameObject BarInfo;
+	public GameObject GameOverPage;
 
 	[Space(10)]
 	[Header("Audio")]
@@ -28,15 +29,30 @@ public class GameState : MonoBehaviourHelper {
 	void Start(){
 		_sfxPlayer = GetComponent<AudioSource> ();
 
+		StartGame ();
+
+	}
+
+	public void StartGame(){
 		gameCharacter.Play ("Wait");
 
 		stageManager.InitStages ();
 
-		//barAnimator.Setup (stageManager.stageDocuments[stageManager.selectedStageDocumentID].StageDesignData.stageDatas);
-
 		if (!musicManager.IsPlaying ()) {
 			musicManager.Play (Application.loadedLevel);
 		}
+
+		//barAnimator.Setup (stageManager.stageDocuments[stageManager.selectedStageDocumentID].StageDesignData.stageDatas);
+	}
+
+	public void RestartGame(){
+		stageManager.DestroyStages();
+
+		GameOverPage.SetActive (false);
+
+		gameCharacter.Activate ();
+
+		StartGame ();
 	}
 
 	// Update is called once per frame
@@ -66,10 +82,6 @@ public class GameState : MonoBehaviourHelper {
 		ClearScreen.SetActive (true);
 		LeanTween.alpha (ClearScreen, 1f, 1.1f);
 		LeanTween.moveLocalX (ClearText, -0.4f, 0.2f);
-	}
-
-	void InitStages(){
-		
 	}
 
 	void OnLevelWasLoaded(int level){
@@ -117,16 +129,25 @@ public class GameState : MonoBehaviourHelper {
 		musicManager.Stop ();
 
 		gameCharacter.Play ("Dead");
-		gameCharacter.Deactivate ();
+
 
 		PlaySFX (SoundFail, 1.0f);
 
 		//Invoke ("GoToMainMenu", SoundFail.length);
+		Invoke("ShowGameOverPage", SoundFail.length);
 
+		// bomb explosion
+		BombExplosionForGameOver();
+	}
+
+	void BombExplosionForGameOver(){
 		BombFX.SetActive (true);
 		BombFX.GetComponent<ParticleSystem> ().Play ();
-
 		currentStage.HideBomb ();
+	}
+
+	void ShowGameOverPage(){
+		GameOverPage.SetActive (true);
 	}
 
 	public void StageClear(){

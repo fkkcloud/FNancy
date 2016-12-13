@@ -54,6 +54,10 @@ public class GameCharacter : MonoBehaviour {
 		CharacterObj.GetComponent<Animation> ().Play (animation);	
 	}
 
+	public void Activate(){
+		StateReset ();
+	}
+
 	public void Deactivate(){
 		HighlightFX.SetActive (false);
 	}

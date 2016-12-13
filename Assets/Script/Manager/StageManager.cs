@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct Stages
+public struct LevelData
 {
 	public StageDesigner StageDesignData;
 }
@@ -14,13 +14,14 @@ public class StageManager : MonoBehaviourHelper {
 	[Header("Stage")]
 
 	public int selectedStageDocumentID ;
-	public Stages[] stageDocuments;
+	public LevelData[] stageDocuments;
 
+	[Tooltip ("Prefab to grab to create stage env")]
 	public GameObject StageObject;
 
-	private float _currentTimeLimit;
-
 	private Stage[] _stages;
+
+	private float _currentTimeLimit;
 
 	public bool IsReady { get; set;}
 
@@ -51,7 +52,16 @@ public class StageManager : MonoBehaviourHelper {
 		return stageDocuments[selectedStageDocumentID].StageDesignData.speedCurve.Evaluate(i);
 	}
 
+	public void DestroyStages(){
+		for (int i = 0; i < _stages.Length; i++) {
+			_stages [i].DestroyStageObject ();
+			DestroyImmediate (_stages[i]);
+		}
+	}
+
 	public void InitStages(){
+		gameState.state = GameState.CurrentState.Playing;
+
 		int stageCount = stageDocuments[selectedStageDocumentID].StageDesignData.stageDatas.Length;
 		_stages = new Stage[stageCount];
 
@@ -62,7 +72,6 @@ public class StageManager : MonoBehaviourHelper {
 			Vector3 pos = new Vector3 (0f, 0f, ZPos);
 			_stages [i] = new Stage ();
 			_stages [i].Init (stageDocuments[selectedStageDocumentID].StageDesignData.stageDatas [i], ref StageObject, pos);
-			_stages [i].stageObj.SetActive (false);
 			ZPos += gameDesignVariables.StageLength;
 		}
 

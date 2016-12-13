@@ -80,6 +80,8 @@ public class Stage : MonoBehaviourHelper
 
 		stageObj = Instantiate (StageObject);
 		stageObj.transform.position = pos;
+		stageObj.SetActive (false);
+
 		_anim = stageObj.GetComponent<Animator> ();
 		UIElements = stageObj.GetComponent<StageElements> ();
 
@@ -99,6 +101,10 @@ public class Stage : MonoBehaviourHelper
 		bombObj = UIElements.BombObj;
 
 		InitGameMode ();
+	}
+
+	public void DestroyStageObject(){
+		DestroyImmediate (stageObj);
 	}
 
 	public void Activate(){
