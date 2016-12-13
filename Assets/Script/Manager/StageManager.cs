@@ -84,7 +84,7 @@ public class StageManager : MonoBehaviourHelper {
 
 	public void GoToNextStage(){
 		// deactivate current stage with delay
-		currentStage.DeActivate ();
+		currentStage.Deactivate ();
 		StartCoroutine (StaticUtils.Hide(currentStage.stageObj, gameDesignVariables.StageMoveDuration * 1.5f));
 
 		gameState.state = GameState.CurrentState.Moving;

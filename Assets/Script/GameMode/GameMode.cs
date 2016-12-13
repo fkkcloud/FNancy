@@ -47,6 +47,8 @@ public class GameMode : MonoBehaviourHelper {
 	}
 
 	public virtual void ReactOnTouch (){
+		if (!_timerOn)
+			return;
 	}
 
 	public virtual void StartGame(){ 

@@ -98,10 +98,11 @@ public class Stage : MonoBehaviourHelper
 		gameMode.Init ();
 	}
 
-	public void DeActivate(){
+	public void Deactivate(){
 		Animate(Stage.AnimType.BombDown);
 		gameMode.StopGame ();
 	}
+		
 
 	public void HideBomb(){
 		bombObj.SetActive (false);

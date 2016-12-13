@@ -57,6 +57,9 @@ public class GameModeColor : GameMode {
 	public override void ReactOnTouch() {
 		base.ReactOnTouch ();
 
+		if (!_timerOn)
+			return;
+
 		gameState.PlayHitSound ();
 
 		// project ray to front to capture object

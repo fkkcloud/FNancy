@@ -38,6 +38,9 @@ public class GameModeSlider : GameMode {
 	public override void ReactOnTouch() {
 		base.ReactOnTouch ();
 
+		if (!_timerOn)
+			return;
+
 		if (_stageHP > currentDamage) {
 
 			gameState.PlayHitSound ();

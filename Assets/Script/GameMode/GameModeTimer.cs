@@ -52,6 +52,9 @@ public class GameModeTimer : GameMode {
 	public override void ReactOnTouch() {
 		base.ReactOnTouch ();
 
+		if (!_timerOn)
+			return;
+
 		currentStage.UIElements.GameMode0_UI.SetActive (false);
 
 		if (_timer >= _timeLimit - 0.25f && _timer < _timeLimit + 0.05f) {

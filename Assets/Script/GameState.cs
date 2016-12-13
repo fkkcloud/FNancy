@@ -14,6 +14,7 @@ public class GameState : MonoBehaviourHelper {
 	public GameObject BarInfo;
 	public GameObject GameOverPage;
 	public GameObject FeedbackText;
+	public GameObject Character;
 
 	[Space(10)]
 	[Header("Audio")]
@@ -37,6 +38,9 @@ public class GameState : MonoBehaviourHelper {
 	}
 
 	public void StartGame(){
+
+		Instantiate (Character);
+		gameCharacter.Activate ();
 		gameCharacter.Play ("Wait");
 
 		stageManager.InitStages ();
@@ -49,11 +53,10 @@ public class GameState : MonoBehaviourHelper {
 	}
 
 	public void RestartGame(){
+		DestroyImmediate (gameCharacter);
 		stageManager.DestroyStages();
 
 		GameOverPage.SetActive (false);
-
-		gameCharacter.Activate ();
 
 		StartGame ();
 	}
@@ -140,9 +143,12 @@ public class GameState : MonoBehaviourHelper {
 		
 		state = CurrentState.GameOver;
 
+		currentStage.Deactivate ();
+
 		musicManager.Stop ();
 
 		gameCharacter.Play ("Dead");
+		gameCharacter.Deactivate ();
 
 
 		PlaySFX (SoundFail, 1.0f);

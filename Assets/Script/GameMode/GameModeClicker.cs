@@ -36,6 +36,9 @@ public class GameModeClicker : GameMode {
 	public override void ReactOnTouch() {
 		base.ReactOnTouch ();
 
+		if (!_timerOn)
+			return;
+
 		if (currentDamage < currentStage.stageData.hp)
 			currentStage.minigamePlayUI [currentDamage].SetActive (false);
 
