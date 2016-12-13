@@ -92,14 +92,23 @@ public class Stage : MonoBehaviourHelper
 		DestroyImmediate (stageObj);
 	}
 
+	public void Open(){
+		Activate ();
+		Animate(Stage.AnimType.Activate);
+	}
+
+	public void Close(){
+		
+		Deactivate ();
+		Animate(Stage.AnimType.BombDown);
+	}
+
 	public void Activate(){
 		stageObj.SetActive (true);
-		Animate(Stage.AnimType.Activate);
 		gameMode.Init ();
 	}
 
 	public void Deactivate(){
-		Animate(Stage.AnimType.BombDown);
 		gameMode.StopGame ();
 	}
 		

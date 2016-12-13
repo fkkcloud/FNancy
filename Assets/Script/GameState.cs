@@ -154,7 +154,7 @@ public class GameState : MonoBehaviourHelper {
 		PlaySFX (SoundFail, 1.0f);
 
 		//Invoke ("GoToMainMenu", SoundFail.length);
-		Invoke("ShowGameOverPage", SoundFail.length);
+		Invoke("ShowGameOverPage", SoundFail.length * 0.475f);
 
 		// bomb explosion
 		BombExplosionForGameOver();

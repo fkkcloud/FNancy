@@ -14,6 +14,7 @@ public class GameModeTimer : GameMode {
 		currentStage.UITextMeshTimer.text = timerDisplay.ToString("0.0");
 	}
 
+
 	public override void Tick() {
 		base.Tick ();
 
@@ -31,11 +32,11 @@ public class GameModeTimer : GameMode {
 		// coloring the text
 		if (_timer < _timeLimit - 0.25f) {
 			currentStage.UITextMeshTimer.color = new Color (0.9f, 0.2f, 0.2f);
-		} else if (_timer >= _timeLimit - 0.25f && _timer <= _timeLimit - 0.1f) {
+		} else if (_timer >= _timeLimit - 0.25f && _timer < _timeLimit - 0.125f) { // GOOD
 			currentStage.UITextMeshTimer.color = new Color (0.9f, 0.9f, 0.2f);
-		} else if (_timer > _timeLimit + 0.05f) {
+		} else if (_timer > _timeLimit + 0.075f) { // GAME OVER
 			currentStage.UITextMeshTimer.color = new Color (0.9f, 0.2f, 0.2f);
-		} else {
+		} else if (_timer >= _timeLimit - 0.125f && _timer < _timeLimit + 0.075f){ // PERFECT
 			currentStage.UITextMeshTimer.color = new Color (0.2f, 0.9f, 0.2f);
 		}
 
@@ -57,9 +58,9 @@ public class GameModeTimer : GameMode {
 
 		currentStage.UIElements.GameMode0_UI.SetActive (false);
 
-		if (_timer >= _timeLimit - 0.25f && _timer < _timeLimit + 0.05f) {
+		if (_timer >= _timeLimit - 0.25f && _timer < _timeLimit + 0.075f) {
 
-			if (_timer >= _timeLimit - 0.1f && _timer < _timeLimit + 0.05f) {
+			if (_timer >= _timeLimit - 0.125f && _timer < _timeLimit + 0.075f) {
 				gameState.PlayTextFeedBack (GameState.FeedbackType.Perfect);
 				gameState.PlayPerfectSound ();
 				gameCharacter.currentPerfect += 1;

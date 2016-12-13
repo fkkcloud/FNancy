@@ -84,7 +84,7 @@ public class StageManager : MonoBehaviourHelper {
 
 	public void GoToNextStage(){
 		// deactivate current stage with delay
-		currentStage.Deactivate ();
+		currentStage.Close ();
 		StartCoroutine (StaticUtils.Hide(currentStage.stageObj, gameDesignVariables.StageMoveDuration * 1.5f));
 
 		gameState.state = GameState.CurrentState.Moving;
@@ -106,7 +106,7 @@ public class StageManager : MonoBehaviourHelper {
 	}
 
 	void ActivateStage(){
-		currentStage.Activate();
+		currentStage.Open();
 		Invoke ("TimerOnDelay", gameDesignVariables.StageMoveDuration * 1.025f);
 	}
 
