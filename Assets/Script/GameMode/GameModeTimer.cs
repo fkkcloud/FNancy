@@ -34,7 +34,7 @@ public class GameModeTimer : GameMode {
 			currentStage.UITextMeshTimer.color = new Color (0.9f, 0.2f, 0.2f);
 		} else if (_timer >= _timeLimit - 0.25f && _timer < _timeLimit - 0.125f) { // GOOD
 			currentStage.UITextMeshTimer.color = new Color (0.9f, 0.9f, 0.2f);
-		} else if (_timer > _timeLimit + 0.075f) { // GAME OVER
+		} else if (_timer > _timeLimit + 0.025f) { // GAME OVER
 			currentStage.UITextMeshTimer.color = new Color (0.9f, 0.2f, 0.2f);
 		} else if (_timer >= _timeLimit - 0.125f && _timer < _timeLimit + 0.075f){ // PERFECT
 			currentStage.UITextMeshTimer.color = new Color (0.2f, 0.9f, 0.2f);

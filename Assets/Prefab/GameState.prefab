@@ -52,6 +52,7 @@ MonoBehaviour:
   GameOverPage: {fileID: 0}
   FeedbackText: {fileID: 0}
   Character: {fileID: 1497429238445100, guid: 2967d9d63659c4d368569394f51924ff, type: 2}
+  ClearUI: {fileID: 0}
   SoundPerfect: {fileID: 8300000, guid: aa90639b403df4340ba644345ba7725c, type: 3}
   SoundFail: {fileID: 8300000, guid: 131e20c91512347d0bf0f907b102a7a8, type: 3}
   SoundClear: {fileID: 8300000, guid: 81b02915f78724722a420cebfee100ea, type: 3}

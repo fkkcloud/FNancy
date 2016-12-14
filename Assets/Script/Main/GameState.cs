@@ -17,6 +17,8 @@ public class GameState : MonoBehaviourHelper {
 	public GameObject GameOverPage;
 	public GameObject FeedbackText;
 	public GameObject Character;
+	public GameObject ClearUI;
+	public GameObject ClearMenuButtons;
 
 	[Space(10)]
 	[Header("Audio")]
@@ -58,23 +60,24 @@ public class GameState : MonoBehaviourHelper {
 			Instantiate (Character);
 		
 		gameCharacter.Activate ();
-		gameCharacter.Play ("Wait");
 
 		float delaytime = 0.5f;
 		stageManager.InitStages (delaytime); // with delaytime
 		_initialStage.SetActive (false);
 
+		// UI related controls
 		if (globalVariables.StartedFromLevelRoom || globalVariables.Restarted) {
-			MenuScreen.SetActive (false);
-			MenuButtons.SetActive (false);
+			TurnOffMenuScreen ();
 			globalVariables.Restarted = false;
 			globalVariables.StartedFromLevelRoom = false;
+			gameCharacter.Play ("Wait");
 		} else {
 			Invoke ("TurnOffMenuScreen", 0.5f);
 			LeanTween.alpha (MenuScreen, 0f, 0.2f);
 			LeanTween.moveLocalY(MenuButtons, -132f, 0.4f).setEase(LeanTweenType.easeInQuad);
 		}
 
+		// animated character to the stage!
 		Vector3 originalPos = gameCharacter.gameObject.transform.position;
 		gameCharacter.gameObject.transform.position = new Vector3 (originalPos.x, originalPos.y, -5.2f);
 		LeanTween.moveLocalZ (gameCharacter.gameObject, originalPos.z, 0.5f).setEase(LeanTweenType.easeOutQuad);
@@ -87,21 +90,17 @@ public class GameState : MonoBehaviourHelper {
 		//barAnimator.Setup (stageManager.stageDocuments[stageManager.selectedStageDocumentID].StageDesignData.stageDatas);
 	}
 
-	void TurnOffMenuScreen(){
-		MenuScreen.SetActive (false);
-		gameCharacter.Play ("Wait");
-	}
-
 	public void RestartGame(){
 
 		ResetSFX ();
+		ResetClearScreen ();
+		ResetGameOverScreen ();
 
 		globalVariables.Restarted = true;
 
+		// destroy all level info
 		DestroyImmediate (gameCharacter.gameObject);
 		stageManager.DestroyStages();
-
-		GameOverPage.SetActive (false);
 
 		StartGame ();
 	}
@@ -129,11 +128,64 @@ public class GameState : MonoBehaviourHelper {
 		}
 	}
 
-	public void LevelClear(){
+	void TurnOffMenuScreen(){
+		MenuScreen.SetActive (false);
+		MenuButtons.SetActive (false);
+		gameCharacter.Play ("Wait");
+	}
+
+	public void ResetClearScreen(){
+		ClearScreen.SetActive (false);
+		ClearUI.SetActive (false);
+	}
+
+	public void ShowClearScreen(){
 		ClearScreen.SetActive (true);
 		LeanTween.alpha (ClearScreen, 1f, 1.1f);
-		LeanTween.moveLocalX (ClearText, -0.4f, 0.2f);
+		LeanTween.moveLocalY(ClearMenuButtons, -2f, 0.4f).setEase(LeanTweenType.easeOutQuad);
+		//StartCoroutine (StaticUtils.AnimateFeedBackText(ClearText.GetComponent<Text>().rectTransform, 0.3f, 215f, -71f, 100f));
+		ClearUI.SetActive (true);
 	}
+
+	public void ResetGameOverScreen(){
+		GameOverPage.SetActive (false);
+	}
+
+	void ShowGameOverScreen(){
+		GameOverPage.SetActive (true);
+		BarInfo.GetComponent<BarAnimator> ().Setup (globalVariables.stageDocuments[globalVariables.SelectedLevel].StageDesignData.stageDatas);
+	}
+
+
+	public void GotoNextLevel()
+	{
+		//LeanTween.alpha (ClearScreen, 0f, 0.3f);
+		LeanTween.moveLocalY(ClearMenuButtons, -132f, 0.4f).setEase(LeanTweenType.easeInQuad);
+		globalVariables.SelectedLevel++;
+		Invoke ("RestartGame", 0.4f);
+	}
+		
+	public void GameOver(){
+
+		if (state == CurrentState.GameOver)
+			return;
+
+		state = CurrentState.GameOver;
+
+		currentStage.Deactivate ();
+
+		musicManager.Stop ();
+
+		gameCharacter.Play ("Dead");
+		gameCharacter.Deactivate ();
+
+		PlaySFX (SoundFail, 1.0f);
+		Invoke("ShowGameOverScreen", SoundFail.length * 0.475f);
+
+		// bomb explosion
+		BombExplosionForGameOver();
+	}
+
 
 	void OnLevelWasLoaded(int level){
 		//InitStages ();
@@ -184,37 +236,12 @@ public class GameState : MonoBehaviourHelper {
 		PlaySFX (gameState.SoundHit, 2f);
 	}
 
-	public void GameOver(){
-
-		if (state == CurrentState.GameOver)
-			return;
-		
-		state = CurrentState.GameOver;
-
-		currentStage.Deactivate ();
-
-		musicManager.Stop ();
-
-		gameCharacter.Play ("Dead");
-		gameCharacter.Deactivate ();
-
-		PlaySFX (SoundFail, 1.0f);
-		Invoke("ShowGameOverPage", SoundFail.length * 0.475f);
-
-		// bomb explosion
-		BombExplosionForGameOver();
-	}
-
 	void BombExplosionForGameOver(){
 		BombFX.SetActive (true);
 		BombFX.GetComponent<ParticleSystem> ().Play ();
 		currentStage.HideBomb ();
 	}
-
-	void ShowGameOverPage(){
-		GameOverPage.SetActive (true);
-	}
-
+		
 	public void StageClear(){
 		gameCharacter.Play ("Walk");
 		stageManager.GoToNextStage ();

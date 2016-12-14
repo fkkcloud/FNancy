@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53cd71e3d3ad64eb996c1f1cbaa3f5f9, type: 3}
-  m_Name: 001
+  m_Name: clearTestShort
   m_EditorClassIdentifier: 
   speedCurve:
     serializedVersion: 2
@@ -30,16 +30,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   stageDatas:
-  - level: 0
-    timeLimit: 1
-    reward: []
-    gamemode: 0
-    hp: 0
-  - level: 0
-    timeLimit: 1
-    reward: []
-    gamemode: 0
-    hp: 0
   - level: 0
     timeLimit: 1
     reward: []

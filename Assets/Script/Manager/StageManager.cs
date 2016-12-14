@@ -85,7 +85,7 @@ public class StageManager : MonoBehaviourHelper {
 
 		// check level CLEAR point - show summary
 		if (currentStageID == _stages.Length-1) {
-			gameState.LevelClear ();
+			gameState.ShowClearScreen ();
 			return;
 		}
 

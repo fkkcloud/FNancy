@@ -52,7 +52,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedLevel: 0
+  StartedFromLevelRoom: 0
+  Restarted: 0
   stageDocuments:
   - StageDesignData: {fileID: 11400000, guid: d235759f1cfc71b4ca624350e3b23af5, type: 2}
   - StageDesignData: {fileID: 11400000, guid: 1a0c50e4d35f24638b7807482d81975c, type: 2}
-  - StageDesignData: {fileID: 0}
+  - StageDesignData: {fileID: 11400000, guid: d235759f1cfc71b4ca624350e3b23af5, type: 2}
+  - StageDesignData: {fileID: 11400000, guid: d235759f1cfc71b4ca624350e3b23af5, type: 2}
+  - StageDesignData: {fileID: 11400000, guid: d235759f1cfc71b4ca624350e3b23af5, type: 2}
+  - StageDesignData: {fileID: 11400000, guid: d235759f1cfc71b4ca624350e3b23af5, type: 2}
+  - StageDesignData: {fileID: 11400000, guid: d235759f1cfc71b4ca624350e3b23af5, type: 2}
+  - StageDesignData: {fileID: 11400000, guid: d235759f1cfc71b4ca624350e3b23af5, type: 2}
+  - StageDesignData: {fileID: 11400000, guid: d235759f1cfc71b4ca624350e3b23af5, type: 2}
+  - StageDesignData: {fileID: 11400000, guid: d235759f1cfc71b4ca624350e3b23af5, type: 2}
