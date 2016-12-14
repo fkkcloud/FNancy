@@ -2,22 +2,22 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Main/GameState.cs">
     <Files>
-      <File FileName="Assets/Script/Main/GameState.cs" Line="75" Column="83" />
+      <File FileName="Assets/Script/BarAnimator.cs" Line="14" Column="51" />
+      <File FileName="Assets/Script/Main/GameState.cs" Line="156" Column="2" />
       <File FileName="Assets/Script/Manager/LevelManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/Manager/StageManager.cs" Line="84" Column="12" />
+      <File FileName="Assets/Script/Manager/StageManager.cs" Line="11" Column="48" />
       <File FileName="Assets/Script/ScriptableObject/StageData.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/GameDesignVariables.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/MonoBehaviourHelper.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/StaticUtils.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/BarAnimator.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/GameMode/GameMode.cs" Line="33" Column="17" />
+      <File FileName="Assets/Script/StaticUtils.cs" Line="43" Column="47" />
+      <File FileName="Assets/Script/GameMode/GameMode.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/GameMode/GameModeClicker.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/GameMode/GameModeTimer.cs" Line="37" Column="41" />
+      <File FileName="Assets/Script/GameMode/GameModeTimer.cs" Line="64" Column="31" />
       <File FileName="Assets/Script/GameMode/GameModeSlider.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/GameMode/GameModeColor.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/ScriptableObject/StageDesigner.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/Manager/PlayerPrefManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/Manager/MusicManager.cs" Line="37" Column="3" />
+      <File FileName="Assets/Script/Manager/MusicManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/Main/GlobalVariables.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/Main/GameLevelManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/Stage/StageElements.cs" Line="1" Column="1" />

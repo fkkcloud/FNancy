@@ -102,6 +102,11 @@ public class GameState : MonoBehaviourHelper {
 		DestroyImmediate (gameCharacter.gameObject);
 		stageManager.DestroyStages();
 
+		if (musicManager.IsPlaying ()) {
+			musicManager.Stop ();
+			musicManager.Play (Application.loadedLevel);
+		}
+
 		StartGame ();
 	}
 
