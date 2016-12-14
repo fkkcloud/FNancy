@@ -260,11 +260,17 @@ public class GameState : MonoBehaviourHelper {
 		
 	public void GoToMainMenu()
 	{
+		if (musicManager.IsPlaying ()) {
+			musicManager.Stop ();
+		}
 		LevelManager.LoadMainMenu();
 	}
 
 	public void GoToLevelRoom()
 	{
+		if (musicManager.IsPlaying ()) {
+			musicManager.Stop ();
+		}
 		LevelManager.LoadLevelRoom();
 	}
 }

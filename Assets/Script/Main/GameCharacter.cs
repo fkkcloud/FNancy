@@ -10,6 +10,8 @@ public class GameCharacter : MonoBehaviour {
 	public int currentUndefeatCount = 0;
 	public int currentPerfect = 0;
 
+	public GameObject GeoRef;
+
 	public GameObject HighlightFX; // y = 0.64 ~ 0.82
 
 	public enum CurrentState {Normal, Undefeatable, Tired, Drunken};
@@ -29,7 +31,10 @@ public class GameCharacter : MonoBehaviour {
 		currentPerfect = 0;
 		currentUndefeatCount = 0;
 
+		HighlightFX.GetComponent<ParticleSystem> ().Stop ();
 		HighlightFX.SetActive (false); 
+
+		ChangeCharacterColor (new Color (1f, 1f, 1f));
 	}
 
 	public float Remap (float value, float from1, float to1, float from2, float to2) {
@@ -44,9 +49,16 @@ public class GameCharacter : MonoBehaviour {
 			_state = CurrentState.Undefeatable;
 		}
 		if (currentPerfect > 0) {
+
 			HighlightFX.SetActive (true);
-			float size = Remap (currentPerfect, 1, perfectMax, 0.5f, 2f);
-			HighlightFX.transform.localScale = new Vector3 (size, size, size);
+			if (!HighlightFX.GetComponent<ParticleSystem> ().isPlaying)
+				HighlightFX.GetComponent<ParticleSystem> ().Play ();
+
+			float particleAmount = Remap (currentPerfect, 1, perfectMax, 20f, 110f);
+			ParticleSystem.EmissionModule main = HighlightFX.GetComponent<ParticleSystem> ().emission;
+			main.rateOverTimeMultiplier = particleAmount;
+
+			ChangeCharacterColor(new Color(1.6f * currentPerfect, currentPerfect, 0.1f));
 		}
 	}
 
@@ -60,5 +72,12 @@ public class GameCharacter : MonoBehaviour {
 
 	public void Deactivate(){
 		HighlightFX.SetActive (false);
+	}
+
+	public void ChangeCharacterColor(Color color){
+		Material[] mats = GeoRef.GetComponent<SkinnedMeshRenderer> ().materials;
+		for (int i = 0; i < mats.Length; i++) {
+			mats [i].color = color;
+		}
 	}
 }
