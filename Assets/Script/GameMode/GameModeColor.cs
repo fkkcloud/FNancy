@@ -48,6 +48,11 @@ public class GameModeColor : GameMode {
 		if (!_timerOn)
 			return;
 
+		// when player does not do anything
+		if (_timer > _timeLimit) {
+			gameState.GameOver ();
+		}
+
 		// cancel highlight combo!
 		if (gameCharacter._state == GameCharacter.CurrentState.Undefeatable) {
 			gameCharacter.StateReset ();
@@ -91,9 +96,10 @@ public class GameModeColor : GameMode {
 
 	public override void SetupUI(){
 
+		currentStage.bombObj.SetActive (true);
+
 		// setup UI
-		currentStage.gameUIList.Add (currentStage.UITextMeshTimer.gameObject);
-		//_gameUI.Add (UITextMeshTimerIndicator.gameObject);
+		currentStage.gameUIList.Add (currentStage.UITextMeshTimerIndicator.gameObject);
 		currentStage.gameUIList.Add (currentStage.UIElements.GameMode3_UI);
 
 		currentStage.gameUIList.Add (currentStage.UIElements.MiniGameText);

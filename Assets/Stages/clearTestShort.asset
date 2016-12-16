@@ -30,18 +30,15 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   stageDatas:
-  - level: 0
-    timeLimit: 1
+  - timeLimit: 3
     reward: []
-    gamemode: 0
-    hp: 0
-  - level: 0
-    timeLimit: 1
+    gamemode: 2
+    hp: 4
+  - timeLimit: 3
     reward: []
-    gamemode: 0
-    hp: 0
-  - level: 0
-    timeLimit: 1
+    gamemode: 1
+    hp: 15
+  - timeLimit: 3
     reward: []
-    gamemode: 0
-    hp: 0
+    gamemode: 2
+    hp: 4

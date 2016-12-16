@@ -244,7 +244,7 @@ public class GameState : MonoBehaviourHelper {
 	void BombExplosionForGameOver(){
 		BombFX.SetActive (true);
 		BombFX.GetComponent<ParticleSystem> ().Play ();
-		currentStage.HideBomb ();
+		currentStage.HideCurrentBombOrCage ();
 	}
 		
 	public void StageClear(){

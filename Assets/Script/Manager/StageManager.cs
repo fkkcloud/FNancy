@@ -102,6 +102,7 @@ public class StageManager : MonoBehaviourHelper {
 	void ActivateStage(float DelayTime){
 		currentStage.Open();
 		Invoke ("TimerOnDelay", DelayTime);
+		Invoke ("AnimationOnActiavteStage", DelayTime * 0.5f);
 	}
 
 	void TimerOnDelay()
@@ -110,6 +111,10 @@ public class StageManager : MonoBehaviourHelper {
 		gameState.PlayerIdle ();
 		gameState.state = GameState.CurrentState.Playing;
 		Debug.Log ("CurrentStage:" + (currentStageID + 1));
+	}
+
+	void AnimationOnActiavteStage(){
+		currentStage.Animate (Stage.AnimType.Activate);
 	}
 
 	void MoveStages(){

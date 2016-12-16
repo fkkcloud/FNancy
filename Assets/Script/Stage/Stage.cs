@@ -38,6 +38,19 @@ public class Stage : MonoBehaviourHelper
 		}
 	}
 
+	private GameObject _cageObj;
+	public GameObject cageObj
+	{
+		get
+		{
+			return _cageObj;
+		}
+		set
+		{
+			_cageObj = value;
+		}
+	}
+
 	public TextMesh UITextMeshTimerIndicator;
 	public TextMesh UITextMeshTimer;
 
@@ -84,6 +97,7 @@ public class Stage : MonoBehaviourHelper
 
 
 		bombObj = UIElements.BombObj;
+		cageObj = UIElements.CageObj;
 
 		InitGameMode ();
 	}
@@ -94,7 +108,7 @@ public class Stage : MonoBehaviourHelper
 
 	public void Open(){
 		Activate ();
-		Animate(Stage.AnimType.Activate);
+		//Animate(Stage.AnimType.Activate);
 	}
 
 	public void Close(){
@@ -113,8 +127,9 @@ public class Stage : MonoBehaviourHelper
 	}
 		
 
-	public void HideBomb(){
+	public void HideCurrentBombOrCage(){
 		bombObj.SetActive (false);
+		cageObj.SetActive (false);
 	}
 
 	public float GetCurrentLimitTime()

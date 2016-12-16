@@ -13,6 +13,7 @@ TagManager:
   - minigame_bomb_r
   - minigame_bomb_g
   - minigame_bomb_b
+  - Indicator
   layers:
   - Default
   - TransparentFX

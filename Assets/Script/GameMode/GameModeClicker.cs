@@ -20,6 +20,11 @@ public class GameModeClicker : GameMode {
 		if (!_timerOn)
 			return;
 
+		// when player does not do anything
+		if (_timer > _timeLimit) {
+			gameState.GameOver ();
+		}
+
 		if (gameCharacter._state == GameCharacter.CurrentState.Undefeatable) {
 			gameCharacter.StateReset ();
 		}
@@ -63,9 +68,10 @@ public class GameModeClicker : GameMode {
 
 	public override void SetupUI(){
 
+		currentStage.bombObj.SetActive (true);
+
 		// setup UI
-		currentStage.gameUIList.Add (currentStage.UITextMeshTimer.gameObject);
-		//_gameUI.Add (UITextMeshTimerIndicator.gameObject);
+		currentStage.gameUIList.Add (currentStage.UITextMeshTimerIndicator.gameObject);
 		currentStage.gameUIList.Add (currentStage.UIElements.GameMode1_UI);
 
 		float playMatLength = currentStage.UIElements.PlayMat.transform.lossyScale.x;

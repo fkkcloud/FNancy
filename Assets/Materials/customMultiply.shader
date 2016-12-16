@@ -1,18 +1,16 @@
 ﻿
-Shader "Custom/Unlit Transpreant"
+Shader "Custom/Unlit Transpreant Mult"
 {
     Properties
     {
     	_Color ("Main Color (A=Opacity)", Color) = (1,1,1,1)
         _MainTex ("Texture", 2D) = "white" {}
-        _MultTex ("Texture", 2D) = "white" {}
-        _MultUVScale ("Tex 2 UV Scale", Range(0, 1)) = 1
     }
     SubShader
     {
         Tags {"Queue"="Transparent" "IgnoreProjector"="True"}
     	ZWrite Off
-    	Blend SrcAlpha OneMinusSrcAlpha
+    	Blend DstColor Zero // Multiplicative
         LOD 100
 
         Pass
@@ -39,10 +37,8 @@ Shader "Custom/Unlit Transpreant"
             };
 
             sampler2D _MainTex;
-            sampler2D _MultTex;
             float4 _MainTex_ST;
             fixed4 _Color;
-            float _MultUVScale;
             
             v2f vert (appdata v)
             {
@@ -57,10 +53,9 @@ Shader "Custom/Unlit Transpreant"
             {
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
-                fixed4 col2 = tex2D(_MultTex, i.uv * _MultUVScale);
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
-                return col * col2 * _Color;
+                return col * _Color;
             }
             ENDCG
         }

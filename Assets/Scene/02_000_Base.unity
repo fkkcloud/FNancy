@@ -199,7 +199,7 @@ Transform:
   m_PrefabParentObject: {fileID: 4527571997106722, guid: f3346f4ba606e47989e5a2607c918966,
     type: 2}
   m_PrefabInternal: {fileID: 1463326115}
---- !u!1001 &442007643
+--- !u!1001 &456541489
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -266,7 +266,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &521179643
 MeshRenderer:
   m_ObjectHideFlags: 0

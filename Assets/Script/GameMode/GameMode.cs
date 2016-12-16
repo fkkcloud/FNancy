@@ -27,12 +27,7 @@ public class GameMode : MonoBehaviourHelper {
 			float timeMult = stageManager.GetCurrentStageTimeMult();
 			_timer += (gameDesignVariables.TimerSpeed * timeMult * Time.deltaTime);
 
-			CalculateTimer ();
-			
-			// when player does not do anything
-			if (_timer >= _timeLimit + 0.075f) {
-				gameState.GameOver ();
-			}
+			SetTimer ();
 
 			if (_timer > _timeLimit - 0.35f) {
 				currentStage.Animate (Stage.AnimType.BombShake);
@@ -41,9 +36,9 @@ public class GameMode : MonoBehaviourHelper {
 		}
 	}
 
-	public virtual void CalculateTimer(){
+	public virtual void SetTimer(){
 		float timerDisplay = Mathf.Max (0.0f, (currentStage.stageData.timeLimit - _timer));
-		currentStage.UITextMeshTimer.text = timerDisplay.ToString("0.0");
+		currentStage.UITextMeshTimerIndicator.text = timerDisplay.ToString("0.0");
 	}
 
 	public virtual void ReactOnTouch (){
