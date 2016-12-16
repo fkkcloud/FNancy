@@ -14,7 +14,10 @@ public class GameModeTimer : GameMode {
 	// only game mode timer overide this for now to have the timer increase from 0.0!
 	public override void SetTimer(){
 		float timerDisplay = Mathf.Max (0.0f, (_timer));
-		timerDisplay = Mathf.Min (_timeLimit, (_timer));
+		if (_timer < _timeLimit + 0.1f) {
+			timerDisplay = Mathf.Min (_timeLimit, (_timer));
+		}
+			
 		currentStage.UITextMeshTimer.text = timerDisplay.ToString("0.0");
 	}
 
