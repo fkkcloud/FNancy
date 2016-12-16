@@ -6,6 +6,8 @@ public class GameModeTimer : GameMode {
 
 	Material mat;
 	Renderer[] renders;
+	Light[] lights;
+	List<LTDescr> lightTweens = new List<LTDescr>();
 
 	public override void Init(){
 		base.Init ();
@@ -47,9 +49,9 @@ public class GameModeTimer : GameMode {
 		// coloring the text
 		Color textClr = mat.color;
 		if (_timer >= a && _timer < b) { 		// GOOD
-			textClr = new Color (0.9f, 0.7f, 0.2f);
+			textClr = new Color (2f, 0.7f, 0.2f);
 		} else if (_timer >= b && _timer < c) { // PERFECT
-			textClr = new Color (0.2f, 0.9f, 0.2f);
+			textClr = new Color (0.2f, 2f, 0.2f);
 		} else if (_timer >= c){ 				// GAME OVER
 			textClr = new Color (0.9f, 0.2f, 0.2f);
 		}
@@ -66,16 +68,35 @@ public class GameModeTimer : GameMode {
 				Color clr = r.material.color;
 
 				if (_timer >= a && _timer < b) { 		// GOOD
-					clr = new Color (0.1f, 0.4f, 0.1f);
+					clr = new Color (0.1f, 2f, 0.1f);
 				} else if (_timer >= b && _timer < c) { // PERFECT
-					clr = new Color (0.1f, 0.4f, 0.1f);
+					clr = new Color (0.1f, 2f, 0.1f);
 				} else if (_timer >= c){ 				// GAME OVER
 					clr = new Color (0.9f, 0.2f, 0.2f);
 				}
 				r.material.color = clr;
 			}
+		}
 
+		foreach (Light r in lights) {
+			if (r.gameObject.tag == "Indicator") {
 
+				/*
+				Color clr = r.material.GetColor ("_Color");
+				r.material.SetColor ("_Color", new Color (clr.r + 0.014f, clr.g, clr.b));
+				*/
+
+				Color clr = r.color;
+
+				if (_timer >= a && _timer < b) { 		// GOOD
+					clr = new Color (0.15f, 0.8f, 0.1f);
+				} else if (_timer >= b && _timer < c) { // PERFECT
+					clr = new Color (0.15f, 0.8f, 0.1f);
+				} else if (_timer >= c){ 				// GAME OVER
+					clr = new Color (0.9f, 0.2f, 0.2f);
+				}
+				r.color = clr;
+			}
 		}
 	}
 
@@ -118,6 +139,10 @@ public class GameModeTimer : GameMode {
 
 	public override void StopGame(){
 		base.StopGame ();
+
+		for (int i = 0; i < lightTweens.Count; i++) {
+			lightTweens [i].pause ();
+		}
 	}
 
 	public override void SetupUI(){
@@ -125,10 +150,17 @@ public class GameModeTimer : GameMode {
 
 		mat = currentStage.UITextMeshTimer.GetComponent<MeshRenderer> ().material;
 		renders = currentStage.cageObj.GetComponentsInChildren<Renderer> ();
+		lights = currentStage.cageObj.GetComponentsInChildren<Light> ();
 
 		// setup UI
 		currentStage.gameUIList.Add (currentStage.UITextMeshTimer.gameObject);
 		currentStage.gameUIList.Add (currentStage.UITextMeshTimerIndicator.gameObject);
 		currentStage.gameUIList.Add (currentStage.UIElements.GameMode0_UI);
+
+		foreach (Renderer r in renders) {
+			if (r.gameObject.tag == "Indicator") {
+				lightTweens.Add (LeanTween.alpha (r.gameObject, 0.1f, 0.3f).setLoopPingPong (0));
+			}
+		}
 	}
 }
