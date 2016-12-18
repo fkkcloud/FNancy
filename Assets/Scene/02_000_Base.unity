@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.12
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.342128, g: 0.380068, b: 0.41176468, a: 1}
+  m_AmbientSkyColor: {r: 0.745026, g: 0.7637603, b: 0.7794118, a: 1}
   m_AmbientEquatorColor: {r: 0.15473618, g: 0.27303132, b: 0.3897059, a: 1}
   m_AmbientGroundColor: {r: 0.27205884, g: 0.48793104, b: 1, a: 1}
   m_AmbientIntensity: 0.71
@@ -33,11 +33,11 @@ RenderSettings:
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
-  m_ReflectionBounces: 1
-  m_ReflectionIntensity: 1
+  m_ReflectionBounces: 2
+  m_ReflectionIntensity: 0.131
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.12855297, g: 0.13182023, b: 0.122382455, a: 0.131}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -58,20 +58,20 @@ LightmapSettings:
     m_BakeResolution: 40
     m_TextureWidth: 1024
     m_TextureHeight: 1024
-    m_AO: 0
+    m_AO: 1
     m_AOMaxDistance: 1
     m_CompAOExponent: 0
     m_CompAOExponentDirect: 0
     m_Padding: 2
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
-    m_TextureCompression: 1
+    m_TextureCompression: 0
     m_DirectLightInLightProbes: 1
     m_FinalGather: 0
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 1024
     m_ReflectionCompression: 2
-  m_LightingDataAsset: {fileID: 112000012, guid: 00c8ba5043d4743ccadfbb159757c091,
+  m_LightingDataAsset: {fileID: 112000002, guid: 00c8ba5043d4743ccadfbb159757c091,
     type: 2}
   m_RuntimeCPUUsage: 25
 --- !u!196 &4
@@ -90,6 +90,8 @@ NavMeshSettings:
     minRegionArea: 2
     manualCellSize: 0
     cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
 --- !u!114 &16690118 stripped
@@ -251,6 +253,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!64 &521179644
 MeshCollider:
@@ -731,6 +734,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!64 &1103402770
 MeshCollider:
@@ -1031,7 +1035,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20baa240c05a1407e833af6752225627, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &1332657237
+--- !u!1001 &1313574552
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1073,6 +1077,29 @@ Prefab:
     - target: {fileID: 1204687257126472, guid: a6debb5037fb64461ac6ea523b8fc781, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008154055273702, guid: a6debb5037fb64461ac6ea523b8fc781, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697938113451046, guid: a6debb5037fb64461ac6ea523b8fc781, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108038817844512712, guid: a6debb5037fb64461ac6ea523b8fc781,
+        type: 2}
+      propertyPath: m_Range
+      value: 0.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 108670116930862824, guid: a6debb5037fb64461ac6ea523b8fc781,
+        type: 2}
+      propertyPath: m_Range
+      value: 0.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 108619683896412584, guid: a6debb5037fb64461ac6ea523b8fc781,
+        type: 2}
+      propertyPath: m_Range
+      value: 0.52
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a6debb5037fb64461ac6ea523b8fc781, type: 2}
@@ -1389,6 +1416,8 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
+  m_AllowMSAA: 1
+  m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
