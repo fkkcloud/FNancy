@@ -40,7 +40,8 @@ public class GameState : MonoBehaviourHelper {
 		_sfxPlayer = GetComponent<AudioSource> ();
 
 		// main menu bg
-		_initialStage = Instantiate (stageManager.StageObject);
+		if (stageManager)
+			_initialStage = Instantiate (stageManager.StageObject);
 
 		// skip the menu part if its started from level menu
 		if (globalVariables.StartedFromLevelRoom ||  globalVariables.Restarted) {
@@ -114,7 +115,7 @@ public class GameState : MonoBehaviourHelper {
 	void Update () {
 
 		// regular game tick
-		if (stageManager.IsReady && gameState.state != GameState.CurrentState.GameOver) {
+		if (stageManager && stageManager.IsReady && gameState.state != GameState.CurrentState.GameOver) {
 			
 			currentStage.gameMode.Tick ();
 
@@ -272,5 +273,10 @@ public class GameState : MonoBehaviourHelper {
 			musicManager.Stop ();
 		}
 		LevelManager.LoadLevelRoom();
+	}
+
+	public void GoToStore()
+	{
+		LevelManager.LoadStoreRoom ();
 	}
 }

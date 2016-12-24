@@ -1296,12 +1296,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114808931039844230, guid: f3346f4ba606e47989e5a2607c918966,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 16690118}
-    - target: {fileID: 114911128298555784, guid: f3346f4ba606e47989e5a2607c918966,
+    - target: {fileID: 114321883772799768, guid: f3346f4ba606e47989e5a2607c918966,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1311,14 +1306,16 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 16690118}
-    - target: {fileID: 1207847292121554, guid: f3346f4ba606e47989e5a2607c918966, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1207847292121554, guid: f3346f4ba606e47989e5a2607c918966, type: 2}
-      propertyPath: m_Name
-      value: MainMenuButtons
-      objectReference: {fileID: 0}
+    - target: {fileID: 114911128298555784, guid: f3346f4ba606e47989e5a2607c918966,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 16690118}
+    - target: {fileID: 114808931039844230, guid: f3346f4ba606e47989e5a2607c918966,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 16690118}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f3346f4ba606e47989e5a2607c918966, type: 2}
   m_IsPrefabParent: 0

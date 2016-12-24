@@ -38,5 +38,9 @@ public class LevelManager : MonoBehaviour {
 	public void LoadLevelRoom(){
 		Application.LoadLevel ("01_002_LevelRoom");
 	}
+
+	public void LoadStoreRoom(){
+		Application.LoadLevel ("01_003_Store");
+	}
 }
 	

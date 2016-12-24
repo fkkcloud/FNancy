@@ -1,8 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Materials/customMultiply.shader">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Manager/LevelManager.cs">
     <Files>
       <File FileName="Assets/Materials/customMultiply.shader" Line="7" Column="46" />
+      <File FileName="Assets/Script/StoreNavigator.cs" Line="93" Column="19" />
+      <File FileName="Assets/Script/Main/GameState.cs" Line="280" Column="29" />
+      <File FileName="Assets/Script/Manager/LevelManager.cs" Line="37" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
