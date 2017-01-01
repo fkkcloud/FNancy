@@ -15,16 +15,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
-      time: 0.0026303583
-      value: 0.909332
-      inSlope: 0.13227893
-      outSlope: 0.13227893
+      time: -0.0014015145
+      value: 0.949072
+      inSlope: 0.037923165
+      outSlope: 0.037923165
       tangentMode: 34
     - serializedVersion: 2
-      time: 1.0008193
-      value: 1.0413713
-      inSlope: 0.13227893
-      outSlope: 0.13227893
+      time: 0.5120672
+      value: 0.96854436
+      inSlope: 0.061147355
+      outSlope: 0.061147355
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.9990926
+      value: 1.0096354
+      inSlope: 0.084371544
+      outSlope: 0.084371544
       tangentMode: 34
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -34,15 +40,15 @@ MonoBehaviour:
     reward: []
     gamemode: 0
     hp: 0
-  - timeLimit: 0.8
+  - timeLimit: 0.6
     reward: []
     gamemode: 0
     hp: 0
-  - timeLimit: 1
+  - timeLimit: 1.2
     reward: []
     gamemode: 0
     hp: 0
-  - timeLimit: 0.5
+  - timeLimit: 0.7
     reward: []
     gamemode: 0
     hp: 0
@@ -54,18 +60,6 @@ MonoBehaviour:
     reward: []
     gamemode: 0
     hp: 0
-  - timeLimit: 5
-    reward: []
-    gamemode: 1
-    hp: 20
-  - timeLimit: 0.8
-    reward: []
-    gamemode: 0
-    hp: 0
-  - timeLimit: 1
-    reward: []
-    gamemode: 0
-    hp: 0
   - timeLimit: 0.6
     reward: []
     gamemode: 0
@@ -74,79 +68,31 @@ MonoBehaviour:
     reward: []
     gamemode: 0
     hp: 0
-  - timeLimit: 1.2
-    reward: []
-    gamemode: 0
-    hp: 0
-  - timeLimit: 0.5
-    reward: []
-    gamemode: 0
-    hp: 0
-  - timeLimit: 3
-    reward: []
-    gamemode: 2
-    hp: 4
-  - timeLimit: 0.5
-    reward: []
-    gamemode: 0
-    hp: 0
-  - timeLimit: 0.7
-    reward: []
-    gamemode: 0
-    hp: 0
-  - timeLimit: 0.9
-    reward: []
-    gamemode: 0
-    hp: 0
-  - timeLimit: 1.1
-    reward: []
-    gamemode: 0
-    hp: 0
-  - timeLimit: 0.5
-    reward: []
-    gamemode: 0
-    hp: 0
-  - timeLimit: 0.7
-    reward: []
-    gamemode: 0
-    hp: 0
-  - timeLimit: 3
-    reward: []
-    gamemode: 1
-    hp: 15
-  - timeLimit: 0.7
-    reward: []
-    gamemode: 0
-    hp: 0
-  - timeLimit: 0.9
-    reward: []
-    gamemode: 0
-    hp: 0
-  - timeLimit: 0.7
-    reward: []
-    gamemode: 0
-    hp: 0
   - timeLimit: 1
     reward: []
-    gamemode: 3
+    gamemode: 0
     hp: 0
-  - timeLimit: 0.7
+  - timeLimit: 0.5
     reward: []
     gamemode: 0
     hp: 0
-  - timeLimit: 0.6
+  - timeLimit: 0.5
     reward: []
     gamemode: 0
     hp: 0
-  - timeLimit: 1
-    reward: []
-    gamemode: 3
-    hp: 0
-  - timeLimit: 0.6
+  - timeLimit: 0.5
     reward: []
     gamemode: 0
     hp: 0
-  - timeLimit: 3
+  - timeLimit: 0.5
     reward: []
-    gamemode: 1
-    hp: 25
+    gamemode: 0
+    hp: 0
+  - timeLimit: 0.5
+    reward: []
+    gamemode: 0
+    hp: 0
+  - timeLimit: 0.5
+    reward: []
+    gamemode: 0
+    hp: 0

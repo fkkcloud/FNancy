@@ -9,14 +9,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: 02
+  m_Name: 12
   m_EditorClassIdentifier: Assembly-CSharp::StageDesigner
   speedCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 2
+      time: 0.0026303583
+      value: 0.909332
+      inSlope: 0.13227893
+      outSlope: 0.13227893
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 1.0008193
+      value: 1.0413713
+      inSlope: 0.13227893
+      outSlope: 0.13227893
+      tangentMode: 34
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   stageDatas:
   - timeLimit: 1
     reward: []
@@ -70,10 +82,10 @@ MonoBehaviour:
     reward: []
     gamemode: 0
     hp: 0
-  - timeLimit: 5
+  - timeLimit: 3
     reward: []
     gamemode: 2
-    hp: 15
+    hp: 4
   - timeLimit: 0.5
     reward: []
     gamemode: 0
@@ -86,3 +98,55 @@ MonoBehaviour:
     reward: []
     gamemode: 0
     hp: 0
+  - timeLimit: 1.1
+    reward: []
+    gamemode: 0
+    hp: 0
+  - timeLimit: 0.5
+    reward: []
+    gamemode: 0
+    hp: 0
+  - timeLimit: 0.7
+    reward: []
+    gamemode: 0
+    hp: 0
+  - timeLimit: 3
+    reward: []
+    gamemode: 1
+    hp: 15
+  - timeLimit: 0.7
+    reward: []
+    gamemode: 0
+    hp: 0
+  - timeLimit: 0.9
+    reward: []
+    gamemode: 0
+    hp: 0
+  - timeLimit: 0.7
+    reward: []
+    gamemode: 0
+    hp: 0
+  - timeLimit: 1
+    reward: []
+    gamemode: 3
+    hp: 0
+  - timeLimit: 0.7
+    reward: []
+    gamemode: 0
+    hp: 0
+  - timeLimit: 0.6
+    reward: []
+    gamemode: 0
+    hp: 0
+  - timeLimit: 1
+    reward: []
+    gamemode: 3
+    hp: 0
+  - timeLimit: 0.6
+    reward: []
+    gamemode: 0
+    hp: 0
+  - timeLimit: 3
+    reward: []
+    gamemode: 1
+    hp: 25
